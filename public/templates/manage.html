@@ -1,0 +1,23 @@
+<!-- LOADING ICON =============================================== -->
+<!-- show loading icon if the loading variable is set to true -->
+<p class="text-center" ng-show="vm.loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+
+<div class="container" ng-hide="vm.loading">
+    <h2>Lorem Ipsum "Food" Items</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>"Food" Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.items">
+                <td>{{item.id}}</td>
+                <td>{{item.item_name}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+

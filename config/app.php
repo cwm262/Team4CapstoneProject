@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -172,11 +173,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        pantryApp\Providers\AppServiceProvider::class,
+        // pantryApp\Providers\BroadcastServiceProvider::class,
+        pantryApp\Providers\AuthServiceProvider::class,
+        pantryApp\Providers\EventServiceProvider::class,
+        pantryApp\Providers\RouteServiceProvider::class,
 
     ],
 

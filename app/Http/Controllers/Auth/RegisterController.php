@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace pantryApp\Http\Controllers\Auth;
 
-use App\User;
+use pantryApp\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use pantryApp\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
