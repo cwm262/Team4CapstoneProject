@@ -79,7 +79,15 @@
                 </a>
                 <ul class="dropdown-menu pull-right" uib-dropdown-menu>
                     <li>
-                        <a href="">Log Out</a>
+                        <a href="<?php echo url('/logout') ?>"
+                            onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="<?php echo url('/logout') ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
+                        </form>
                     </li>
                 </ul>
             </li>

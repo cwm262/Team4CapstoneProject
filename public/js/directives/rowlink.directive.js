@@ -4,6 +4,8 @@
     angular
         .module('pantryApp')
         .directive('rowLink', rowLink);
+
+    rowLink.$inject = ['$location'];
     
     function rowLink($location){
         return{

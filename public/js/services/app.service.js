@@ -4,6 +4,8 @@
     angular
         .module('pantryApp')
         .factory('item', item);
+
+    item.$inject = ['$http', 'CSRF_TOKEN'];
     
     function item($http, CSRF_TOKEN){
 

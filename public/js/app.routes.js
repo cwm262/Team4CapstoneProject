@@ -4,6 +4,8 @@
     angular
         .module('pantryApp')
         .config(config);
+
+    config.$inject = ['$routeProvider'];
     
     function config($routeProvider){
 

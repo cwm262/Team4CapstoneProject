@@ -4,6 +4,8 @@
     angular
         .module('pantryApp')
         .controller('ManageItemsController', ManageItemsController);
+
+    ManageItemsController.$inject = ['item'];
     
     function ManageItemsController(item){
 
