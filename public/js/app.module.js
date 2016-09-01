@@ -8,7 +8,8 @@
             'ngMessages',
             'ngTouch',
             'ngAria',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'restangular'
         ]);
     
 })();

@@ -5,22 +5,22 @@
         .module('pantryApp')
         .factory('item', item);
 
-    item.$inject = ['$http', 'CSRF_TOKEN'];
+    item.$inject = ['Restangular'];
     
-    function item($http, CSRF_TOKEN){
+    function item(Restangular){
 
         var service = {
-            get: get
+            getAll: getAll,
+            getOne: getOne
         };
         return service;
 
-        function get(){
-            var config = {
-                headers: {
-                    'X-CSRF-TOKEN': CSRF_TOKEN
-                }
-            }
-            return $http.get('/api/items', config);
+        function getAll(){
+            return Restangular.all('/api/items').getList();
+        }
+
+        function getOne(id){
+            return Restangular.one('/api/items', id).get();
         }
 
     }

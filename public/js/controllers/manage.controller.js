@@ -13,9 +13,9 @@
 
         vm.loading = true;
 
-        item.get()
+        item.getAll()
             .then(function(response){
-                vm.items = response.data;
+                vm.items = response;
                 vm.loading = false;
             })
 

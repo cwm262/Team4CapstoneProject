@@ -5,8 +5,10 @@
         .module('pantryApp')
         .config(config);
     
-    function config(){
-
+    config.$inject = ['RestangularProvider', 'CSRF_TOKEN'];
+    
+    function config(RestangularProvider, CSRF_TOKEN){
+        RestangularProvider.setDefaultHeaders({"X-CSRF-TOKEN": CSRF_TOKEN});
     }
 
 })();
