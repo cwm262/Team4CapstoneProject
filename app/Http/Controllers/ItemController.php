@@ -4,9 +4,10 @@ namespace pantryApp\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 use pantryApp\Http\Requests;
-use pantryApp\Item as Item;
+use pantryApp\Item;
 
 class ItemController extends Controller
 {
@@ -38,7 +39,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item;
+        $item->item_name = $request->input('item_name');
+
+        try{
+            $item->save();
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
     }
 
     /**
@@ -49,7 +58,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(Item::find($id));
     }
 
     /**

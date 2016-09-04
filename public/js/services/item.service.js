@@ -9,18 +9,25 @@
     
     function item(Restangular){
 
+        var items = Restangular.all('/api/items');
+
         var service = {
             getAll: getAll,
-            getOne: getOne
+            getOne: getOne,
+            post: post
         };
         return service;
 
         function getAll(){
-            return Restangular.all('/api/items').getList();
+            return items.getList();
         }
 
         function getOne(id){
-            return Restangular.one('/api/items', id).get();
+            return items.get(id);
+        }
+
+        function post(data){
+            return items.post(data);
         }
 
     }
