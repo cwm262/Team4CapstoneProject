@@ -4,7 +4,6 @@ html{
 }
 
 body{
-    font-family: 'Lato', sans-serif;
     margin-bottom: 24px;
 }
 
@@ -14,39 +13,14 @@ body{
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 24px;
-    background-color: #222222;
+    /*background-color: #222222;
     color: #fff;
-    border-top: 2px solid #f1b82d !important;
+    border-top: 2px solid #f1b82d !important;*/
     font-size: small;
-}
-
-#copyright > a{
-    color: #f1b82d;
-}
-
-
-.mainHeader > nav{
-    border-bottom: 2px solid #f1b82d !important;
 }
 
 table{
     font-size: 14px;
-}
-
-.table {
-  table-layout:fixed;
-}
-
-.table td {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.table td:hover{
-    overflow:visible;
-    white-space: normal;
-    height:auto;
 }
 
 
@@ -59,23 +33,12 @@ table{
     border-radius:0px
 }
 
-a{
-    color: #000;
-}
-
-a:hover, a:focus{
-    color: #524c4c;
-    text-decoration: none;
-}
-
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
-
 .default-top-spacer{
     margin-top: 20px;
 }
 
 .extra-padding{
-    padding-top: 60px;
+    padding-top: 40px;
 }
 
 .modal-padding{
@@ -102,15 +65,20 @@ a:hover, a:focus{
 }
 
 .navbar-brand{
-    padding: 6px 3px !important;
+    padding: 2px 0 0 0 !important;
 }
+
+.navbar-brand>img{
+    padding-top: 4px;
+    padding-left: 10px;
+}
+
 #navbar-page-title{
     float: left;
     padding: 12px 8px;
     font-size: 12px;
     line-height: 18px;
     height: 42px;
-    color: #fff;
 }
 
 #userHeader{
@@ -157,82 +125,6 @@ body {
     color: #000;
 }
 
-.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
-    background-color: #000;
-}
-
-#archiveBtn:hover{
-    background-color:#DD4D4D;
-    color: #000;
-}
-
-.btn-primary, .btn-success{
-    background-color: #000;
-    border-color: #524c4c;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-success:hover, .btn-success:focus{
-    background-color: #666666;
-    border-color: #CCCCCC;
-}
-
-.btn-primary[disabled]:hover, .btn-success[disabled]:hover{
-    background-color: #666666;
-    border-color: #CCCCCC;
-}
-
-.btn-danger {
-    color: #ffffff;
-    background-color: #900000;
-    border-color: #AA1A1A;
-}
-
-.btn-info{
-    color: #333333;
-    background-color: #e7e7e7;
-    border-color: #cccccc;
-}
-
-.btn-info:hover, .btn-info:focus {
-    color: #333333;
-    background-color: #cecece;
-    border-color: #adadad;
-}
-
-caption{
-    color: #000;
-    font-size: medium;
-    font-weight: bold;
-}
-
-.navbar .btn {
-    padding-bottom: 2px !important;
-}
-
-.navbar-default .navbar-nav>li>a {
-    color: #fff;
-}
-
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active, .navbar-default .navbar-nav>li>a:focus {
-    color: #f1b82d;
-    background-color: #333333 !important;
-}
-
-body > div.modal.fade.ng-isolate-scope.in > div > div > form > div:nth-child(8) > div > ul > li.uib-button-bar.ng-scope > span{
-    margin-bottom: 5px !important;
-}
-
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
-    background-color: #272727;
-}
-
-body > div.modal.fade.ng-isolate-scope.in > div > div > form > ng-form > div.formly-field.ng-scope.ng-isolate-scope.formly-field-datepicker > div > div > p > div > ul > li.uib-button-bar.ng-scope > span{
-    margin-bottom: 5px !important;
-}
-
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(6) > div > ul > li.uib-button-bar.ng-scope > span > button.btn.btn-sm.btn-danger.uib-clear.ng-binding{
-    margin-bottom: 5px !important;
-}
 
 .sk-circle {
   margin: 100px auto;

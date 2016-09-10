@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
     <link rel="stylesheet" href="css/base.css">
 
     <!-- JS Libs -->
@@ -29,7 +29,7 @@
 <!-- declare our angular app and controller --> 
 <body ng-app="pantryApp"> 
 
-<div class="mainHeader navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
             <span class="sr-only">Toggle navigation</span>
@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#/">
-            <img src="images/Icon.png" alt="Pantry Wizard Logo" height="35px"/>
+            <img src="images/hotdog.png" alt="Food Logo" height="45px"/>
         </a>
     </div>
     <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
