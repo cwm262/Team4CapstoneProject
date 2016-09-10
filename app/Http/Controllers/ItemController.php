@@ -22,16 +22,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,10 +29,9 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $item = new Item;
-        $item->item_name = $request->input('item_name');
-
         try{
+            $item = new Item;
+            $item->item_name = $request->input('item_name');
             $item->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
@@ -62,17 +51,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -81,7 +59,17 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $item = Item::find($id);
+            $input = $request->all();
+            foreach ($input as $key => $value) {
+                $item->$key = $value;
+            }
+            $item->save();
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
     }
 
     /**
@@ -92,6 +80,12 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $item = Item::find($id);
+            $item->delete();
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
     }
 }

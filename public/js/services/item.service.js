@@ -14,7 +14,9 @@
         var service = {
             getAll: getAll,
             getOne: getOne,
-            post: post
+            post: post,
+            put: put,
+            remove: remove
         };
         return service;
 
@@ -28,6 +30,14 @@
 
         function post(data){
             return items.post(data);
+        }
+
+        function put(data, id){
+            return Restangular.one('/api/items', id).customPUT(data);
+        }
+
+        function remove(id){
+            return Restangular.one('/api/items', id).remove();
         }
 
     }
