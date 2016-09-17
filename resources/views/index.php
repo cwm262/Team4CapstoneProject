@@ -7,6 +7,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/all.css">
 
     <!-- JS Libs -->
     <script src="js/all.js"></script>
