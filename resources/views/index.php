@@ -21,6 +21,7 @@
     <script src="js/controllers/manualInput.controller.js"></script> <!-- load our controller -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
+    <script src="js/services/grocery.service.js"></script> <!-- load our item service -->
     <script src="js/directives/rowlink.directive.js"></script> <!-- load our directives -->
     <script src="js/app.routes.js"></script> <!-- load our routes -->
     <script src="js/app.config.js"></script> <!-- load our config -->
@@ -103,7 +104,7 @@
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="alert.close()">{{alert.msg}}</div>
 </div>
 
-<div id="mainContent" class="extra-padding container" ng-view>
+<div ng-view>
 
 </div>
 

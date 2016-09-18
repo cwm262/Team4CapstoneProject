@@ -10,7 +10,8 @@
             'ngAria',
             'ui.bootstrap',
             'restangular',
-            'ngProgress'
+            'ngProgress',
+            'rzModule'
         ]);
     
 })();
