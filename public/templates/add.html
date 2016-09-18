@@ -18,17 +18,19 @@
                     <h5>Click to Edit</h5>
                 </div>
                 <div class="panel-body">
-                  <table class="table table-hover">
+                  <table class="table table-hover table-borderless">
                     <thead>
                       <tr>
                         <th>Quantity</th>
                         <th>Name</th>
+                        <th>Submitted</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="item in vm.recentlyAdded" ng-click="vm.selectItem(item)">
                         <td>{{item.quantity}}</td>
                         <td>{{item.name}}</td>
+                        <td ng-class="{ 'glyphicon glyphicon-ok' : item.submitted }"></td>
                       </tr>
                     </tbody>
                   </table>

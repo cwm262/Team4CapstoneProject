@@ -16,7 +16,7 @@
         //Dummy data below.
         vm.groceryItem = {
             quantity: 4,
-            name: "Bananas"
+            name: "Bananas",
         }
         vm.recentlyAdded.push(vm.groceryItem);
         vm.groceryItem = {
@@ -56,6 +56,7 @@
 
         vm.addToGroceries = function(selectedItem){
             selectedItem.quantity = vm.slider.value;
+            selectedItem.submitted = true;
             var data = {
                 //Build with values from selectedItem
                 
