@@ -16,8 +16,13 @@
                 controllerAs: "vm"
             })
             .when("/add-items", {
-                templateUrl : "templates/add-items.html",
+                templateUrl : "templates/add.html",
                 controller: "AddItemController",
+                controllerAs: "vm"
+            })
+            .when("/add-items/manual",{
+                templateUrl: "templates/manual.html",
+                controller: "ManualInputController",
                 controllerAs: "vm"
             })
             .when("/remove-items", {
