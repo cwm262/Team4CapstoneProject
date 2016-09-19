@@ -14,18 +14,18 @@
         vm.recentlyAdded = [];
 
         //Dummy data below.
-        // vm.groceryItem = {
-        //     quantity: 4,
-        //     name: "Bananas",
-        // }
-        //vm.recentlyAdded.push(vm.groceryItem);
-        // vm.groceryItem = {
-        //     quantity: 1,
-        //     name: "Campbell's Tomato Soup"
-        // }
-        //vm.recentlyAdded.push(vm.groceryItem);
-        //vm.lastScannedItem = _.last(vm.recentlyAdded);
-        //vm.selectedItem = vm.lastScannedItem;
+        vm.groceryItem = {
+            quantity: 4,
+            name: "Bananas",
+        }
+        vm.recentlyAdded.push(vm.groceryItem);
+        vm.groceryItem = {
+            quantity: 1,
+            name: "Campbell's Tomato Soup"
+        }
+        vm.recentlyAdded.push(vm.groceryItem);
+        vm.lastScannedItem = _.last(vm.recentlyAdded);
+        vm.selectedItem = vm.lastScannedItem;
 
         //Build option floor and ceil from db data somehow?
         vm.slider = {

@@ -6,6 +6,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+     <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet"> 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/all.css">
 
@@ -48,7 +49,7 @@
     <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#/">Pantry Wizard</a>
+                <a href="#/">PANTRY WIZARD</a>
             </li>
             <li>
                 <a href="#/add-items">
