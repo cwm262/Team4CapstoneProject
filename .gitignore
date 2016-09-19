@@ -2,3 +2,4 @@
 /node_modules
 .browse*
 session_start.sh
+session_finish.sh
