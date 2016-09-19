@@ -26,8 +26,13 @@
                 controllerAs: "vm"
             })
             .when("/remove-items", {
-                templateUrl : "templates/remove-items.html",
+                templateUrl : "templates/remove.html",
                 controller: "RemoveItemController",
+                controllerAs: "vm"
+            })
+            .when("/remove-items/manual", {
+                templateUrl: "templates/manual-remove.html",
+                controller: "ManualRemoveController",
                 controllerAs: "vm"
             })
             .when("/manage", {

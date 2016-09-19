@@ -61,6 +61,7 @@
                 //Build with values from selectedItem
                 
             }
+            //NOTE: Call to /items to see if item has been registered to db. Add if it has not.
             //Use to post item to DB once submit is pressed. Adds to Groceries in Inventory table.
             // grocery.post(data).then(function(response){
             //     selectedItem.quantity = vm.slider.value;
