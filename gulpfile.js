@@ -24,6 +24,12 @@ elixir(mix => {
             './node_modules/angular-route/angular-route.js',
             './node_modules/angular-touch/angular-touch.js',
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
-            './node_modules/restangular/dist/restangular.js'
-        ]);
+            './node_modules/restangular/dist/restangular.js',
+            './node_modules/ngprogress/build/ngProgress.js',
+            './node_modules/angularjs-slider/dist/rzslider.js'
+        ])
+        .styles([
+            './node_modules/ngprogress/ngProgress.css',
+            './node_modules/angularjs-slider/dist/rzslider.css'
+        ])
 });

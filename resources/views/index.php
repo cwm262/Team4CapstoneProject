@@ -6,7 +6,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+     <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet"> 
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/all.css">
 
     <!-- JS Libs -->
     <script src="js/all.js"></script>
@@ -16,8 +18,13 @@
     <script src="js/app.module.js"></script> <!-- load our application -->
     <script src="js/controllers/main.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/manage.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/add.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/remove.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/manualInput.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/manualRemove.controller.js"></script> <!-- load our controller -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
+    <script src="js/services/grocery.service.js"></script> <!-- load our item service -->
     <script src="js/directives/rowlink.directive.js"></script> <!-- load our directives -->
     <script src="js/app.routes.js"></script> <!-- load our routes -->
     <script src="js/app.config.js"></script> <!-- load our config -->
@@ -44,7 +51,7 @@
     <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#/">Pantry Wizard</a>
+                <a href="#/">PANTRY WIZARD</a>
             </li>
             <li>
                 <a href="#/add-items">
@@ -93,14 +100,6 @@
                 </ul>
             </li>
         </ul>
-        <form class="navbar-form navbar-right navbar-input-group" role="search">
-            <div class="input-group">
-                <input class="form-control" placeholder="Search" type="text" ng-model="searchParam">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-secondary" ng-click="globalAPI.search()"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
-        </form>
     </nav>
 </div>
 
@@ -108,7 +107,7 @@
     <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="alert.close()">{{alert.msg}}</div>
 </div>
 
-<div id="mainContent" class="extra-padding container" ng-view>
+<div ng-view>
 
 </div>
 

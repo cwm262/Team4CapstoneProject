@@ -1,0 +1,101 @@
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>
+    .bootstrap-iso form button,
+    .bootstrap-iso form button:hover {
+        color: white !important;
+    }
+    
+    .asteriskField {
+        color: red;
+    }
+</style>
+
+<!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+<div class="bootstrap-iso default-top-spacer">
+    <div class="container">
+        <div class="row">
+            <button class="btn btn-default" name="backBtn" type="button" ng-click="vm.backToAddItemsPage()">
+                Back
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 col-sm-offset-3">
+                <form method="post" name="addItemForm">
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="barcode">
+                            Barcode
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="barcode" name="barcode" type="text" ng-model="vm.itemToBeAdded.barcode" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.barcode.$error.required">Please scan or enter a barcode.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="itemName">
+                            Item Name
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="itemName" name="itemName" type="text" ng-model="vm.itemToBeAdded.itemName" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.itemName.$error.required">Please enter the product name.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="measurement">
+                            Unit of Measurement
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="measurement" name="measurement" type="text" ng-model="vm.itemToBeAdded.measurement" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.measurement.$error.required">Please select the appropriate unit of measurement.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="storage">
+                            Storage
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="storage" name="storage" type="text" ng-model="vm.itemToBeAdded.storage" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.storage.$error.required">Please select how this item should be stored.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="servingSize">
+                            Serving Size
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="servingSize" name="servingSize" type="text" ng-model="vm.itemToBeAdded.servingSize" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.servingSize.$error.required">Please select the listed serving size.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="servingsPer">
+                            Servings Per Container
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="servingsPer" name="servingsPer" type="text" ng-model="vm.itemToBeAdded.servingsPer" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.servingsPer.$error.required">Please enter the amount of listed servings.</span>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button class="btn btn-primary " name="submit" type="submit" ng-disabled="addItemForm.$invalid" ng-click="vm.addItemToDB()">
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

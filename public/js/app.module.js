@@ -9,7 +9,9 @@
             'ngTouch',
             'ngAria',
             'ui.bootstrap',
-            'restangular'
+            'restangular',
+            'ngProgress',
+            'rzModule'
         ]);
     
 })();
