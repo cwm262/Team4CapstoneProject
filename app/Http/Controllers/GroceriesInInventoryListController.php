@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use pantryApp\Http\Requests;
 
-class GroceriesInInventoryController extends Controller
+class GroceriesInInventoryListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class GroceriesInInventoryController extends Controller
      */
     public function index()
     {
-        //
+                return response()->json(Item::get());
     }
 
     /**
@@ -36,7 +36,18 @@ class GroceriesInInventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $groceriesInInventory = new GroceriesInInventoryList;
+            $groceriesInInventory->item_id = $request->input('item_id');
+            $groceriesInInventory->user_id = $request->input('user_id');
+            $groceriesInInventory->list_id = $request->input('list_id');
+            $groceriesInInventory->quantity = $request->input('quantity');
+            $groceriesInInventory->
+            $groceriesInInventory->save();
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
     }
 
     /**

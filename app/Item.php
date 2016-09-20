@@ -8,3 +8,7 @@ class Item extends Model
 {
     //
 }
+class GroceriesInInventoryList extends Model
+{
+    
+}
