@@ -13,6 +13,7 @@
 
         vm.loading = true;
         vm.item_name = null;
+        vm.selectedFood = null;
 
         item.getAll()
             .then(function(response){
@@ -20,17 +21,8 @@
                 vm.loading = false;
             })
 
-        vm.addItem = function(){
-            var data = {
-                item_name: vm.item_name             
-            }
-            item.post(data).then(function(response){
-                $location.path('items');
-                alert.add("success", "Item added.");
-            }, function(error){
-                $location.path('/');
-                alert.add("danger", "Failed to add item: " + error.data.message);
-            })
+        vm.selectFood = function(food){
+            vm.selectedFood = food;
         }
 
     }

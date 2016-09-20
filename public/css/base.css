@@ -53,13 +53,13 @@ body{
 }
 
 .tab-pane{
-  height:500px;
+  height:600px;
   overflow-y:scroll;
   width:100%;
 }
 
 .tab-pane-no-scroll{
-    height: 500px;
+    height: 600px;
     width: 100%;
 }
 
