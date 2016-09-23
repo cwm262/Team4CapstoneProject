@@ -13,12 +13,12 @@ class Inventorytable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('inventory');
+        /**Schema::dropIfExists('inventory');**/
         Schema::create('inventory', function (Blueprint $table) {
             $table->integer('user_id')->references('user_id')->on('users');
             $table->integer('item_id')->references('item_id')->on('items');
-            $table->integer('quantity');
-            $table->integer('used');
+            $table->float('quantity', 8, 2);
+            $table->float('used', 8, 2);
             $table->boolean('expired');
             $table->timestamps();
 

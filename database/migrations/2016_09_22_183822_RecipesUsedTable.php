@@ -13,7 +13,7 @@ class RecipesUsedTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('recipes_used');
+        /**Schema::dropIfExists('recipes_used');**/
         Schema::create('recipes_used', function (Blueprint $table) {
             $table->integer('recipe_id')->references('recipe_id')->on('recipes');
             $table->integer('user_id')->references('user_id')->on('users');
