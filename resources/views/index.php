@@ -82,15 +82,14 @@
         <ul class="nav navbar-nav navbar-right" id="userHeader">
             <li uib-dropdown class="dropdown">
                 <a href uib-dropdown-toggle>
-                    <span class="glyphicon glyphicon-user"> <?php echo Auth::user()->name; ?>
-                    <i class="icon-sort-down"></i>
+                    <span class="glyphicon glyphicon-user"></span> <?php echo Auth::user()->name; ?>
                 </a>
                 <ul class="dropdown-menu pull-right" uib-dropdown-menu>
                     <li>
                         <a href="<?php echo url('/logout') ?>"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                            Logout
+                            <span class="glyphicon glyphicon-log-out"></span> Logout
                         </a>
 
                         <form id="logout-form" action="<?php echo url('/logout') ?>" method="POST" style="display: none;">
