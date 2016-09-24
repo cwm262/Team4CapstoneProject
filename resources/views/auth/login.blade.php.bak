@@ -1,50 +1,7 @@
-<!doctype html> <html lang="en"> <head> <meta charset="UTF-8"> <title>Pantry Wizard</title>
+@extends('layouts.app')
 
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
-     <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet"> 
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/all.css">
-
-    <!-- JS Libs -->
-    <script src="js/all.js"></script>
-
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-
-</head> 
-<!-- declare our angular app and controller --> 
-<body ng-app="pantryApp"> 
-
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#/">
-            <img src="images/hotdog.png" alt="Food Logo" height="45px"/>
-        </a>
-    </div>
-    <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="#/">PANTRY WIZARD</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-
-<div class="container default-top-spacer">
+@section('content')
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -97,8 +54,9 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/register') }}">Register</a>
-
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                    Forgot Your Password?
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -107,6 +65,4 @@
         </div>
     </div>
 </div>
-
-</body> 
-</html>
+@endsection

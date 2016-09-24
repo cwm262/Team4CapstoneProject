@@ -1,23 +1,83 @@
-<!-- LOADING ICON =============================================== -->
-<!-- show loading icon if the loading variable is set to true -->
-<p class="text-center" ng-show="vm.loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+<div class="container default-top-spacer">
 
-<div class="container" ng-hide="vm.loading">
-    <h2>Lorem Ipsum "Food" Items</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>"Food" Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="item in vm.items">
-                <td>{{item.id}}</td>
-                <td>{{item.item_name}}</td>
-            </tr>
-
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default tab-pane">
+                <div class="panel-heading">
+                    <h3 class="">Current Inventory</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover table-borderless">
+                    <thead>
+                        <tr>
+                            <th>Food Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in vm.items" ng-click="vm.selectFood(item)">
+                            <td>{{item.item_name}}</td>
+                            <td>{{item.id}}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default tab-pane-no-scroll" ng-if="vm.selectedFood != null">
+                <div class="panel-heading">
+                    <h3 class="">Selected Food</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="editItemForm">
+                        <div class="form-group ">
+                            <label class="control-label" for="foodName">
+                                Food Name
+                            </label>
+                            <input class="form-control" id="foodName" name="foodName" type="text" ng-model="vm.selectedFood.item_name" ng-disabled="true"
+                            />
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="foodServingSize">
+                                Serving Size
+                            </label>
+                            <input class="form-control" id="foodServingSize" name="foodServingSize" type="text" ng-model="vm.selectedFood.serving_size" ng-disabled="true"
+                            />
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="foodMeasurement">
+                                Unit of Measurement
+                            </label>
+                            <input class="form-control" id="foodMeasurement" name="foodMeasurement" type="text" ng-model="vm.selectedFood.measurement" ng-disabled="true"
+                            />
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="foodServingsPerContainer">
+                                Servings Per Container
+                            </label>
+                            <input class="form-control" id="foodServingsPerContainer" name="foodServingsPerContainer" type="text" ng-model="vm.selectedFood.servings_per_container" ng-disabled="true"
+                            />
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="foodStorage">
+                                Storage Classification
+                            </label>
+                            <input class="form-control" id="foodStorage" name="foodStorage" type="text" ng-model="vm.selectedFood.storage" ng-disabled="true"
+                            />
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label" for="foodQuantity">
+                                Amount in Inventory
+                            </label>
+                            <input class="form-control" id="foodQuantity" name="foodQuantity" type="text" ng-model="vm.selectedFood.quantity"
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary" ng-click="updateSelectedFood()">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
