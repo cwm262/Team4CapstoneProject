@@ -16,7 +16,7 @@ class CreateItemTable extends Migration
         /**Schema::dropIfExists('items');**/
         Schema::create('items', function (Blueprint $table) {
             $table->increments('item_id');
-            $table->integer('user_id')->references('user_id')->on('users');
+            $table->integer('user_id')->references('id')->on('users');
             $table->char('name', 50);
             $table->string('measurement', 30);
             $table->float('serving_size', 8, 2);

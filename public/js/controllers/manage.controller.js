@@ -15,14 +15,20 @@
         vm.item_name = null;
         vm.selectedFood = null;
 
-        item.getAll()
-            .then(function(response){
-                vm.items = response;
-                vm.loading = false;
-            })
+        //Perform get request to build an array of inventory items. Will need to call inventory and items.
+        // item.getAll()
+        //     .then(function(response){
+        //         vm.items = response;
+        //         vm.loading = false;
+        //     })
 
         vm.selectFood = function(food){
             vm.selectedFood = food;
+        }
+
+        vm.updateSelectedFood = function(){
+            //Update quantity/etc on selected
+            //Should remove if quantity set to 0
         }
 
     }
