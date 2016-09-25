@@ -10,8 +10,7 @@
     function ManageItemsController(item){
 
         var vm = this;
-
-        vm.loading = true;
+        
         vm.item_name = null;
         vm.selectedFood = null;
 
