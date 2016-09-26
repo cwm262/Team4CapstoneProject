@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call('InventorySeeder');
         $this->call('RecipeTable');
         $this->call('RecipeIngredients');
+        $this->call('RecipesUsed');
     }
 }

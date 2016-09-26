@@ -13,11 +13,13 @@ class RecipesUsedTable extends Migration
      */
     public function up()
     {
-        /**Schema::dropIfExists('recipes_used');**/
+        Schema::dropIfExists('recipes_used');
         Schema::create('recipes_used', function (Blueprint $table) {
-            $table->integer('recipe_id')->references('recipe_id')->on('recipes');
-            $table->integer('id')->references('id')->on('users');
+            $table->integer('recipe_id')->unsigned();
+            $table->integer('id')->unsigned();
             $table->integer('quantity');
+            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('recipe_id')->references('recipe_id')->on('recipes');
         });
     }
 

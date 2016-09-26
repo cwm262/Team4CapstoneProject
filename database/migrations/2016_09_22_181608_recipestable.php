@@ -13,13 +13,14 @@ class Recipestable extends Migration
      */
     public function up()
     {
-        /**Schema::dropIfExists('recipes');**/
+        Schema::dropIfExists('recipes');
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('recipe_id');
-            $table->integer('id')->references('id')->on('users');
+            $table->integer('id')->unsigned();
             $table->char('name', 50);
             $table->longText('instructions');
             $table->float('prep_time', 8, 2);
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
