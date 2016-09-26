@@ -3,8 +3,11 @@
 namespace pantryApp\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 use pantryApp\Http\Requests;
+use pantryApp\Item;
 
 class GroceriesInInventoryListController extends Controller
 {
@@ -43,6 +46,7 @@ class GroceriesInInventoryListController extends Controller
             $groceriesInInventory->list_id = $request->input('list_id');
             $groceriesInInventory->quantity = $request->input('quantity');
             $groceriesInInventory->
+
             $groceriesInInventory->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
@@ -58,7 +62,7 @@ class GroceriesInInventoryListController extends Controller
      */
     public function show($id)
     {
-        //
+                return response()->json(Item::find($id));
     }
 
     /**
@@ -81,7 +85,18 @@ class GroceriesInInventoryListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+   /**      try{
+            $item = Item::find($id);
+            $input = $request->all();
+            foreach ($input as $key => $value) {
+                $item->$key = $value;
+            }
+            $item->save();
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
+        */
     }
 
     /**
