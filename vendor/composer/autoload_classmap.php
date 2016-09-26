@@ -81,6 +81,7 @@ return array(
     'Hamcrest\\Type\\IsString' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+    'InventorySeeder' => $baseDir . '/database/seeds/InventorySeeder.php',
     'Inventorytable' => $baseDir . '/database/migrations/2016_09_22_180712_inventorytable.php',
     'ItemsTableSeeder' => $baseDir . '/database/seeds/ItemsTableSeeder.php',
     'PHPUnit\\Framework\\TestCase' => $vendorDir . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
