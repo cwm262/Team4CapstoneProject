@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 *{
     font-family: 'Bree Serif', serif;
 }
@@ -53,13 +55,13 @@ body{
 }
 
 .tab-pane{
-  height:500px;
+  height:700px;
   overflow-y:scroll;
   width:100%;
 }
 
 .tab-pane-no-scroll{
-    height: 500px;
+    height: 700px;
     width: 100%;
 }
 
@@ -146,6 +148,27 @@ body {
 }
 
 .center {text-align: center; margin-left: auto; margin-right: auto; margin-bottom: auto; margin-top: auto;}
+
+.star-rating {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+.star-rating .star {
+  padding: 1px;
+  color: #ddd;
+  font-size: 20px;
+  text-shadow: .05em .05em #aaa;
+  list-style-type: none;
+  display: inline-block;
+  cursor: pointer;
+}
+.star-rating .star.filled {
+  color: #fd0;
+}
+.star-rating.readonly .star.filled {
+  color: #666;
+}
 
 .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
     color: #000;

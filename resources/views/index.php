@@ -6,7 +6,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
-     <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/all.css">
 
@@ -22,10 +23,13 @@
     <script src="js/controllers/remove.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/manualInput.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/manualRemove.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/recipe.controller.js"></script> <!-- load our controller -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
     <script src="js/services/grocery.service.js"></script> <!-- load our item service -->
+    <script src="js/services/recipe.service.js"></script> <!-- load our item service -->
     <script src="js/directives/rowlink.directive.js"></script> <!-- load our directives -->
+    <script src="js/directives/starRating.directive.js"></script> <!-- load our directives -->
     <script src="js/app.routes.js"></script> <!-- load our routes -->
     <script src="js/app.config.js"></script> <!-- load our config -->
     
@@ -82,15 +86,14 @@
         <ul class="nav navbar-nav navbar-right" id="userHeader">
             <li uib-dropdown class="dropdown">
                 <a href uib-dropdown-toggle>
-                    <span class="glyphicon glyphicon-user"> <?php echo Auth::user()->name; ?>
-                    <i class="icon-sort-down"></i>
+                    <span class="glyphicon glyphicon-user"></span> <?php echo Auth::user()->name; ?>
                 </a>
                 <ul class="dropdown-menu pull-right" uib-dropdown-menu>
                     <li>
                         <a href="<?php echo url('/logout') ?>"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                            Logout
+                            <span class="glyphicon glyphicon-log-out"></span> Logout
                         </a>
 
                         <form id="logout-form" action="<?php echo url('/logout') ?>" method="POST" style="display: none;">
