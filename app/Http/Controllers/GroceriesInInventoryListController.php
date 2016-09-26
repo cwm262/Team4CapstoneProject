@@ -92,6 +92,12 @@ class GroceriesInInventoryListController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $groceriesInInventory = Item::find($id);
+            $groceriesInInventory->delete();
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
     }
 }
