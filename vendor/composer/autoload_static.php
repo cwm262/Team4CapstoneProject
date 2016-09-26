@@ -873,6 +873,7 @@ class ComposerStaticInita877e12fbda72f5f80d64f49d835629b
         'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
         'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'ShoppingList' => __DIR__ . '/../..' . '/database/seeds/ShoppingList.php',
         'ShoppingListTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_22_192435_ShoppingListTable.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',

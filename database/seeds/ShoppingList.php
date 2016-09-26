@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RecipeRatings extends Seeder
+class ShoppingList extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,11 +11,11 @@ class RecipeRatings extends Seeder
      */
     public function run()
     {
-        DB::table('recipe_ratings')->delete();
-        DB::table('recipe_ratings')->insert([
-            'recipe_id' => '1',
+        DB::table('shopping_list')->delete();
+        DB::table('shopping_list')->insert([
             'id' => '1',
-            'rating' => '10',
+            'item_id' => '2',
+            'quantity' => '1',
         ]);
     }
 }
