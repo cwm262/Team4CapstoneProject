@@ -13,11 +13,13 @@ class RecipeRatingsTable extends Migration
      */
     public function up()
     {
-        /**Schema::dropIfExists('recipe_ratings');**/
+        Schema::dropIfExists('recipe_ratings');
         Schema::create('recipe_ratings', function (Blueprint $table) {
-            $table->integer('recipe_id')->references('recipe_id')->on('recipes');
-            $table->integer('id')->references('id')->on('users');
+            $table->integer('recipe_id')->unsigned();
+            $table->integer('id')->unsigned();
             $table->integer('rating');
+            $table->foreign('recipe_id')->references('recipe_id')->on('recipes');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 
