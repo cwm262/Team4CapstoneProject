@@ -16,7 +16,7 @@ class Recipestable extends Migration
         /**Schema::dropIfExists('recipes');**/
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('recipe_id');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->integer('id')->references('id')->on('users');
             $table->char('name', 50);
             $table->longText('instructions');
             $table->float('prep_time', 8, 2);

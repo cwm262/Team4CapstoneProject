@@ -15,7 +15,7 @@ class ShoppingListTable extends Migration
     {
         /**Schema::dropIfExists('shopping_list');**/
         Schema::create('shopping_list', function (Blueprint $table) {
-            $table->integer('user_id')->references('id')->on('users');
+            $table->integer('id')->references('id')->on('users');
             $table->integer('item_id')->references('item_id')->on('items');
             $table->float('quantity', 8, 2);
         });
