@@ -19,7 +19,7 @@ class Inventorytable extends Migration
             $table->integer('item_id')->references('item_id')->on('items');
             $table->float('quantity', 8, 2);
             $table->float('used', 8, 2);
-            $table->boolean('expired');
+            $table->float('expired', 8, 2)->nullable();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 

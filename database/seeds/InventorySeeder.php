@@ -13,8 +13,11 @@ class InventorySeeder extends Seeder
     {
         DB::table('inventory')->delete();
         DB::table('inventory')->insert([
-            'item_id' => '123',
-            
+            'id' => '1',
+            'item_id' => '1',
+            'quantity' => '16',
+            'used' => '4',
+            'expired' => NULL,
         ]);
     }
 }
