@@ -413,6 +413,7 @@ class ComposerStaticInita877e12fbda72f5f80d64f49d835629b
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'InventorySeeder' => __DIR__ . '/../..' . '/database/seeds/InventorySeeder.php',
         'Inventorytable' => __DIR__ . '/../..' . '/database/migrations/2016_09_22_180712_inventorytable.php',
         'ItemsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/ItemsTableSeeder.php',
         'PHPUnit\\Framework\\TestCase' => __DIR__ . '/..' . '/phpunit/phpunit/src/ForwardCompatibility/TestCase.php',
