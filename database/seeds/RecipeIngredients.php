@@ -17,5 +17,20 @@ class RecipeIngredients extends Seeder
             'recipe_id' => '2',
             'quantity'=> '1',
         ]);
+        DB::table('recipe_ingredients')->insert([
+            'item_id' => '2',
+            'recipe_id' => '2',
+            'quantity'=> '2',
+        ]);
+        DB::table('recipe_ingredients')->insert([
+            'item_id' => '1',
+            'recipe_id' => '2',
+            'quantity'=> '1',
+        ]);
+        DB::table('recipe_ingredients')->insert([
+            'item_id' => '3',
+            'recipe_id' => '2',
+            'quantity'=> '.1',
+        ]);
     }
 }

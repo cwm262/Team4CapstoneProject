@@ -169,16 +169,16 @@ class InventorySeeder extends Seeder
         ]);
         DB::table('inventory')->insert([
             'id' => '1',
-            'item_id' => '20',
-            'quantity' => '5',
-            'used' => '2',
-            'expired' => NULL,
+            'item_id' => '19',
+            'quantity' => '6',
+            'used' => '6',
+            'expired' => '0',
         ]);
         DB::table('inventory')->insert([
             'id' => '1',
-            'item_id' => '20',
-            'quantity' => '5',
-            'used' => '5',
+            'item_id' => '19',
+            'quantity' => '6',
+            'used' => '6',
             'expired' => '0',
         ]);
     }
