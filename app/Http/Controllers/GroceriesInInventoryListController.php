@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use pantryApp\Http\Requests;
 use pantryApp\Item;
 
-class ItemController extends Controller
+class GroceriesInInventoryListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,17 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return response()->json(Item::get());
+                return response()->json(Item::get());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -30,23 +40,16 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         try{
-            $item = new Item;
-            
-            $item->item_id = $request->('item_id');
-            $item->barcode = $request->('barcode');
-            $item->user_id = $request->('user_id');
-            $item->item_name = $request->('item_name');
-            $item->measurement = $request->('measurement');
-            $item->serving_sive = $request->('serving_size');
-            $item->servings_per_container = $request->('servings_per_container');
-            $item->type = $request->('type');
-            $item->storage = $request->('storage');
-            $item->expiration = $request->('expiration');
-            $item->ready_to_eat = $request->('ready_to_eat');
-            $item->created_at = $request->('created_at');
-            $item->updated_at = $request->('updated_at');
+            $groceriesInInventory = new GroceriesInInventoryList;
+            $groceriesInInventory->item_id = $request->input('item_id');
+            $groceriesInInventory->user_id = $request->input('user_id');
+            $groceriesInInventory->created_at = $request->input('created_at');
+            $groceriesInInventory->quantity = $request->input('quantity');
+            $groceriesInInventory->used = $request->input('used');
+            $groceriesIneInventory->expired = $request->input('expired');
+            $groceriesInInventory->date_modified = $request->input('date_modified')
 
-            $item->save();
+            $groceriesInInventory->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
@@ -61,7 +64,18 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        return response()->json(Item::find($id));
+                return response()->json(Item::find($id));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -74,7 +88,7 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $item = Item::find($id);
+            $item = GroceriesInInventory::find($id);
             $input = $request->all();
             foreach ($input as $key => $value) {
                 $item->$key = $value;
@@ -84,6 +98,7 @@ class ItemController extends Controller
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
+        
     }
 
     /**
@@ -95,8 +110,8 @@ class ItemController extends Controller
     public function destroy($id)
     {
         try{
-            $item = Item::find($id);
-            $item->delete();
+            $groceriesInInventory = Item::find($id);
+            $groceriesInInventory->delete();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
