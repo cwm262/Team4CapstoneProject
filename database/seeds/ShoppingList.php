@@ -17,5 +17,15 @@ class ShoppingList extends Seeder
             'item_id' => '2',
             'quantity' => '1',
         ]);
+        DB::table('shopping_list')->insert([
+            'id' => '1',
+            'item_id' => '18',
+            'quantity' => '5',
+        ]);
+        DB::table('shopping_list')->insert([
+            'id' => '1',
+            'item_id' => '6',
+            'quantity' => '8',
+        ]);
     }
 }

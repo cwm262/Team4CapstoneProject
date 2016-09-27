@@ -65,7 +65,7 @@ class InventorySeeder extends Seeder
             'id' => '1',
             'item_id' => '6',
             'quantity' => '8',
-            'used' => '2',
+            'used' => '6',
             'expired' => NULL,
         ]);
         DB::table('inventory')->insert([
@@ -156,7 +156,7 @@ class InventorySeeder extends Seeder
         DB::table('inventory')->insert([
             'id' => '1',
             'item_id' => '18',
-            'quantity' => '24',
+            'quantity' => '4',
             'used' => '0',
             'expired' => NULL,
         ]);
