@@ -15,7 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/chris', 'ChrisPlayGroundController@index');
+Route::get('/chris', 'ChrisPlaygroundController@index');
 
 Auth::routes();
 

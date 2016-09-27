@@ -3,20 +3,12 @@
 namespace pantryApp\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use pantryApp\Http\Requests;
 //use pantryApp\ModelName;
 
-class HomeController extends Controller
+class ChrisPlaygroundController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        
-    }
-
     /**
      * Show the application dashboard.
      *
