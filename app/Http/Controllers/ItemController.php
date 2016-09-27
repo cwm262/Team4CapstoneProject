@@ -31,7 +31,7 @@ class ItemController extends Controller
     {
         try{
             $item = new Item;
-            
+
             $item->item_id = $request->('item_id');
             $item->barcode = $request->('barcode');
             $item->user_id = $request->('user_id');
