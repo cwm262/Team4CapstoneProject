@@ -31,5 +31,31 @@ class RecipeTable extends Seeder
             'prep_time' => '15',
 
         ]);
+        DB::table('recipes')->insert([
+            'id' => '1',
+            'name' => 'Cheese Burger',
+            'instructions' => 'Preheat grill to at least 500 degrees. Create beef patty from 1/4lb beef while waiting. Season to taste. Place beef patty on grill wait for 5 minutes. While cooking prepair other ingredients. After 5 minutes filp burger and cook 3 minutes. Remove from grill and    immediatly place cheese on patty to let it melt. Place patty on bun with the rest of the ingredients on top. Enjoy',
+            'prep_time' => '15',
+        ]);
+        DB::table('recipes')->insert([
+            'id' => '1',
+            'name' => 'Turkey Sandwich',
+            'instructions' => 'Place slices of bread on plate. Add cheese to one slice. Place meat on the other slice. Combine and enjoy!',
+            'prep_time' => '5',
+        ]);
+        DB::table('recipes')->insert([
+            'id' => '1',
+            'name' => 'Grilled Cheese',
+            'instructions' => 'Spread 1/2 tablespoon of butter on one side of each slice of bread. Place cheese on un buttered side. Place slices together with butter facing outward. Heat skillet to medium heat. Place sandwhich on skillet, cook on each side for 3 minutes to melt cheese. Enjoy!',
+            'prep_time' => '10',
+        ]);
+        DB::table('recipes')->insert([
+            'id' => '1',
+            'name' => 'Tacos',
+            'instructions' => '"Cook beef in 10-inch skillet over medium heat 8 to 10 minutes, stirring occasionally, until brown; drain.
+            Stir salsa into beef. Heat to boiling, stirring constantly; reduce heat to medium-low. Cook 5 minutes, stirring occasionally. Pour beef mixture into large serving bowl.
+            Heat taco shells as directed on package. Serve taco shells with beef mixture, lettuce, tomato and cheese."',
+            'prep_time' => '20',
+        ]);
     }
 }
