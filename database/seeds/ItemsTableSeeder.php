@@ -204,5 +204,41 @@ class ItemsTableSeeder extends Seeder
             'expiration' => '7',
             'ready_to_eat' => '0',
         ]);
+        DB::table('items')->insert([
+            'barcode' => '139',
+            'id' => '1',
+            'item_name' => 'Mild Salsa',
+            'measurement' => 'tablespoons',
+            'serving_size' => '2',
+            'servings_per_container' => '24',
+            'type' => '0',
+            'storage' => '1',
+            'expiration' => '30',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '140',
+            'id' => '1',
+            'item_name' => 'Taco Shells',
+            'measurement' => 'quantity',
+            'serving_size' => '2',
+            'servings_per_container' => '6',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '30',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '141',
+            'id' => '1',
+            'item_name' => 'Head of Lettuce',
+            'measurement' => 'quantity',
+            'serving_size' => '.2',
+            'servings_per_container' => '5',
+            'type' => '1',
+            'storage' => '1',
+            'expiration' => '10',
+            'ready_to_eat' => '0',
+        ]);
     }
 }
