@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
+Route::get('/chris', 'ChrisPlayGroundController@index');
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
