@@ -130,6 +130,78 @@ class ItemsTableSeeder extends Seeder
             'type' => '1',
             'storage' => '1',
             'expiration' => '30',
+            'ready_to_eat' => '1',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '133',
+            'id' => '1',
+            'item_name' => 'Onion',
+            'measurement' => 'ounces',
+            'serving_size' => '.2',
+            'servings_per_container' => '5',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '35',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '134',
+            'id' => '1',
+            'item_name' => 'Tomato',
+            'measurement' => 'ounces',
+            'serving_size' => '.2',
+            'servings_per_container' => '5',
+            'type' => '1',
+            'storage' => '1',
+            'expiration' => '14',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '135',
+            'id' => '1',
+            'item_name' => 'Spaghetti Noodles',
+            'measurement' => 'ounces',
+            'serving_size' => '2',
+            'servings_per_container' => '8',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '365',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '136',
+            'id' => '1',
+            'item_name' => 'Prego Italian Sauce',
+            'measurement' => 'cups',
+            'serving_size' => '.5',
+            'servings_per_container' => '5',
+            'type' => '0',
+            'storage' => '2',
+            'expiration' => '365',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '137',
+            'id' => '1',
+            'item_name' => 'Sliced Turkey',
+            'measurement' => 'pounds',
+            'serving_size' => '.2',
+            'servings_per_container' => '5',
+            'type' => '1',
+            'storage' => '1',
+            'expiration' => '7',
+            'ready_to_eat' => '0',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '138',
+            'id' => '1',
+            'item_name' => 'Sliced Bread',
+            'measurement' => 'grams',
+            'serving_size' => '38',
+            'servings_per_container' => '18',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '7',
             'ready_to_eat' => '0',
         ]);
     }
