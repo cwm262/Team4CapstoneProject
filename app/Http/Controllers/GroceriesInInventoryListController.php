@@ -43,9 +43,11 @@ class GroceriesInInventoryListController extends Controller
             $groceriesInInventory = new GroceriesInInventoryList;
             $groceriesInInventory->item_id = $request->input('item_id');
             $groceriesInInventory->user_id = $request->input('user_id');
-            $groceriesInInventory->list_id = $request->input('list_id');
+            $groceriesInInventory->created_at = $request->input('created_at');
             $groceriesInInventory->quantity = $request->input('quantity');
-            $groceriesInInventory->
+            $groceriesInInventory->used = $request->input('used');
+            $groceriesIneInventory->expired = $request->input('expired');
+            $groceriesInInventory->date_modified = $request->input('date_modified')
 
             $groceriesInInventory->save();
         }catch(\Exception $e){
@@ -85,8 +87,8 @@ class GroceriesInInventoryListController extends Controller
      */
     public function update(Request $request, $id)
     {
-   /**      try{
-            $item = Item::find($id);
+        try{
+            $item = GroceriesInInventory::find($id);
             $input = $request->all();
             foreach ($input as $key => $value) {
                 $item->$key = $value;
@@ -96,7 +98,7 @@ class GroceriesInInventoryListController extends Controller
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
-        */
+        
     }
 
     /**
