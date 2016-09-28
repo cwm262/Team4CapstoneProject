@@ -47,8 +47,7 @@ class GroceriesInInventoryListController extends Controller
             $groceriesInInventory->quantity = $request->input('quantity');
             $groceriesInInventory->used = $request->input('used');
             $groceriesIneInventory->expired = $request->input('expired');
-            $groceriesInInventory->date_modified = $request->input('date_modified')
-
+            $groceriesInInventory->date_modified = $request->input('date_modified');
             $groceriesInInventory->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
