@@ -16,11 +16,11 @@ class Recipestable extends Migration
         Schema::dropIfExists('recipes');
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('recipe_id');
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->char('name', 50);
             $table->longText('instructions');
             $table->float('prep_time', 8, 2);
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -14,7 +14,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->delete();
         DB::table('items')->insert([
             'barcode' => '123',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'butter',
             'measurement' => 'tablespoons',
             'serving_size' => '1',
@@ -26,7 +26,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '124',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'eggs',
             'measurement' => 'quantity',
             'serving_size' => '1',
@@ -38,7 +38,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '125',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'milk',
             'measurement' => 'cups',
             'serving_size' => '1',
@@ -50,7 +50,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '126',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Sharp Cheddar Shredded Cheese',
             'measurement' => 'ounces',
             'serving_size' => '1',
@@ -62,7 +62,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '127',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Apple',
             'measurement' => 'quantity',
             'serving_size' => '1',
@@ -74,7 +74,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '128',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Banana',
             'measurement' => 'quantity',
             'serving_size' => '1',
@@ -86,7 +86,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '129',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Burger Buns',
             'measurement' => 'quantity',
             'serving_size' => '1',
@@ -98,7 +98,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '130',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Sliced Peperjack Cheese',
             'measurement' => 'quantity',
             'serving_size' => '1',
@@ -110,7 +110,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '131',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Ground Beef',
             'measurement' => 'pounds',
             'serving_size' => '.25',
@@ -122,7 +122,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '132',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Cheetos',
             'measurement' => 'ounces',
             'serving_size' => '.25',
@@ -134,7 +134,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '133',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Onion',
             'measurement' => 'quantity',
             'serving_size' => '.2',
@@ -146,7 +146,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '134',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Tomato',
             'measurement' => 'quantity',
             'serving_size' => '.2',
@@ -158,7 +158,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '135',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Spaghetti Noodles',
             'measurement' => 'ounces',
             'serving_size' => '2',
@@ -170,7 +170,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '136',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Prego Italian Sauce',
             'measurement' => 'cups',
             'serving_size' => '.5',
@@ -182,7 +182,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '137',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Sliced Turkey',
             'measurement' => 'pounds',
             'serving_size' => '.2',
@@ -194,7 +194,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '138',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Sliced Bread',
             'measurement' => 'quantity',
             'serving_size' => '2',
@@ -206,7 +206,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '139',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Mild Salsa',
             'measurement' => 'cups',
             'serving_size' => '.25',
@@ -218,7 +218,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '140',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Taco Shells',
             'measurement' => 'quantity',
             'serving_size' => '2',
@@ -230,7 +230,7 @@ class ItemsTableSeeder extends Seeder
         ]);
         DB::table('items')->insert([
             'barcode' => '141',
-            'id' => '1',
+            'user_id' => '1',
             'item_name' => 'Head of Lettuce',
             'measurement' => 'quantity',
             'serving_size' => '.2',

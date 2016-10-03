@@ -16,10 +16,10 @@ class RecipeRatingsTable extends Migration
         Schema::dropIfExists('recipe_ratings');
         Schema::create('recipe_ratings', function (Blueprint $table) {
             $table->integer('recipe_id')->unsigned();
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('rating');
             $table->foreign('recipe_id')->references('recipe_id')->on('recipes');
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

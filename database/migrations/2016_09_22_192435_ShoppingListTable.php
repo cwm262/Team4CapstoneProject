@@ -15,10 +15,10 @@ class ShoppingListTable extends Migration
     {
         Schema::dropIfExists('shopping_list');
         Schema::create('shopping_list', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('item_id')->unsigned();
             $table->float('quantity', 8, 2);
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('item_id')->references('item_id')->on('items');
         });
     }

@@ -13,17 +13,17 @@ class ShoppingList extends Seeder
     {
         DB::table('shopping_list')->delete();
         DB::table('shopping_list')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'item_id' => '2',
             'quantity' => '1',
         ]);
         DB::table('shopping_list')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'item_id' => '18',
             'quantity' => '5',
         ]);
         DB::table('shopping_list')->insert([
-            'id' => '1',
+            'user_id' => '1',
             'item_id' => '6',
             'quantity' => '8',
         ]);

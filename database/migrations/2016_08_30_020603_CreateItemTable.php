@@ -17,7 +17,7 @@ class CreateItemTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->increments('item_id');
             $table->integer('barcode')->unique();
-            $table->integer('id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->char('item_name', 100);
             $table->char('measurement', 50);
             $table->float('serving_size', 8, 2);
@@ -29,7 +29,7 @@ class CreateItemTable extends Migration
             /**$table->timestamps();**/
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->softDeletes();
             
         });
