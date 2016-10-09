@@ -16,9 +16,9 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
-        return response()->json(Item::get());
+        return response()->json(inventory::where('user_id', $user_id)->orderBy('item_id', 'asc')->get());   
     }
 
     /**
@@ -59,9 +59,15 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($item_id)
     {
-        return response()->json(Item::find($id));
+        try{
+        return response()->json(item::where('item_id' $item_id)->get());
+        }
+        catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
     }
 
     /**
@@ -70,28 +76,28 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
+     
+    public function update(Request $request, $item_id)
+    {   
         try{
-            $item = Item::find($id);
+            $itemUpdate = item::where('item_id', $item_id)->orderBy('created_at', 'asc')->first();
             $input = $request->all();
-            foreach ($input as $key => $value) {
-                $item->$key = $value;
-            }
-            $item->save();
+                foreach ($input as $key => $value) {
+                    $itemUpdate->$key = $value;
+                }
+            $itemUpdate->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
     }
-
+    */
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     
     public function destroy($id)
     {
         try{
@@ -102,4 +108,5 @@ class ItemController extends Controller
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
     }
+    */
 }
