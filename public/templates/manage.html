@@ -1,5 +1,25 @@
+<script type="text/ng-template" id="addToModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Add to {{mvm.grocery.name}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <span>How much {{mvm.grocery.name}} would you like to add?</span><br>
+        <form class="form form-horizontal">
+            <div class="form-group">
+                <label for="numberAdded" class="control-label col-sm-4">Enter an amount</label>
+                <div class="col-sm-2">
+                    <input type="number" class="form-control" ng-model="mvm.amtToAdd" min="0">
+                    <span> {{mvm.grocery.unit}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="mvm.added()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>
 <div class="container default-top-spacer">
-
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-default tab-pane">
@@ -8,8 +28,15 @@
                 </div>
                 <div class="panel-body">
                     <uib-accordion close-others='true'>
-                        <div uib-accordion-group class="panel-default" heading="{{grocery.name}} - Total: {{grocery.total}} {{grocery.unit}}" ng-repeat="grocery in vm.groceries">
+                        <div uib-accordion-group class="panel-default" 
+                        heading="{{grocery.name}} - {{grocery.total}} {{grocery.unit}}" 
+                        ng-repeat="grocery in vm.groceries">
                             <table class="table table-hover table-borderless">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-primary btn-sm" ng-click="vm.updateSelectedFood('add', grocery)"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.updateSelectedFood('waste', grocery)">Report Expired</button>
+                                    <button type="submit" class="btn btn-default btn-sm" ng-click="vm.updateSelectedFood('remove', grocery)"><span class="glyphicon glyphicon-minus"></span></button>
+                                </div>
                                 <thead>
                                     <tr>
                                         <th>Food Name</th>
@@ -20,7 +47,7 @@
                                 <tbody>
                                     <tr ng-repeat="item in grocery.itemList" ng-click="vm.selectFood(item)">
                                         <td>{{item.item.item_name}}</td>
-                                        <td>{{item.quantity}}</td>
+                                        <td><span>{{item.quantity}}</span><span ng-if="item.item.measurement !== 'quantity'"> {{item.item.measurement}}</span></td>
                                         <td>{{item.daysUntilExpiration}}</td>
                                     </tr>
                                 </tbody>
@@ -85,11 +112,6 @@
                             </label>
                             <input class="form-control" id="foodExpiration" name="foodExpiration" type="text" ng-model="vm.selectedFood.daysUntilExpiration" ng-disabled="true"
                             />
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-primary" ng-click="vm.updateSelectedFood('add')">Add More</button>
-                            <button type="submit" class="btn btn-danger" ng-click="vm.updateSelectedFood('waste')">Report Expired</button>
-                            <button type="submit" class="btn btn-default" ng-click="vm.updateSelectedFood('remove')">Report Used</button>
                         </div>
                     </form>
                 </div>

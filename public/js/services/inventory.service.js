@@ -24,10 +24,12 @@
         }
 
         function getOne(user_id, item_id){
+            var inventory = Restangular.all('/api/inventory/');
             return inventory.get(user_id, item_id);
         }
 
         function post(data){
+            var inventory = Restangular.all('/api/inventory/');
             return inventory.post(data);
         }
 

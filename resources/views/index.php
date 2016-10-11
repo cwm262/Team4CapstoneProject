@@ -24,6 +24,7 @@
     <script src="js/controllers/manualInput.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/manualRemove.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/recipe.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/inventoryModal.controller.js"></script> <!-- load our controller -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
     <script src="js/services/inventory.service.js"></script> <!-- load our item service -->
