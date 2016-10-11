@@ -15,6 +15,7 @@ class Inventorytable extends Migration
     {
         Schema::dropIfExists('inventory');
         Schema::create('inventory', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('item_id')->unsigned();
             $table->float('quantity', 8, 2);
