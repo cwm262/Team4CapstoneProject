@@ -25,12 +25,22 @@
             <div class="panel panel-default tab-pane">
                 <div class="panel-heading">
                     <h3 class="">Current Inventory</h3>
+                    <form>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+
+                            <input type="text" class="form-control" placeholder="Search" ng-model="vm.searchInventory">
+
+                        </div>      
+                        </div>
+                    </form>
                 </div>
                 <div class="panel-body">
                     <uib-accordion close-others='true'>
                         <div uib-accordion-group class="panel-default" 
                         heading="{{grocery.name}} - {{grocery.total}} {{grocery.unit}}" 
-                        ng-repeat="grocery in vm.groceries">
+                        ng-repeat="grocery in vm.groceries | filter:vm.searchInventory">
                             <table class="table table-hover table-borderless">
                                 <div class="btn-group" role="group">
                                     <button type="submit" class="btn btn-primary btn-sm" ng-click="vm.updateSelectedFood('add', grocery)"><span class="glyphicon glyphicon-plus"></span></button>

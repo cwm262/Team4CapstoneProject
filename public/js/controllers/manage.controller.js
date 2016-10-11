@@ -15,6 +15,7 @@
         vm.progressbar = ngProgressFactory.createInstance();
 
         vm.selectedFood = null;
+        vm.searchInventory = "";
 
         vm.getFullItemList = function(){
             vm.progressbar.start();

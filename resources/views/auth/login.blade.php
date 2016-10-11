@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/all.css">
 
-    <!-- JS Libs -->
-    <script src="js/all.js"></script>
-
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -38,7 +35,7 @@
     <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#/">PANTRY WIZARD</a>
+                <a href="/">PANTRY WIZARD</a>
             </li>
         </ul>
     </nav>
@@ -94,7 +91,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Login
+                                    Login &nbsp; <span class="glyphicon glyphicon-log-in"></span>
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/register') }}">Register</a>
