@@ -68,6 +68,30 @@
             
         };
 
+        mvm.expired = function () {
+            mvm.progressbar.start();
+            if(mvm.selectedFood == null){
+                mvm.progressbar.complete();
+                alert.add('info', 'Please select an item.');
+                return;
+            }
+            if(mvm.amtToRemove > mvm.selectedFood.quantity){
+                mvm.progressbar.complete();
+                alert.add('warning', 'Amount reported would exceed quantity known in stock.');
+            }else{
+                var data = {
+                    quantity: (mvm.selectedFood.quantity - mvm.amtToRemove),
+                    expired: mvm.amtToRemove
+                }
+                inventory.put(data, mvm.selectedFood.id).then(function(response){
+                    $rootScope.$emit("RefreshItemList", {});
+                    $uibModalInstance.dismiss('close');
+                })
+                mvm.progressbar.complete();
+            }
+            
+        };
+
         mvm.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };

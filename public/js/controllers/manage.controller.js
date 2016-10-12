@@ -108,6 +108,16 @@
                     controllerAs: 'mvm'
                 });
             }
+            else if(action === 'waste'){
+                var modalInstance = $uibModal.open({
+                    templateUrl: "expireModal.html",
+                    resolve: {
+                        grocery: grocery
+                    },
+                    controller: 'InventoryModalController',
+                    controllerAs: 'mvm'
+                });
+            }
             
 
             
