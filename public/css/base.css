@@ -1,5 +1,3 @@
-@import "compass/css3";
-
 *{
     font-family: 'Bree Serif', serif;
 }
@@ -51,17 +49,21 @@ body{
 }
 
 .small-top-spacer{
-    margin-top: 40px;
+    margin-top: 60px;
+}
+
+.inventory-panel-title{
+    margin-top: 4px !important;
 }
 
 .tab-pane{
-  height:700px;
+  height:600px;
   overflow-y:scroll;
   width:100%;
 }
 
 .tab-pane-no-scroll{
-    height: 700px;
+    height: 600px;
     width: 100%;
 }
 

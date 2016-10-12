@@ -101,7 +101,7 @@
         <div class="col-sm-6">
             <div class="panel panel-default tab-pane">
                 <div class="panel-heading">
-                    <h3 class="">Current Inventory</h3>
+                    <h3 class="inventory-panel-title">Current Inventory</h3>
                     <form>
                         <div class="form-group">
                         <div class="input-group">
@@ -117,8 +117,9 @@
                     <uib-accordion close-others='true'>
                         <div uib-accordion-group class="panel-default" 
                         heading="{{grocery.name}} - {{grocery.total}} {{grocery.unit}}" 
-                        ng-repeat="grocery in vm.groceries | filter:vm.searchInventory">
-                            <table class="table table-hover table-borderless">
+                        ng-repeat="grocery in vm.groceries | filter:vm.searchInventory"
+                        ng-click="vm.selectFood(grocery.itemList[0])">
+                            <table class="table table-borderless">
                                 <div class="btn-group" role="group">
                                     <button type="submit" class="btn btn-primary btn-sm" ng-click="vm.updateSelectedFood('add', grocery)"><span class="glyphicon glyphicon-plus"></span></button>
                                     <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.updateSelectedFood('waste', grocery)">Report Expired</button>
@@ -132,7 +133,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="item in grocery.itemList" ng-click="vm.selectFood(item)">
+                                    <tr ng-repeat="item in grocery.itemList">
                                         <td>{{item.item.item_name}}</td>
                                         <td><span>{{item.quantity}}</span><span ng-if="item.item.measurement !== 'quantity'"> {{item.item.measurement}}</span></td>
                                         <td>{{item.daysUntilExpiration}}</td>
@@ -145,12 +146,16 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="panel panel-default tab-pane-no-scroll" ng-if="vm.selectedFood != null">
+            <div class="panel panel-default tab-pane-no-scroll">
                 <div class="panel-heading">
                     <h3 class="">Selected Food</h3>
                 </div>
                 <div class="panel-body">
-                    <form name="editItemForm">
+                    <div ng-if="vm.selectedFood == null">
+                        <h3>No Food Item Selected</h3>
+                        <small>Please select an item from the list to the left.</small>
+                    </div>
+                    <form name="editItemForm" ng-if="vm.selectedFood != null">
                         <div class="form-group ">
                             <label class="control-label" for="foodName">
                                 Food Name
@@ -184,20 +189,6 @@
                                 Storage Classification
                             </label>
                             <input class="form-control" id="foodStorage" name="foodStorage" type="text" ng-model="vm.selectedFood.item.storage" ng-disabled="true"
-                            />
-                        </div>
-                        <div class="form-group ">
-                            <label class="control-label" for="foodQuantity">
-                                Amount in Inventory
-                            </label>
-                            <input class="form-control" id="foodQuantity" name="foodQuantity" type="text" ng-model="vm.selectedFood.quantity" ng-disabled="true"
-                            />
-                        </div>
-                        <div class="form-group ">
-                            <label class="control-label" for="foodExpiration">
-                                Days Until Expiration
-                            </label>
-                            <input class="form-control" id="foodExpiration" name="foodExpiration" type="text" ng-model="vm.selectedFood.daysUntilExpiration" ng-disabled="true"
                             />
                         </div>
                     </form>
