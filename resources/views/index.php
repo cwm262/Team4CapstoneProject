@@ -32,6 +32,7 @@
     <script src="js/directives/rowlink.directive.js"></script> <!-- load our directives -->
     <script src="js/directives/starRating.directive.js"></script> <!-- load our directives -->
     <script src="js/filters/storageType.filter.js"></script> <!-- load our storage type conversion filter -->
+    <script src="js/filters/dateFormat.filter.js"></script>
     <script src="js/app.routes.js"></script> <!-- load our routes -->
     <script src="js/app.config.js"></script> <!-- load our config -->
     

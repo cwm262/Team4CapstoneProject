@@ -173,3 +173,7 @@ body {
 .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
     color: #000;
 }
+
+.highlight{
+    background-color: #fd0;
+}

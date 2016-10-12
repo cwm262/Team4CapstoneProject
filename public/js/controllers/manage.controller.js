@@ -88,14 +88,27 @@
 
         //User has selected to update an item in their inventory.
         vm.updateSelectedFood = function (action, grocery) {
-            var modalInstance = $uibModal.open({
-                templateUrl: "addToModal.html",
-                resolve: {
-                    grocery: grocery
-                },
-                controller: 'InventoryModalController',
-                controllerAs: 'mvm'
-            });
+            if(action === 'add'){
+                var modalInstance = $uibModal.open({
+                    templateUrl: "addToModal.html",
+                    resolve: {
+                        grocery: grocery
+                    },
+                    controller: 'InventoryModalController',
+                    controllerAs: 'mvm'
+                });
+            }
+            else if(action === 'remove'){
+                var modalInstance = $uibModal.open({
+                    templateUrl: "removeFromModal.html",
+                    resolve: {
+                        grocery: grocery
+                    },
+                    controller: 'InventoryModalController',
+                    controllerAs: 'mvm'
+                });
+            }
+            
 
             
         };

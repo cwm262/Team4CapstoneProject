@@ -78,18 +78,17 @@ class InventoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $user_id
-     * @param  int  $item_id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user_id, $item_id)
+    public function update(Request $request, $id)
     {
         try{
-            $inventoryItem = inventory::where('user_id', $user_id)->where('item_id', $item_id)->orderBy('created_at', 'asc')->first();
+            $inventoryItem = inventory::find($id);
             $input = $request->all();
             foreach ($input as $key => $value) {
                 $inventoryItem->$key = $value;
-                //Need to do more logic here. If we are changing the quantity to below 0, we need to grab the next oldest item from table to change.
+                //Needs to not allow lowering below 0
             }
             $inventoryItem->save();
         }catch(\Exception $e){

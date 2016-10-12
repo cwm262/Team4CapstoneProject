@@ -33,8 +33,8 @@
             return inventory.post(data);
         }
 
-        function put(data, user_id, item_id){
-            return Restangular.one('/api/inventory', user_id, item_id).customPUT(data);
+        function put(data, id){
+            return Restangular.one('/api/inventory', id).customPUT(data);
         }
 
         function remove(id){

@@ -7,7 +7,7 @@
         <form class="form form-horizontal">
             <div class="form-group">
                 <label for="numberAdded" class="control-label col-sm-4">Enter an amount</label>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <input type="number" class="form-control" ng-model="mvm.amtToAdd" min="0">
                     <span> {{mvm.grocery.unit}}</span>
                 </div>
@@ -19,6 +19,45 @@
         <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
     </div>
 </script>
+
+<script type="text/ng-template" id="removeFromModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Remove {{mvm.grocery.name}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <span>Please select the one from which you are removing items.</span><br>
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>Purchase Date</th>
+                    <th>Quantity</th>
+                    <th>Days Until Expiration</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in mvm.grocery.itemList" ng-click="mvm.selectFood(item, $event)">
+                    <td>{{item.created_at | dateFormat}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.daysUntilExpiration}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <form class="form form-horizontal">
+            <div class="form-group">
+                <label for="numberRemoved" class="control-label col-sm-4">Enter an amount to remove from selected</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" ng-model="mvm.amtToRemove" min="0">
+                    <span> {{mvm.grocery.unit}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="mvm.removed()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>
+
 <div class="container default-top-spacer">
     <div class="row">
         <div class="col-sm-6">
