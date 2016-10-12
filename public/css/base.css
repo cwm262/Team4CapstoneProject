@@ -177,3 +177,12 @@ body {
 .highlight{
     background-color: #fd0;
 }
+
+#textLogo{
+    font-size: x-large;
+    padding-top: 13px !important;
+}
+
+.navbar{
+    border-bottom: 2px solid dodgerblue !important;
+}

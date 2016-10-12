@@ -29,16 +29,10 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#/">
-            <img src="images/hotdog.png" alt="Food Logo" height="45px"/>
+            <img src="images/hat.png" alt="Food Logo" height="45px"/>
         </a>
+        <a class="navbar-brand" href="#/" id="textLogo">PANTRY WIZARD</a>
     </div>
-    <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
-        <ul class="nav navbar-nav">
-            <li>
-                <a href="/">PANTRY WIZARD</a>
-            </li>
-        </ul>
-    </nav>
 </div>
 
 <div class="container default-top-spacer">
