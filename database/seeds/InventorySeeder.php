@@ -17,7 +17,7 @@ class InventorySeeder extends Seeder
             'item_id' => '1',
             'quantity' => '16',
             'used' => '4',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -31,14 +31,14 @@ class InventorySeeder extends Seeder
             'item_id' => '2',
             'quantity' => '12',
             'used' => '2',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '3',
             'quantity' => '16',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -52,42 +52,42 @@ class InventorySeeder extends Seeder
             'item_id' => '4',
             'quantity' => '16',
             'used' => '6',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '5',
             'quantity' => '6',
             'used' => '5',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '6',
             'quantity' => '8',
             'used' => '6',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '7',
             'quantity' => '8',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '8',
             'quantity' => '16',
             'used' => '2',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '9',
             'quantity' => '2',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -101,14 +101,14 @@ class InventorySeeder extends Seeder
             'item_id' => '11',
             'quantity' => '16',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '12',
             'quantity' => '10',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         
         DB::table('inventory')->insert([
@@ -123,7 +123,7 @@ class InventorySeeder extends Seeder
             'item_id' => '14',
             'quantity' => '8',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -137,35 +137,35 @@ class InventorySeeder extends Seeder
             'item_id' => '15',
             'quantity' => '5',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '16',
             'quantity' => '5',
             'used' => '.4',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '17',
             'quantity' => '18',
             'used' => '4',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '18',
             'quantity' => '4',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '19',
             'quantity' => '6',
             'used' => '0',
-            'expired' => NULL,
+            'expired' => 0,
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
