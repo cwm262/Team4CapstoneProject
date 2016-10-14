@@ -11,7 +11,8 @@
             'ui.bootstrap',
             'restangular',
             'ngProgress',
-            'rzModule'
+            'rzModule',
+            'angularMoment'
         ]);
     
 })();

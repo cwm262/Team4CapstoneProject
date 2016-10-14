@@ -24,17 +24,21 @@
     <script src="js/controllers/manualInput.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/manualRemove.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/recipe.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/inventoryModal.controller.js"></script> <!-- load our controller -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
-    <script src="js/services/grocery.service.js"></script> <!-- load our item service -->
+    <script src="js/services/inventory.service.js"></script> <!-- load our item service -->
     <script src="js/services/recipe.service.js"></script> <!-- load our item service -->
     <script src="js/directives/rowlink.directive.js"></script> <!-- load our directives -->
     <script src="js/directives/starRating.directive.js"></script> <!-- load our directives -->
+    <script src="js/filters/storageType.filter.js"></script> <!-- load our storage type conversion filter -->
+    <script src="js/filters/dateFormat.filter.js"></script>
     <script src="js/app.routes.js"></script> <!-- load our routes -->
     <script src="js/app.config.js"></script> <!-- load our config -->
     
     <script>
         angular.module("pantryApp").constant("CSRF_TOKEN", "<?php echo csrf_token() ?>");
+        angular.module("pantryApp").constant("USER_ID", "<?php echo Auth::user()->id?>")
     </script>
 </head> 
 <!-- declare our angular app and controller --> 
@@ -49,14 +53,12 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#/">
-            <img src="images/hotdog.png" alt="Food Logo" height="45px"/>
+            <img src="images/hat.png" alt="Food Logo" height="45px"/>
         </a>
+        <a class="navbar-brand" href="#/" id="textLogo">PANTRY WIZARD</a>
     </div>
-    <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
+    <nav class="collapse navbar-collapse pull-right" uib-collapse="navCollapsed">
         <ul class="nav navbar-nav">
-            <li>
-                <a href="#/">PANTRY WIZARD</a>
-            </li>
             <li>
                 <a href="#/add-items">
                     <span class="glyphicon glyphicon-plus"></span> Add

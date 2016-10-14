@@ -29,6 +29,7 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+
         try{
             $item = new Item;
             $item->user_id = $request->input('user_id');
@@ -46,6 +47,7 @@ class ItemController extends Controller
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
+
         
     }
 

@@ -17,6 +17,7 @@ elixir(mix => {
     mix.webpack([
             './node_modules/lodash/lodash.js',
             './node_modules/underscore/underscore.js',
+            './node_modules/moment/moment.js',
             './node_modules/angular/angular.js',
             './node_modules/angular-aria/angular-aria.js',
             './node_modules/angular-animate/angular-animate.js',
@@ -26,7 +27,8 @@ elixir(mix => {
             './node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js',
             './node_modules/restangular/dist/restangular.js',
             './node_modules/ngprogress/build/ngProgress.js',
-            './node_modules/angularjs-slider/dist/rzslider.js'
+            './node_modules/angularjs-slider/dist/rzslider.js',
+            './node_modules/angular-moment/angular-moment.js'
         ])
         .styles([
             './node_modules/ngprogress/ngProgress.css',
