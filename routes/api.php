@@ -19,14 +19,12 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:api'], function()
 {
-  
-    Route::resource('items', 'ItemController');
+    Route::get('items/{user_id}', ['as' => 'items.index', 'uses' => 'ItemController@index']);
+    Route::resource('items', 'ItemController', ['except' => ['index']]);
     
     Route::get('inventory/{user_id}/{item_id}', ['as' => 'inventory.show', 'uses' => 'InventoryController@show']);
     Route::get('inventory/{user_id}', ['as' => 'inventory.index', 'uses' => 'InventoryController@index']);
     Route::put('inventory/{id}', ['as' => 'inventory.update', 'uses' => 'InventoryController@update']);
-    Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show']]);
-
-    
+    Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show', 'update']]);    
 });
 

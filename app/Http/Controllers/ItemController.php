@@ -16,9 +16,16 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
-        return response()->json(Item::get());
+        try{
+            $items = Item::where('user_id', $user_id)->orderBy('item_id', 'asc')->get();
+            return response()->json($items);
+        }
+        catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
     }
 
     /**
@@ -72,12 +79,12 @@ class ItemController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $item = Item::find($id);
+            $items = Item::find($id);
             $input = $request->all();
             foreach ($input as $key => $value) {
                 $item->$key = $value;
             }
-            $item->save();
+            $items->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
