@@ -16,9 +16,9 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($user_id)
+    public function index()
     {
-        return response()->json(inventory::where('user_id', $user_id)->orderBy('item_id', 'asc')->get());   
+        return response()->json(Item::get());
     }
 
     /**
@@ -31,26 +31,22 @@ class ItemController extends Controller
     {
         try{
             $item = new Item;
-
-            $item->item_id = $request->('item_id');
-            $item->barcode = $request->('barcode');
-            $item->user_id = $request->('user_id');
-            $item->item_name = $request->('item_name');
-            $item->measurement = $request->('measurement');
-            $item->serving_sive = $request->('serving_size');
-            $item->servings_per_container = $request->('servings_per_container');
-            $item->type = $request->('type');
-            $item->storage = $request->('storage');
-            $item->expiration = $request->('expiration');
-            $item->ready_to_eat = $request->('ready_to_eat');
-            $item->created_at = $request->('created_at');
-            $item->updated_at = $request->('updated_at');
-
+            $item->user_id = $request->input('user_id');
+            $item->barcode = $request->input('barcode');
+            $item->item_name = $request->input('item_name');
+            $item->measurement = $request->input('measurement');
+            $item->serving_size = $request->input('serving_size');
+            $item->serving_per_container = $request->input('servings_per_container');
+            $item->type = $request->input('type');
+            $item->storage = $request->input('storage');
+            $item->expiriation = $request->input('expiriation');
+            $item->ready_to_eat = $request->input('ready_to_eat');
             $item->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
+        
     }
 
     /**
@@ -59,15 +55,9 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($item_id)
+    public function show($id)
     {
-        try{
-        return response()->json(item::where('item_id' $item_id)->get());
-        }
-        catch(\Exception $e){
-            Log::critical($e->getMessage());
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }
+        return response()->json(Item::find($id));
     }
 
     /**
@@ -76,28 +66,28 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     
-    public function update(Request $request, $item_id)
-    {   
+     */
+    public function update(Request $request, $id)
+    {
         try{
-            $itemUpdate = item::where('item_id', $item_id)->orderBy('created_at', 'asc')->first();
+            $item = Item::find($id);
             $input = $request->all();
-                foreach ($input as $key => $value) {
-                    $itemUpdate->$key = $value;
-                }
-            $itemUpdate->save();
+            foreach ($input as $key => $value) {
+                $item->$key = $value;
+            }
+            $item->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
     }
-    */
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     
+     */
     public function destroy($id)
     {
         try{
@@ -108,5 +98,4 @@ class ItemController extends Controller
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
         }
     }
-    */
 }
