@@ -61,12 +61,13 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $barcode
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($barcode)
     {
-        return response()->json(Item::find($id));
+        $return = Item::where('barcode', $barcode)->get();
+        return response()->json($return);
     }
 
     /**

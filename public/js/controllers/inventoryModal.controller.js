@@ -23,7 +23,7 @@
             var result = document.getElementsByClassName("highlight");
             var wrappedResult = angular.element(result);
             wrappedResult.removeClass('highlight');
-            console.log(food);
+
             var myEl = angular.element( event.target.parentElement );
             myEl.addClass('highlight');
             mvm.selectedFood = food;

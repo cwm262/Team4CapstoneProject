@@ -9,8 +9,6 @@
     
     function item(Restangular){
 
-        var items = Restangular.all('/api/items');
-
         var service = {
             getAll: getAll,
             getOne: getOne,
@@ -20,23 +18,28 @@
         };
         return service;
 
-        function getAll(){
+        function getAll(user_id){
+            var items = Restangular.all('/api/items/' + user_id);
             return items.getList();
         }
 
-        function getOne(id){
-            return items.get(id);
+        function getOne(barcodeNumber){
+            var item = Restangular.one('/api/items/barcode', barcodeNumber).get();
+            return item;
         }
 
         function post(data){
+            var items = Restangular.all('/api/items/');
             return items.post(data);
         }
 
         function put(data, id){
+            var items = Restangular.all('/api/items/');
             return Restangular.one('/api/items', id).customPUT(data);
         }
 
         function remove(id){
+            var items = Restangular.all('/api/items/');
             return Restangular.one('/api/items', id).remove();
         }
 

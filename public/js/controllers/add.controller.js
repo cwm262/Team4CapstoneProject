@@ -5,27 +5,36 @@
         .module('pantryApp')
         .controller('AddItemController', AddItemController);
 
-    AddItemController.$inject = ['grocery', 'ngProgressFactory', '$location'];
+    AddItemController.$inject = ['inventory', 'item', 'ngProgressFactory', '$location'];
     
-    function AddItemController(grocery, ngProgressFactory, $location){
+    function AddItemController(inventory, item, ngProgressFactory, $location){
 
         var vm = this;
-
         vm.recentlyAdded = [];
 
+        vm.barcodeScanned = function(barcode){
+            if(barcode.length > 0){
+                item.getOne(barcode).then(function(response){
+                    console.log(response);
+                }, function(error){
+                    console.log(error);
+                })
+            }
+        }
+
         //Dummy data below.
-        vm.groceryItem = {
-            quantity: 4,
-            name: "Bananas",
-        }
-        vm.recentlyAdded.push(vm.groceryItem);
-        vm.groceryItem = {
-            quantity: 1,
-            name: "Campbell's Tomato Soup"
-        }
-        vm.recentlyAdded.push(vm.groceryItem);
-        vm.lastScannedItem = _.last(vm.recentlyAdded);
-        vm.selectedItem = vm.lastScannedItem;
+        // vm.groceryItem = {
+        //     quantity: 4,
+        //     name: "Bananas",
+        // }
+        // vm.recentlyAdded.push(vm.groceryItem);
+        // vm.groceryItem = {
+        //     quantity: 1,
+        //     name: "Campbell's Tomato Soup"
+        // }
+        // vm.recentlyAdded.push(vm.groceryItem);
+        // vm.lastScannedItem = _.last(vm.recentlyAdded);
+        // vm.selectedItem = vm.lastScannedItem;
 
         //Build option floor and ceil from db data somehow?
         vm.slider = {
@@ -51,6 +60,7 @@
         }
 
         vm.itemScanned = function(){
+            
             //Push to recentlyAdded array. Make current selectedItem.
         }
 

@@ -12,7 +12,8 @@
             'restangular',
             'ngProgress',
             'rzModule',
-            'angularMoment'
+            'angularMoment',
+            'barcodeListener'
         ]);
     
 })();
