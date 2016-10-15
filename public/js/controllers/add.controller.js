@@ -5,48 +5,42 @@
         .module('pantryApp')
         .controller('AddItemController', AddItemController);
 
-    AddItemController.$inject = ['inventory', 'item', 'ngProgressFactory', '$location'];
+    AddItemController.$inject = ['inventory', 'item', 'ngProgressFactory', '$location', 'alert', 'USER_ID'];
     
-    function AddItemController(inventory, item, ngProgressFactory, $location){
+    function AddItemController(inventory, item, ngProgressFactory, $location, alert, USER_ID){
 
         var vm = this;
-        vm.recentlyAdded = [];
 
+        //Creates an empty array to be used for the recently added menu on the left-side of the screen
+        vm.recentlyAdded = [];
+        
+        //Creates a progress bar to be used as a loader
+        vm.progressbar = ngProgressFactory.createInstance();
+        vm.progressbar.setHeight('5px');
+
+        //When a barcode is scanned, this function is called with the barcode as a parameter
         vm.barcodeScanned = function(barcode){
+            vm.progressbar.start(); //Start loader
             if(barcode.length > 0){
+                //Call DB to find out if item is in DB already
                 item.getOne(barcode).then(function(response){
-                    console.log(response);
+                    vm.itemScanned(response[0]); //if so, proceed
+                    vm.progressbar.complete();
                 }, function(error){
-                    console.log(error);
+                    alert.add("warning", "Barcode not found. Please add item manually.");
+                    vm.progressbar.complete();
                 })
             }
         }
 
-        //Dummy data below.
-        // vm.groceryItem = {
-        //     quantity: 4,
-        //     name: "Bananas",
-        // }
-        // vm.recentlyAdded.push(vm.groceryItem);
-        // vm.groceryItem = {
-        //     quantity: 1,
-        //     name: "Campbell's Tomato Soup"
-        // }
-        // vm.recentlyAdded.push(vm.groceryItem);
-        // vm.lastScannedItem = _.last(vm.recentlyAdded);
-        // vm.selectedItem = vm.lastScannedItem;
-
-        //Build option floor and ceil from db data somehow?
+        //Slider defaults for choosing item quantity
         vm.slider = {
-            value: 6,
+            value: 10,
             options: {
                 floor: 1,
-                ceil: 12
+                ceil: 20
             }
         };        
-        //vm.progressbar = ngProgressFactory.createInstance();
-        //vm.progressbar.setHeight('5px');
-        //vm.progressbar.start();
 
         //Can't scan item. Go to manual input.
         vm.goToManualInput = function(){
@@ -59,26 +53,35 @@
             vm.slider.value = vm.selectedItem.quantity;
         }
 
-        vm.itemScanned = function(){
+        //Called when a barcode matches an item in our DB.
+        vm.itemScanned = function(item){
+            item.quantity = 0;
+            //Push to recentlyAdded array.
+            vm.recentlyAdded.push(item);
             
-            //Push to recentlyAdded array. Make current selectedItem.
         }
 
+        //When user elects to submit the item with its chosen quantity, this gets called.
         vm.addToGroceries = function(selectedItem){
-            selectedItem.quantity = vm.slider.value;
-            selectedItem.submitted = true;
+            vm.progressbar.start();
+            selectedItem.quantity = vm.slider.value; //Get quantity from slider value.
+            //Build POST data
             var data = {
-                //Build with values from selectedItem
-                
+                item_id: selectedItem.item_id,
+                user_id: USER_ID,
+                quantity: selectedItem.quantity,
+                used: 0  
             }
-            //NOTE: Call to /items to see if item has been registered to db. Add if it has not.
-            //Use to post item to DB once submit is pressed. Adds to Groceries in Inventory table.
-            // grocery.post(data).then(function(response){
-            //     selectedItem.quantity = vm.slider.value;
-            // }, function(error){
-            //     $location.path('add-items');
-            //     alert.add("danger", "Failed to add grocery item: " + error.data.message);
-            // })
+            //POST to db
+            inventory.post(data).then(function(response){
+                //Remove the submitted item from our recentlyAdded array.
+                vm.recentlyAdded = _.reject(vm.recentlyAdded, function(el) { return el.item_id === selectedItem.item_id; });
+                //Nullify selected item.
+                selectedItem = null;
+            }, function(error){
+                alert.add("danger", "Failed to add item to inventory. Please mark date/time and report issue to support.");
+            })
+            vm.progressbar.complete();
         }
 
     }
