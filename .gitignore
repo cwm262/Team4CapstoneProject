@@ -3,3 +3,4 @@
 .browse*
 session_start.sh
 session_finish.sh
+.env
