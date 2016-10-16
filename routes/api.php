@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('items/{user_id}', ['as' => 'items.index', 'uses' => 'ItemController@index']);
     Route::get('items/barcode/{barcode}', ['as' => 'items.show', 'uses' => 'ItemController@show']);
     Route::resource('items', 'ItemController', ['except' => ['index', 'show']]);
+
+    Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.ugrent', 'uses' => 'NotificationController@urgent']);
+    Route::get('notifications/recipes/{user_id}', ['as' => 'notifications.recipes', 'uses' => 'NotificationController@recipes']);
     
     Route::get('inventory/{user_id}/{item_id}', ['as' => 'inventory.show', 'uses' => 'InventoryController@show']);
     Route::get('inventory/{user_id}', ['as' => 'inventory.index', 'uses' => 'InventoryController@index']);
