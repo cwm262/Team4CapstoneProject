@@ -18,14 +18,14 @@ class RecipeController extends Controller
      */
     public function index($user_id)
     {
-        /*try{
+        try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
             return response()->json($recipes);
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }*/
+        }
     }
 
 
@@ -51,7 +51,7 @@ class RecipeController extends Controller
         }*/
     }
 
-    public funciton setIngredient(Request $request)
+    public function setIngredient(Request $request)
     {
         // 1 request will have 1 row in the ingredients table
         // item_id/recipe_id
