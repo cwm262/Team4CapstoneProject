@@ -786,6 +786,7 @@ class ComposerStaticInita877e12fbda72f5f80d64f49d835629b
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'RecipeController' => __DIR__ . '/../..' . '/database/migrations/2016_10_16_192450_RecipeController.php',
         'RecipeIngredients' => __DIR__ . '/../..' . '/database/seeds/RecipeIngredients.php',
         'RecipeIngredientsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_22_182834_RecipeIngredientsTable.php',
         'RecipeRatings' => __DIR__ . '/../..' . '/database/seeds/RecipeRatings.php',

@@ -21,6 +21,7 @@ class Recipestable extends Migration
             $table->longText('instructions');
             $table->float('prep_time', 8, 2);
             $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

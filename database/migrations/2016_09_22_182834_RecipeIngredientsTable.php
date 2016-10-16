@@ -18,8 +18,8 @@ class RecipeIngredientsTable extends Migration
             $table->integer('item_id')->unsigned();
             $table->integer('recipe_id')->unsigned();
             $table->float('quantity', 8, 2);
-            $table->foreign('item_id')->references('item_id')->on('items');
-            $table->foreign('recipe_id')->references('recipe_id')->on('recipes');
+            $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
+            $table->foreign('recipe_id')->references('recipe_id')->on('recipes')->onDelete('cascade');
         });
     }
 
