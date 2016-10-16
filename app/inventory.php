@@ -11,8 +11,8 @@ class inventory extends Model
      /**
      * Get the item associated with an inventory row
      */
-    public function item()
+    /*public function item()
     {
         return $this->belongsTo('pantryApp\Item', 'item_id', 'item_id');
-    }
+    }*/
 }

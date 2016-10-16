@@ -454,6 +454,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'RecipeController' => $baseDir . '/database/migrations/2016_10_16_192450_RecipeController.php',
     'RecipeIngredients' => $baseDir . '/database/seeds/RecipeIngredients.php',
     'RecipeIngredientsTable' => $baseDir . '/database/migrations/2016_09_22_182834_RecipeIngredientsTable.php',
     'RecipeRatings' => $baseDir . '/database/seeds/RecipeRatings.php',
