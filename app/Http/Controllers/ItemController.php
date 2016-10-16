@@ -44,12 +44,13 @@ class ItemController extends Controller
             $item->item_name = $request->input('item_name');
             $item->measurement = $request->input('measurement');
             $item->serving_size = $request->input('serving_size');
-            $item->serving_per_container = $request->input('servings_per_container');
+            $item->servings_per_container = $request->input('servings_per_container');
             $item->type = $request->input('type');
             $item->storage = $request->input('storage');
-            $item->expiriation = $request->input('expiriation');
+            $item->expiration = $request->input('expiration');
             $item->ready_to_eat = $request->input('ready_to_eat');
             $item->save();
+            return response()->json($item);
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);

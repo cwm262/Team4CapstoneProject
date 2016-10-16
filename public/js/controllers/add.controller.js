@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('AddItemController', AddItemController);
 
-    AddItemController.$inject = ['inventory', 'item', 'ngProgressFactory', '$location', 'alert', 'USER_ID'];
+    AddItemController.$inject = ['inventory', 'item', 'ngProgressFactory', '$location', 'alert', 'USER_ID', '$uibModal', '$rootScope'];
     
-    function AddItemController(inventory, item, ngProgressFactory, $location, alert, USER_ID){
+    function AddItemController(inventory, item, ngProgressFactory, $location, alert, USER_ID, $uibModal, $rootScope){
 
         var vm = this;
 
@@ -20,22 +20,23 @@
 
         //When a barcode is scanned, this function is called with the barcode as a parameter
         vm.barcodeScanned = function(barcode){
-            vm.progressbar.start(); //Start loader
             if(barcode.length > 0){
                 //Call DB to find out if item is in DB already
                 item.getOne(barcode).then(function(response){
                     vm.itemScanned(response[0]); //if so, proceed
-                    vm.progressbar.complete();
                 }, function(error){
                     alert.add("warning", "Barcode not found. Please add item manually.");
-                    vm.progressbar.complete();
                 })
             }
         }    
 
         //Can't scan item. Go to manual input.
-        vm.goToManualInput = function(){
-            $location.path('add-items/manual');
+        vm.manualInputSelected = function(){
+            var modalInstance = $uibModal.open({
+                templateUrl: "manuallyAddItem.html",
+                controller: 'AddItemModalController',
+                controllerAs: 'mvm'
+            });
         }
 
         //Item is selected from table view. Change to current selected item. Change slider value.
@@ -85,6 +86,11 @@
             alert.add("success", "Items have been added to inventory!");
             vm.progressbar.complete();
         }
+
+        $rootScope.$on("AddToRecentlyAddedList", function(data){
+            console.log(data);
+           //vm.itemScanned();
+        });
 
     }
 
