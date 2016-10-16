@@ -31,16 +31,7 @@
                     vm.progressbar.complete();
                 })
             }
-        }
-
-        //Slider defaults for choosing item quantity
-        vm.slider = {
-            value: 10,
-            options: {
-                floor: 1,
-                ceil: 20
-            }
-        };        
+        }    
 
         //Can't scan item. Go to manual input.
         vm.goToManualInput = function(){
@@ -55,32 +46,43 @@
 
         //Called when a barcode matches an item in our DB.
         vm.itemScanned = function(item){
-            item.quantity = 0;
+            item.quantity = 1;
             //Push to recentlyAdded array.
             vm.recentlyAdded.push(item);
             
         }
 
+        //Remove an index from the recentlyAdded array of items.
+        vm.itemRemoved = function(index){
+            vm.recentlyAdded.splice(index, 1);
+        }
+
+        //Empty the array to 'cancel' submission process
+        vm.submitCancelled = function(){
+            vm.recentlyAdded = [];
+        }
+
         //When user elects to submit the item with its chosen quantity, this gets called.
-        vm.addToGroceries = function(selectedItem){
+        vm.groceriesSubmitted = function(){
             vm.progressbar.start();
-            selectedItem.quantity = vm.slider.value; //Get quantity from slider value.
-            //Build POST data
-            var data = {
-                item_id: selectedItem.item_id,
-                user_id: USER_ID,
-                quantity: selectedItem.quantity,
-                used: 0  
-            }
-            //POST to db
-            inventory.post(data).then(function(response){
-                //Remove the submitted item from our recentlyAdded array.
-                vm.recentlyAdded = _.reject(vm.recentlyAdded, function(el) { return el.item_id === selectedItem.item_id; });
-                //Nullify selected item.
-                selectedItem = null;
-            }, function(error){
-                alert.add("danger", "Failed to add item to inventory. Please mark date/time and report issue to support.");
-            })
+            
+            angular.forEach(vm.recentlyAdded, function(value, key) {
+                //Build POST data
+                var data = {
+                    item_id: value.item_id,
+                    user_id: USER_ID,
+                    quantity: value.quantity,
+                    used: 0  
+                }
+                //POST to db
+                inventory.post(data).then(function(response){
+                }, function(error){
+                    alert.add("danger", "Failed to add " + value.item_name + "to inventory. Please mark date/time and report issue to support.");
+                })
+                
+            });
+            vm.recentlyAdded = [];
+            alert.add("success", "Items have been added to inventory!");
             vm.progressbar.complete();
         }
 

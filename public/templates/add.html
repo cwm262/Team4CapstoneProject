@@ -1,78 +1,50 @@
 <div class="container default-top-spacer" ng-if="vm.recentlyAdded.length == 0">
-  <div class="jumbotron">
-    <h1 class="display-3">Add to Inventory</h1>
-    <p class="lead">Please scan now or click below to manually enter a new item.</p>
-    <hr class="m-y-2">
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" ng-click="vm.goToManualInput()" role="button">New Item</a>
-    </p>
-  </div>
+	<div class="jumbotron">
+		<h1 class="display-3">Add to Inventory</h1>
+		<p class="lead">Please scan now or click below to manually enter a new item.</p>
+		<hr class="m-y-2">
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" ng-click="vm.goToManualInput()" role="button">New Item</a>
+		</p>
+	</div>
 </div>
 
-<barcode-listener
-  on-scan='vm.barcodeScanned'
-  prefix='0'
-  length='11'
-  scan-duration='500'
-></barcode-listener>
+<barcode-listener on-scan='vm.barcodeScanned' prefix='0' length='11' scan-duration='500'></barcode-listener>
 
-<div class="container-fluid default-top-spacer" ng-if="vm.recentlyAdded.length != 0">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-default tab-pane">
-                <div class="panel-heading">
-                    <h3 class="">Recently Scanned</h3>
-                    <h5>Click to Edit</h5>
-                </div>
-                <div class="panel-body">
-                  <table class="table table-hover table-borderless">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="item in vm.recentlyAdded" ng-click="vm.selectItem(item)">
-                        <td>{{item.item_name}}</td>
-                        <td>{{item.quantity || 0}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="tab-pane-no-scroll">
-              <div class="panel panel-default" ng-if="! vm.selectedItem">
-                <div class="panel-heading">
-                    <h3>Please select an item from the left to enter the quantity and submit to inventory</h3>
-                    <h5>If you navigate away from this menu the list to the left has been cleared, nothing will have been added to inventory.</h5>
-                </div>
-              </div>
-              <div class="panel panel-default" ng-if="vm.selectedItem">
-                <div class="panel-heading">
-                    <h3 class="">Selected Item</h3>
-                    <h5>Press Submit to Add to Inventory</h5>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <h1 class="text-center">{{vm.selectedItem.item_name}}</h1>
-                  </div>
-                  <div class="row">
-                    <h3 class="text-center">Select quantity</h3>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                      <rzslider rz-slider-model="vm.slider.value" rz-slider-options="vm.slider.options"></rzslider>
-                    </div>
-                  </div>
-                  <div class="row small-top-spacer">
-                    <a class="btn btn-primary btn-lg col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4" ng-click="vm.addToGroceries(vm.selectedItem)" role="button">Submit</a>
-                  </div>
-                </div>
-                </div>
-            </div>
-        </div>
+<div class="container default-top-spacer" ng-if="vm.recentlyAdded.length != 0">
+	<div class="row">
+		<div class="panel panel-default tab-pane">
+			<div class="panel-heading">
+				<h3>Recently Scanned</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-borderless">
+					<thead>
+						<tr>
+							<th class="col-xs-1">#</th>
+							<th class="col-xs-4">Name</th>
+							<th class="col-xs-3">Quantity</th>
+							<th class="col-xs-3">Unit of Measurement</th>
+							<th class="col-xs-1">Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in vm.recentlyAdded">
+							<td>{{$index + 1}}</td>
+							<td>{{item.item_name}}</td>
+							<td><input type="number" ng-model="item.quantity" class="form-control" min="0"></td>
+							<td>{{item.measurement}}</td>
+							<td><button type="button" class="btn btn-danger btn-sm" ng-click="vm.itemRemoved($index)"><span class="glyphicon glyphicon-trash"></span></button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+  <div class="row">
+    <div class="btn-group col-sm-offset-5" role="group">
+      <button type="button" class="btn btn-danger" ng-click="vm.submitCancelled()">Cancel</button>
+      <button type="button" class="btn btn-primary" ng-click="vm.groceriesSubmitted()">Submit</button>
     </div>
+  </div>
 </div>
