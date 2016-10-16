@@ -18,8 +18,8 @@ class RecipeRatingsTable extends Migration
             $table->integer('recipe_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('rating');
-            $table->foreign('recipe_id')->references('recipe_id')->on('recipes');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('recipe_id')->references('recipe_id')->on('recipes')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

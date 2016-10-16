@@ -20,6 +20,15 @@ class RecipeController extends Controller
     {
         try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+
+            foreach($recipes as $recipe) {
+                $ingredients = $recipe->ingredients;
+
+                foreach($ingredients as $ingredient) {
+                    $ingredient->item;
+                }
+            }
+
             return response()->json($recipes);
         }
         catch(\Exception $e){
@@ -37,18 +46,19 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        /*try{
+        try{
             $recipe = new recipe;
-            $recipe->item_id = $request->input('item_id');
             $recipe->user_id = $request->input('user_id');
             $recipe->name = $request->input('name');
             $recipe->instructions = $request->input('instructions');
             $recipe->prep_time = $request->input('prep_time');
             $recipe->save();
+            return response()->json($recipe);
+
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }*/
+        }
     }
 
     public function setIngredient(Request $request)
@@ -67,14 +77,14 @@ class RecipeController extends Controller
      */
     public function show($id)
     {
-        /*try{
+        try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
             return response()->json($recipes);
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }*/
+        }
     }
 
 
@@ -106,14 +116,14 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($recipe_id)
     {
-        /*try{
-            $recipe = recipe::find($id);
-            $recipe->delete();
+        try{
+            $deletedRows = recipe::where('recipe_id', $recipe_id)->delete();
+            return "Deleted";
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
-        }*/
+        }
     }
 }

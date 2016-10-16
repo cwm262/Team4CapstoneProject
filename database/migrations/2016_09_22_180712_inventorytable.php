@@ -23,8 +23,8 @@ class Inventorytable extends Migration
             $table->float('expired', 8, 2)->nullable();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('item_id')->references('item_id')->on('items');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
 
 
 

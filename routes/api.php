@@ -19,13 +19,15 @@ Route::get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:api'], function()
 {
-    Route::get('items/{user_id}', ['as' => 'items.index', 'uses' => 'ItemController@index']);
-    Route::resource('items', 'ItemController', ['except' => ['index']]);
+
 });
 
-    
+Route::get('items/{user_id}', ['as' => 'items.index', 'uses' => 'ItemController@index']);
+Route::resource('items', 'ItemController', ['except' => ['index']]);
+
 Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
-Route::resource('recipes', 'RecipeController', ['except' => ['index']]);
+Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
+Route::resource('recipes', 'RecipeController', ['except' => ['index', 'destroy']]);
 
 Route::get('inventory/{user_id}/{item_id}', ['as' => 'inventory.show', 'uses' => 'InventoryController@show']);
 Route::get('inventory/{user_id}', ['as' => 'inventory.index', 'uses' => 'InventoryController@index']);
