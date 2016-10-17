@@ -16,7 +16,7 @@ class CreateItemTable extends Migration
         Schema::dropIfExists('items');
         Schema::create('items', function (Blueprint $table) {
             $table->increments('item_id');
-            $table->integer('barcode')->unique();
+            $table->string('barcode')->unique();
             $table->integer('user_id')->unsigned();
             $table->char('item_name', 100);
             $table->char('measurement', 50);

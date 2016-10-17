@@ -17,7 +17,7 @@ class Inventorytable extends Migration
         Schema::create('inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('item_id')->unsigned();
+            $table->float('total', 8, 2)->default(0);
             $table->float('quantity', 8, 2)->default(0);
             $table->float('used', 8, 2)->default(0);
             $table->float('expired', 8, 2)->default(0);
