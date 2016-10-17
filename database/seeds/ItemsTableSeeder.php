@@ -240,5 +240,17 @@ class ItemsTableSeeder extends Seeder
             'expiration' => '10',
             'ready_to_eat' => '0',
         ]);
+        DB::table('items')->insert([
+            'barcode' => '16000660908',
+            'user_id' => '1',
+            'item_name' => 'Cinnamon Toast Crunch Cereal Bars',
+            'measurement' => 'quantity',
+            'serving_size' => '1',
+            'servings_per_container' => '6',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '90',
+            'ready_to_eat' => '1',
+        ]);
     }
 }

@@ -18,7 +18,7 @@ class InventoryController extends Controller
     public function index($user_id)
     {
         try{
-            $inventoryItems = inventory::where('user_id', $user_id)->orderBy('item_id', 'asc')->get();
+            $inventoryItems = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
             //Calling the item() function inside the inventory model to grab the associated item specs for
             //each row in a user's inventory table
             foreach($inventoryItems as $ii){

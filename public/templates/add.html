@@ -1,65 +1,185 @@
 <div class="container default-top-spacer" ng-if="vm.recentlyAdded.length == 0">
-  <div class="jumbotron">
-    <h1 class="display-3">Add to Inventory</h1>
-    <p class="lead">Please scan now or click below to manually enter a new item.</p>
-    <hr class="m-y-2">
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" ng-click="vm.goToManualInput()" role="button">New Item</a>
-    </p>
-  </div>
+	<div class="jumbotron">
+		<h1 class="display-3">Add to Inventory</h1>
+		<p class="lead">Please scan now or click below to manually enter a new item.</p>
+		<hr class="m-y-2">
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" ng-click="vm.manualInputSelected()" role="button">New Item</a>
+		</p>
+	</div>
 </div>
 
-<div class="container-fluid default-top-spacer" ng-if="vm.recentlyAdded.length != 0">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-default tab-pane">
-                <div class="panel-heading">
-                    <h3 class="">Recently Scanned</h3>
-                    <h5>Click to Edit</h5>
-                </div>
-                <div class="panel-body">
-                  <table class="table table-hover table-borderless">
-                    <thead>
-                      <tr>
-                        <th>Quantity</th>
-                        <th>Name</th>
-                        <th>Submitted</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="item in vm.recentlyAdded" ng-click="vm.selectItem(item)">
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.name}}</td>
-                        <td ng-class="{ 'glyphicon glyphicon-ok' : item.submitted }"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="panel panel-default tab-pane-no-scroll">
-                <div class="panel-heading">
-                    <h3 class="">Selected Item</h3>
-                    <h5>Press Submit to Add to Inventory</h5>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <h1 class="text-center">{{vm.selectedItem.name}}</h1>
-                  </div>
-                  <div class="row">
-                    <h3 class="text-center">Select quantity</h3>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                      <rzslider rz-slider-model="vm.slider.value" rz-slider-options="vm.slider.options"></rzslider>
-                    </div>
-                  </div>
-                  <div class="row small-top-spacer">
-                    <a class="btn btn-primary btn-lg col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4" ng-click="vm.addToGroceries(vm.selectedItem)" role="button">Submit</a>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<barcode-listener on-scan='vm.barcodeScanned' prefix='0' length='11' scan-duration='500'></barcode-listener>
+
+<div class="container default-top-spacer" ng-if="vm.recentlyAdded.length != 0">
+	<div class="row">
+		<div class="panel panel-default tab-pane">
+			<div class="panel-heading">
+				<h3>Recently Scanned</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-borderless">
+					<thead>
+						<tr>
+							<th class="col-xs-1">#</th>
+							<th class="col-xs-4">Name</th>
+							<th class="col-xs-3">Quantity</th>
+							<th class="col-xs-3">Unit of Measurement</th>
+							<th class="col-xs-1">Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in vm.recentlyAdded">
+							<td>{{$index + 1}}</td>
+							<td>{{item.item_name}}</td>
+							<td><input type="number" ng-model="item.quantity" class="form-control" min="0"></td>
+							<td>{{item.measurement}}</td>
+							<td><button type="button" class="btn btn-danger btn-sm" ng-click="vm.itemRemoved($index)"><span class="glyphicon glyphicon-trash"></span></button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="btn-group col-sm-offset-5" role="group">
+			<button type="button" class="btn btn-danger" ng-click="vm.submitCancelled()">Cancel</button>
+			<button type="button" class="btn btn-primary" ng-click="vm.groceriesSubmitted()">Submit</button>
+		</div>
+	</div>
 </div>
+
+<style>
+    .bootstrap-iso form button,
+    .bootstrap-iso form button:hover {
+        color: white !important;
+    }
+    
+    .asteriskField {
+        color: red;
+    }
+</style>
+
+<script type="text/ng-template" id="manuallyAddItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Manually Add New Item</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="bootstrap-iso">
+                <form method="post" name="addItemForm">
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="barcode">
+                            Barcode
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="barcode" name="barcode" type="number" ng-model="mvm.itemToBeAdded.barcode" ng-required="true" min="0"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.barcode.$error.required">Please scan or enter a barcode.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="itemName">
+                            Item Name
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="itemName" name="itemName" type="text" ng-model="mvm.itemToBeAdded.itemName" ng-required="true"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.itemName.$error.required">Please enter the product name.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="measurement">
+                            Unit of Measurement
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <select class="form-control" id="measurement" name="measurement" ng-model="mvm.itemToBeAdded.measurement" ng-required="true">
+													<option>Quantity</option>
+													<option>Pounds</option>
+													<option>Ounces</option>
+													<option>Cups</option>
+													<option>Tablespoons</option>
+													<option>Teaspoons</option>
+													<option>Quarts</option>
+													<option>Gallons</option>
+												</select>
+                        <span class="err-messages" ng-show="addItemForm.measurement.$error.required">Please select the appropriate unit of measurement.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="storage">
+                            Storage
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <select class="form-control" id="storage" name="storage" ng-model="mvm.itemToBeAdded.storage" ng-required="true">
+													<option>Freezer</option>
+													<option>Refrigerator</option>
+													<option>Pantry</option>
+												</select>
+                        <span class="err-messages" ng-show="addItemForm.storage.$error.required">Please select how this item should be stored.</span>
+                    </div>
+										<div class="form-group ">
+                        <label class="control-label requiredField" for="expiration">
+                            Average Time Until Expiration (In Days)
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="expiration" name="expiration" type="number" ng-model="mvm.itemToBeAdded.expiration" ng-required="true" min="0"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.expiration.$error.required">Please enter an estimated number of days until item expires.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="servingSize">
+                            Serving Size
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="servingSize" name="servingSize" type="number" ng-model="mvm.itemToBeAdded.servingSize" ng-required="true" min="0"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.servingSize.$error.required">Please select the listed serving size.</span>
+                    </div>
+                    <div class="form-group ">
+                        <label class="control-label requiredField" for="servingsPer">
+                            Servings Per Container
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <input class="form-control" id="servingsPer" name="servingsPer" type="number" ng-model="mvm.itemToBeAdded.servingsPer" ng-required="true" min="0"
+                        />
+                        <span class="err-messages" ng-show="addItemForm.servingsPer.$error.required">Please enter the amount of listed servings.</span>
+                    </div>
+										<div class="form-group ">
+                        <label class="control-label requiredField" for="type">
+                            Type
+                            <span class="asteriskField">
+                                *
+                            </span>
+                        </label>
+                        <select class="form-control" id="type" name="type" ng-model="mvm.itemToBeAdded.type" ng-required="true">
+													<option>Liquid</option>
+													<option>Solid</option>
+												</select>
+                        <span class="err-messages" ng-show="addItemForm.type.$error.required">Please select the type..</span>
+                    </div>
+										<div class="checkbox">
+                        <label>
+													<input type="checkbox" id="ready_to_eat" name="ready_to_eat" ng-model="mvm.itemToBeAdded.ready_to_eat">
+													Is the item ready to eat? i.e., without being used in a recipe, e.g., an apple
+												</label>
+                    </div>
+
+                </form>
+</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-disabled="addItemForm.$invalid" ng-click="mvm.itemSubmitted()">Submit</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>
