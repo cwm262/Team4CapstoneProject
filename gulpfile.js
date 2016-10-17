@@ -29,7 +29,8 @@ elixir(mix => {
             './node_modules/ngprogress/build/ngProgress.js',
             './node_modules/angularjs-slider/dist/rzslider.js',
             './node_modules/angular-moment/angular-moment.js',
-            './node_modules/angular-barcode-listener/angular-barcode-listener.js'
+            './node_modules/angular-barcode-listener/angular-barcode-listener.js',
+            './node_modules/angular-confirm/angular-confirm.js'
         ])
         .styles([
             './node_modules/ngprogress/ngProgress.css',

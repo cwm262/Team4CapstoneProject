@@ -57,13 +57,13 @@ body{
 }
 
 .tab-pane{
-  height:600px;
+  height:550px;
   overflow-y:scroll;
   width:100%;
 }
 
 .tab-pane-no-scroll{
-    height: 600px;
+    height: 550px;
     width: 100%;
 }
 
@@ -187,4 +187,8 @@ body {
 
 .navbar{
     border-bottom: 2px solid dodgerblue !important;
+}
+
+.btn-link{
+    color: #000 !important;
 }

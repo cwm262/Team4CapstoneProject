@@ -13,7 +13,8 @@
             'ngProgress',
             'rzModule',
             'angularMoment',
-            'barcodeListener'
+            'barcodeListener',
+            'angular-confirm'
         ]);
     
 })();

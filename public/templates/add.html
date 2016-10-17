@@ -16,6 +16,9 @@
 		<div class="panel panel-default tab-pane">
 			<div class="panel-heading">
 				<h3>Recently Scanned</h3>
+				<h5>Warning: If you navigate from this page before submitting, no items will be added.</h5>
+				<button type="button" class="btn btn-info" ng-click="vm.manualInputSelected()">New Item</button>
+				<small>Scanning not working? Click New Item!</small>
 			</div>
 			<div class="panel-body">
 				<table class="table table-borderless">
@@ -34,7 +37,7 @@
 							<td>{{item.item_name}}</td>
 							<td><input type="number" ng-model="item.quantity" class="form-control" min="0"></td>
 							<td>{{item.measurement}}</td>
-							<td><button type="button" class="btn btn-danger btn-sm" ng-click="vm.itemRemoved($index)"><span class="glyphicon glyphicon-trash"></span></button></td>
+							<td><button type="button" class="btn btn-link" ng-click="vm.itemRemoved($index)"><span class="glyphicon glyphicon-trash"></span></button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -50,19 +53,21 @@
 </div>
 
 <style>
-    .bootstrap-iso form button,
-    .bootstrap-iso form button:hover {
-        color: white !important;
-    }
-    
-    .asteriskField {
-        color: red;
-    }
+	.bootstrap-iso form button,
+	.bootstrap-iso form button:hover {
+		color: white !important;
+	}
+	
+	.asteriskField {
+		color: red;
+	}
 </style>
 
 <script type="text/ng-template" id="manuallyAddItem.html">
     <div class="modal-header">
         <h3 class="modal-title" id="modal-title">Manually Add New Item</h3>
+        <small>Does this item already exist in your database? Click below to remove unnecessary fields.</small>
+        <button class="btn btn-info" type="button" ng-click="mvm.alreadyEntered = !mvm.alreadyEntered">Toggle</button>
     </div>
     <div class="modal-body" id="modal-body">
         <div class="bootstrap-iso">
@@ -78,7 +83,7 @@
                         />
                         <span class="err-messages" ng-show="addItemForm.barcode.$error.required">Please scan or enter a barcode.</span>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="itemName">
                             Item Name
                             <span class="asteriskField">
@@ -89,7 +94,7 @@
                         />
                         <span class="err-messages" ng-show="addItemForm.itemName.$error.required">Please enter the product name.</span>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="measurement">
                             Unit of Measurement
                             <span class="asteriskField">
@@ -97,18 +102,18 @@
                             </span>
                         </label>
                         <select class="form-control" id="measurement" name="measurement" ng-model="mvm.itemToBeAdded.measurement" ng-required="true">
-													<option>Quantity</option>
-													<option>Pounds</option>
-													<option>Ounces</option>
-													<option>Cups</option>
-													<option>Tablespoons</option>
-													<option>Teaspoons</option>
-													<option>Quarts</option>
-													<option>Gallons</option>
+													<option>quantity</option>
+													<option>pounds</option>
+													<option>ounces</option>
+													<option>cups</option>
+													<option>tablespoons</option>
+													<option>teaspoons</option>
+													<option>quarts</option>
+													<option>gallons</option>
 												</select>
                         <span class="err-messages" ng-show="addItemForm.measurement.$error.required">Please select the appropriate unit of measurement.</span>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="storage">
                             Storage
                             <span class="asteriskField">
@@ -122,7 +127,7 @@
 												</select>
                         <span class="err-messages" ng-show="addItemForm.storage.$error.required">Please select how this item should be stored.</span>
                     </div>
-										<div class="form-group ">
+										<div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="expiration">
                             Average Time Until Expiration (In Days)
                             <span class="asteriskField">
@@ -133,7 +138,7 @@
                         />
                         <span class="err-messages" ng-show="addItemForm.expiration.$error.required">Please enter an estimated number of days until item expires.</span>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="servingSize">
                             Serving Size
                             <span class="asteriskField">
@@ -144,7 +149,7 @@
                         />
                         <span class="err-messages" ng-show="addItemForm.servingSize.$error.required">Please select the listed serving size.</span>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="servingsPer">
                             Servings Per Container
                             <span class="asteriskField">
@@ -155,7 +160,7 @@
                         />
                         <span class="err-messages" ng-show="addItemForm.servingsPer.$error.required">Please enter the amount of listed servings.</span>
                     </div>
-										<div class="form-group ">
+										<div class="form-group " ng-if="mvm.alreadyEntered">
                         <label class="control-label requiredField" for="type">
                             Type
                             <span class="asteriskField">
@@ -168,7 +173,7 @@
 												</select>
                         <span class="err-messages" ng-show="addItemForm.type.$error.required">Please select the type..</span>
                     </div>
-										<div class="checkbox">
+										<div class="checkbox" ng-if="mvm.alreadyEntered">
                         <label>
 													<input type="checkbox" id="ready_to_eat" name="ready_to_eat" ng-model="mvm.itemToBeAdded.ready_to_eat">
 													Is the item ready to eat? i.e., without being used in a recipe, e.g., an apple

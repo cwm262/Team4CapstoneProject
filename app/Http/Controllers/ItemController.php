@@ -67,8 +67,18 @@ class ItemController extends Controller
      */
     public function show($barcode)
     {
-        $return = Item::where('barcode', $barcode)->get();
-        return response()->json($return);
+        try{
+            $return = Item::where('barcode', $barcode)->get();
+            if(count($return) == 0){
+                return response()->json(array('message' => "Item not found"), 404);
+            }
+            else{
+                return response()->json($return);
+            }
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
     }
 
     /**
