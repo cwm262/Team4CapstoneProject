@@ -13,7 +13,6 @@ class RecipeIngredientsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('recipe_ingredients');
         Schema::create('recipe_ingredients', function (Blueprint $table) {
             $table->integer('item_id')->unsigned();
             $table->integer('recipe_id')->unsigned();

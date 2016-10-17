@@ -13,10 +13,10 @@ class Inventorytable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('inventory');
         Schema::create('inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('item_id')->unsigned();
             $table->float('total', 8, 2)->default(0);
             $table->float('quantity', 8, 2)->default(0);
             $table->float('used', 8, 2)->default(0);
@@ -25,9 +25,6 @@ class Inventorytable extends Migration
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
-
-
-
         });
     }
 

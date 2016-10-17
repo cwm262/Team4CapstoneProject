@@ -13,7 +13,6 @@ class ShoppingListTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('shopping_list');
         Schema::create('shopping_list', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('item_id')->unsigned();

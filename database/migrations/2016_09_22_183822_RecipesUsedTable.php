@@ -13,7 +13,6 @@ class RecipesUsedTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('recipes_used');
         Schema::create('recipes_used', function (Blueprint $table) {
             $table->integer('recipe_id')->unsigned();
             $table->integer('user_id')->unsigned();
