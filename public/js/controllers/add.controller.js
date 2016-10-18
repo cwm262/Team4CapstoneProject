@@ -117,7 +117,7 @@
                         item_id: value.item_id,
                         user_id: USER_ID,
                         quantity: value.quantity,
-                        used: 0  
+                        total: value.quantity  
                     }
                     //POST to db
                     inventory.post(data).then(function(response){
@@ -127,7 +127,6 @@
                 });
 
                 vm.recentlyAdded = [];
-                alert.add("success", "Items have been added to inventory!");
                 vm.progressbar.complete();
             }); 
             
