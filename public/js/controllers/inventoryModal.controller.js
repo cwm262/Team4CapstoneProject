@@ -35,7 +35,7 @@
                 user_id: USER_ID,
                 item_id: mvm.grocery.itemList[0].item_id,
                 quantity: mvm.amtToAdd,
-                used: 0
+                total: mvm.amtToAdd
             }
             inventory.post(data).then(function(response){
                 $rootScope.$emit("RefreshItemList", {});
@@ -57,7 +57,7 @@
             }else{
                 var data = {
                     quantity: (mvm.selectedFood.quantity - mvm.amtToRemove),
-                    used: mvm.amtToRemove
+                    used: (mvm.selectedFood.used + mvm.amtToRemove)
                 }
                 inventory.put(data, mvm.selectedFood.id).then(function(response){
                     $rootScope.$emit("RefreshItemList", {});
@@ -81,7 +81,7 @@
             }else{
                 var data = {
                     quantity: (mvm.selectedFood.quantity - mvm.amtToRemove),
-                    expired: mvm.amtToRemove
+                    expired: (mvm.selectedFood.expired + mvm.amtToRemove)
                 }
                 inventory.put(data, mvm.selectedFood.id).then(function(response){
                     $rootScope.$emit("RefreshItemList", {});

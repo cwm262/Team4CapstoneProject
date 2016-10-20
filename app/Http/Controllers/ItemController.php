@@ -11,7 +11,7 @@ use pantryApp\Item;
 
 class ItemController extends Controller
 {
-    /**
+    /** index: GET request to /api/items/$user_id 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -28,7 +28,7 @@ class ItemController extends Controller
         }
     }
 
-    /**
+    /** store: POST request to /api/items
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,28 +82,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        try{
-            $items = Item::find($id);
-            $input = $request->all();
-            foreach ($input as $key => $value) {
-                $item->$key = $value;
-            }
-            $items->save();
-        }catch(\Exception $e){
-            Log::critical($e->getMessage());
-            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
-        }
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -112,8 +90,7 @@ class ItemController extends Controller
     public function destroy($id)
     {
         try{
-            $item = Item::find($id);
-            $item->delete();
+            $deletedRows = Item::where('item_id', $id)->delete();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);

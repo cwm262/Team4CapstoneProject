@@ -44,7 +44,7 @@ class InventoryController extends Controller
             $inventoryItem->item_id = $request->input('item_id');
             $inventoryItem->user_id = $request->input('user_id');
             $inventoryItem->quantity = $request->input('quantity');
-            $inventoryItem->used = $request->input('used');
+            $inventoryItem->total = $request->input('total');
             $inventoryItem->save();
         }catch(\Exception $e){
             Log::critical($e->getMessage());
