@@ -82,16 +82,16 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Login &nbsp; <span class="glyphicon glyphicon-log-in"></span>
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/register') }}">Register</a>
+                                <!-- <a class="btn btn-link" href="{{ url('/register') }}">Register</a> -->
 
                             </div>
-                        </div> -->
+                        </div>
                     </form>
                 </div>
             </div>
