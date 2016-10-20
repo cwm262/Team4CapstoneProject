@@ -16,7 +16,8 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        //return view('auth.register');
+        return redirect('login');
     }
 
     /**
@@ -27,11 +28,11 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+        // $this->validator($request->all())->validate();
 
-        $this->guard()->login($this->create($request->all()));
+        // $this->guard()->login($this->create($request->all()));
 
-        return redirect($this->redirectPath());
+        // return redirect($this->redirectPath());
     }
 
     /**
