@@ -28,10 +28,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#/">
+        <a class="navbar-brand" href="/">
             <img src="images/hat.png" alt="Food Logo" height="45px"/>
         </a>
-        <a class="navbar-brand" href="#/" id="textLogo">PANTRY WIZARD</a>
+        <a class="navbar-brand" href="/" id="textLogo">PANTRY WIZARD</a>
     </div>
 </div>
 
