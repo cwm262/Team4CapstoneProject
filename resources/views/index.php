@@ -4,6 +4,8 @@
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
