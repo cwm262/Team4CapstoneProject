@@ -1,4 +1,4 @@
-<div class="container default-top-spacer" ng-if="vm.recentlyRemoved.length == 0">
+<div class="container default-top-spacer">
   <div class="jumbotron">
     <h1 class="display-3">Remove from Inventory</h1>
     <p class="lead">Please scan now or click below to manually remove an item.</p>
@@ -9,59 +9,40 @@
   </div>
 </div>
 
-<div class="container-fluid default-top-spacer" ng-if="vm.recentlyRemoved.length != 0">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-default tab-pane">
-                <div class="panel-heading">
-                    <h3 class="">Recently Scanned</h3>
-                    <h5>Click to Edit</h5>
-                </div>
-                <div class="panel-body">
-                  <table class="table table-hover table-borderless">
-                    <thead>
-                      <tr>
-                        <th>Quantity Removed</th>
-                        <th>Name</th>
-                        <th>Submitted</th>
-                        <th>Total Remaining</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="item in vm.recentlyRemoved" ng-click="vm.selectItem(item)">
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.name}}</td>
-                        <td ng-class="{ 'glyphicon glyphicon-ok' : item.submitted }"></td>
-                        <td>{{item.total}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8">
-            <div class="panel panel-default tab-pane-no-scroll">
-                <div class="panel-heading">
-                    <h3 class="">Selected Item</h3>
-                    <h5>Press Submit to Remove an Item</h5>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <h1 class="text-center">{{vm.selectedItem.name}}</h1>
-                  </div>
-                  <div class="row">
-                    <h3 class="text-center">Select quantity</h3>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2">
-                      <rzslider rz-slider-model="vm.slider.value" rz-slider-options="vm.slider.options"></rzslider>
-                    </div>
-                  </div>
-                  <div class="row small-top-spacer">
-                    <a class="btn btn-primary btn-lg col-sm-4 col-sm-offset-4" ng-click="vm.removeFromGroceries(vm.selectedItem)" role="button">Submit</a>
-                  </div>
-                </div>
-            </div>
-        </div>
+<barcode-listener on-scan='vm.barcodeScanned' prefix='0' length='11' scan-duration='500'></barcode-listener>
+
+<script type="text/ng-template" id="removeScanned.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Remove {{mvm.grocery.itemList[0].item.item_name}}</h3>
     </div>
-</div>
+    <div class="modal-body" id="modal-body">
+        <span>Please select the one from which you are removing items.</span><br>
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>Purchase Date</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in mvm.grocery.itemList" ng-click="mvm.selectFood(item, $event)">
+                    <td>{{item.created_at | dateFormat}}</td>
+                    <td>{{item.quantity}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <form class="form form-horizontal">
+            <div class="form-group">
+                <label for="numberRemoved" class="control-label col-sm-4">Enter an amount to remove from selected</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" ng-model="mvm.amtToRemove" min="0">
+                    <span> {{mvm.grocery.unit}}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="mvm.removed()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>

@@ -62,7 +62,7 @@ class InventoryController extends Controller
     public function show($user_id, $item_id)
     {
         try{
-            $inventoryItems = inventory::where('user_id', $user_id)->where('item_id', $item_id)->get();
+            $inventoryItems = inventory::where('user_id', $user_id)->where('item_id', $item_id)->where('quantity', '>', 0)->get();
             foreach($inventoryItems as $ii){
                 $ii->item;
             }

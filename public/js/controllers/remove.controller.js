@@ -5,70 +5,55 @@
         .module('pantryApp')
         .controller('RemoveItemController', RemoveItemController);
 
-    RemoveItemController.$inject = ['grocery', 'ngProgressFactory', '$location', 'item'];
+    RemoveItemController.$inject = ['ngProgressFactory', 'alert', 'item', 'inventory', 'USER_ID', '$uibModal'];
     
-    function RemoveItemController(grocery, ngProgressFactory, $location, item){
+    function RemoveItemController(ngProgressFactory, alert, item, inventory, USER_ID, $uibModal){
 
         var vm = this;
 
-        vm.recentlyRemoved = [];
+        //Creates a progress bar to be used as a loader
+        vm.progressbar = ngProgressFactory.createInstance();
+        vm.progressbar.setHeight('5px');
 
-        //Dummy data below.
-        // vm.groceryItem = {
-        //     quantity: 4,
-        //     name: "Bananas",
-        //     total: 6
-        // }
-        // vm.recentlyRemoved.push(vm.groceryItem);
-        // vm.groceryItem = {
-        //     quantity: 1,
-        //     name: "Campbell's Tomato Soup",
-        //     total: 3
-        // }
-        // vm.recentlyRemoved.push(vm.groceryItem);
-        // vm.lastScannedItem = _.last(vm.recentlyRemoved);
-        // vm.selectedItem = vm.lastScannedItem;
+        //When a barcode is scanned, this function is called with the barcode as a parameter
+        vm.barcodeScanned = function(barcode){
 
-        //Build option floor and ceil from db data somehow?
-        vm.slider = {
-            value: 6,
-            options: {
-                floor: 1,
-                ceil: 12
+            //If modal open, don't process scan
+            if(angular.element( document.querySelector( '.removeScannedModal' ) ).hasClass('in')){
+                return;
             }
-        };        
-        //vm.progressbar = ngProgressFactory.createInstance();
-        //vm.progressbar.setHeight('5px');
-        //vm.progressbar.start();
-
-        //Can't scan item. Go to manual remove
-        vm.goToManualRemove = function(){
-            $location.path('remove-items/manual');
+            
+            if(barcode.length > 0){
+                //Call DB to find out if item is in DB already
+                item.getOne(barcode).then(function(response){
+                    itemScanned(response[0]); //if so, proceed
+                }, function(error){
+                    alert.add("warning", "Barcode not found. Please try again -- or check the Manage inventory section to review inventory.");
+                })
+            }
         }
 
-        //Item is selected from table view. Change to current selected item. Change slider value.
-        vm.selectItem = function(item){
-            vm.selectedItem = item;
-            vm.slider.value = vm.selectedItem.quantity;
+        function itemScanned(item){
+            inventory.getOne(USER_ID, item.item_id).then(function(response){
+                var data = {
+                    itemList: response
+                }
+                console.log(data);
+                var modalInstance = $uibModal.open({
+                    templateUrl: "removeScanned.html",
+                    resolve: {
+                        grocery: data
+                    },
+                    controller: 'InventoryModalController',
+                    controllerAs: 'mvm',
+                    windowTopClass: 'removeScannedModal'
+                });
+            }, function(error){
+                console.log("Error");
+            })
         }
 
-        vm.itemScanned = function(){
-            //Push to recentlyRemoved array. Make current selectedItem.
-        }
 
-        vm.removeFromGroceries = function(selectedItem){
-            selectedItem.quantity = vm.slider.value;
-            selectedItem.submitted = true;
-
-            //var id = selectedItem.id;
-            //Use to post item to DB once submit is pressed. Remove groceries from Inventory table.
-            // grocery.remove(data).then(function(response){
-            //     selectedItem.quantity = vm.slider.value;
-            // }, function(error){
-            //     $location.path('remove-items');
-            //     alert.add("danger", "Failed to remove grocery item: " + error.data.message);
-            // })
-        }
 
     }
 
