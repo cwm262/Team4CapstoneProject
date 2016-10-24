@@ -17,6 +17,12 @@
     </div>
     <div class="modal-body" id="modal-body">
         <span>Please select the one from which you are removing items.</span><br>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="isExpired" name="isExpired" ng-model="mvm.itemToRemoveIsExpired">
+                Did this item expire before you could use it?
+            </label>
+        </div>
         <table class="table table-borderless">
             <thead>
                 <tr>

@@ -55,9 +55,16 @@
                 mvm.progressbar.complete();
                 alert.add('warning', 'Amount to remove would exceed quantity in stock.');
             }else{
-                var data = {
-                    quantity: (mvm.selectedFood.quantity - mvm.amtToRemove),
-                    used: (mvm.selectedFood.used + mvm.amtToRemove)
+                if(mvm.itemToRemoveIsExpired){
+                    var data = {
+                        quantity: (mvm.selectedFood.quantity - mvm.amtToRemove),
+                        expired: (mvm.selectedFood.expired + mvm.amtToRemove)
+                    }
+                }else{
+                    var data = {
+                        quantity: (mvm.selectedFood.quantity - mvm.amtToRemove),
+                        used: (mvm.selectedFood.used + mvm.amtToRemove)
+                    }
                 }
                 inventory.put(data, mvm.selectedFood.id).then(function(response){
                     $rootScope.$emit("RefreshItemList", {});
