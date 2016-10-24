@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('RemoveItemController', RemoveItemController);
 
-    RemoveItemController.$inject = ['ngProgressFactory', 'alert', 'item', 'inventory', 'USER_ID', '$uibModal'];
+    RemoveItemController.$inject = ['ngProgressFactory', 'alert', 'item', 'inventory', 'USER_ID', '$uibModal', '$location', '$rootScope', 'moment'];
     
-    function RemoveItemController(ngProgressFactory, alert, item, inventory, USER_ID, $uibModal){
+    function RemoveItemController(ngProgressFactory, alert, item, inventory, USER_ID, $uibModal, $location, $rootScope, moment){
 
         var vm = this;
 
@@ -33,12 +33,22 @@
             }
         }
 
+        //Uses emit to call function in manage controller to add focus to the search bar.
+        vm.goToManualRemove = function(){
+            $location.path('manage');
+            $rootScope.$emit("FocusSearchBar", {});
+        }
+
         function itemScanned(item){
             inventory.getOne(USER_ID, item.item_id).then(function(response){
+                var currentDate = moment();
                 var data = {
                     itemList: response
                 }
-                console.log(data);
+                angular.forEach(data.itemList, function (value, key) {
+                        var expirationDate = moment(value.created_at).add(value.item.expiration, 'days');
+                        value.daysUntilExpiration = expirationDate.diff(currentDate, 'days');
+                });
                 var modalInstance = $uibModal.open({
                     templateUrl: "removeScanned.html",
                     resolve: {
@@ -49,7 +59,7 @@
                     windowTopClass: 'removeScannedModal'
                 });
             }, function(error){
-                console.log("Error");
+                alert.add("warning", "Item not found in inventory. Consider searching on the 'Manage' page.");
             })
         }
 

@@ -20,19 +20,9 @@
                 controller: "AddItemController",
                 controllerAs: "vm"
             })
-            .when("/add-items/manual",{
-                templateUrl: "templates/manual.html",
-                controller: "ManualInputController",
-                controllerAs: "vm"
-            })
             .when("/remove-items", {
                 templateUrl : "templates/remove.html",
                 controller: "RemoveItemController",
-                controllerAs: "vm"
-            })
-            .when("/remove-items/manual", {
-                templateUrl: "templates/manual-remove.html",
-                controller: "ManualRemoveController",
                 controllerAs: "vm"
             })
             .when("/manage", {

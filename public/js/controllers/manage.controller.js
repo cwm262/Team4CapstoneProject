@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('ManageItemsController', ManageItemsController);
 
-    ManageItemsController.$inject = ['inventory', 'USER_ID', '$filter', 'moment', 'ngProgressFactory', '$uibModal', '$rootScope'];
+    ManageItemsController.$inject = ['inventory', 'USER_ID', '$filter', 'moment', 'ngProgressFactory', '$uibModal', '$rootScope', '$window', '$timeout'];
 
-    function ManageItemsController(inventory, USER_ID, $filter, moment, ngProgressFactory, $uibModal, $rootScope) {
+    function ManageItemsController(inventory, USER_ID, $filter, moment, ngProgressFactory, $uibModal, $rootScope, $window, $timeout) {
 
         var vm = this;
 
@@ -79,6 +79,14 @@
 
         $rootScope.$on("RefreshItemList", function(){
            vm.getFullItemList();
+        });
+
+        $rootScope.$on("FocusSearchBar", function(){
+            $timeout(function() {
+                var element = $window.document.getElementById("searchField");
+                element.focus();
+            }, 2000);
+            
         });
 
         //Put selected food's details in view to the right of our list.

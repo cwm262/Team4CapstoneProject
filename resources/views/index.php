@@ -23,8 +23,6 @@
     <script src="js/controllers/manage.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/add.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/remove.controller.js"></script> <!-- load our controller -->
-    <script src="js/controllers/manualInput.controller.js"></script> <!-- load our controller -->
-    <script src="js/controllers/manualRemove.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/recipe.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/inventoryModal.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/addItemModal.controller.js"></script> <!-- load our controller -->

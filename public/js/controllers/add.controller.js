@@ -8,8 +8,7 @@
     AddItemController.$inject = [
         'inventory', 
         'item',
-        'ngProgressFactory', 
-        '$location', 
+        'ngProgressFactory',
         'alert', 
         'USER_ID', 
         '$uibModal', 
@@ -20,8 +19,7 @@
     function AddItemController(
         inventory, 
         item, 
-        ngProgressFactory, 
-        $location, 
+        ngProgressFactory,
         alert, 
         USER_ID, 
         $uibModal, 

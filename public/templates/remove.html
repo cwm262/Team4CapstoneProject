@@ -22,12 +22,14 @@
                 <tr>
                     <th>Purchase Date</th>
                     <th>Quantity</th>
+                    <th>Days Until Listed Expiration</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in mvm.grocery.itemList" ng-click="mvm.selectFood(item, $event)">
                     <td>{{item.created_at | dateFormat}}</td>
                     <td>{{item.quantity}}</td>
+                    <td>{{item.daysUntilExpiration}}</td>
                 </tr>
             </tbody>
         </table>
