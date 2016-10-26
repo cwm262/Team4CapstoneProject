@@ -92,7 +92,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
         try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
@@ -107,28 +107,23 @@ class RecipeController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * Warning! This will change the recipe_id
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
-        /*try{
-            $recipe = recipe::find($id);
-            $input = $request->all();
-            foreach ($input as $key => $value) {
-                $recipe->$key = $value;
-            }
-            $recipe->save();
-        }catch(\Exception $e){
-            Log::critical($e->getMessage());
-            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
-        }*/
-
         try{
-            $recipe = recipe::find($id);
-            Log::critical(response()->json($recipe));
+            $status = $this->destroy($request->recipe_id);
+
+            if($status == "Deleted") {
+                $status = $this->store($request);
+            }
+
+            return $status;
 
         }catch(\Exception $e){
             Log::critical($e->getMessage());
@@ -145,8 +140,11 @@ class RecipeController extends Controller
     public function destroy($recipe_id)
     {
         try{
-            $deletedRows = recipe::where('recipe_id', $recipe_id)->delete();
-            return "Deleted";
+            if(recipe::where('recipe_id', $recipe_id)->exists()) {
+                recipe::where('recipe_id', $recipe_id)->delete();
+                return "Deleted";
+            }
+            return "Not Found";
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
