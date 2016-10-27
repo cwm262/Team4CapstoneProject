@@ -34,7 +34,8 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('inventory/{user_id}', ['as' => 'inventory.index', 'uses' => 'InventoryController@index']);
     Route::put('inventory/{id}', ['as' => 'inventory.update', 'uses' => 'InventoryController@update']);
     Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show', 'update']]);  
-     
+    
+    Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
 });
 
  
