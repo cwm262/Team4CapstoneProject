@@ -33,6 +33,13 @@
         </a>
         <a class="navbar-brand" href="/" id="textLogo">PANTRY WIZARD</a>
     </div>
+    <nav class="collapse navbar-collapse pull-right" uib-collapse="navCollapsed">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="/about">
+                    <span class="glyphicon glyphicon-info-sign"></span> About
+                </a>
+        </ul>
 </div>
 
 <div class="container default-top-spacer">

@@ -190,6 +190,14 @@ body {
     border-bottom: 2px solid dodgerblue !important;
 }
 
+.navbar-default{
+    background-image: url(../images/dark-wood.png) !important;
+}
+
+.jumbotron{
+    background-color: #d7d7d7 !important;
+}
+
 .btn-link{
     color: #000 !important;
 }
