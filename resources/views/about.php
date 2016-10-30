@@ -32,7 +32,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h2 style="display:inline-block">Welcome to Pantry Wizard</h2><a href="/login" class="pull-right">Return to login</a></div>
                 <div class="panel-body">
-                    <h4>What does it do?</h4>
                     <h4>The Problem:</h4>
                     <ul>
                         <li>There is no quick and easy way to tell exactly what foods you may have in your home.</li>

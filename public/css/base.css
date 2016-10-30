@@ -16,6 +16,10 @@ body{
     background-image: url(../images/001-Basik-Paper.png);
 }
 
+textarea {
+    resize: none;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -30,6 +34,10 @@ body{
 
 .table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
     border: none !important;
+}
+
+.asteriskField{
+    color: red;
 }
 
 .alertBox{

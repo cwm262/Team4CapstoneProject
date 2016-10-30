@@ -3,10 +3,62 @@
         <h3 class="modal-title" id="modal-title">Create a New Recipe</h3>
     </div>
     <div class="modal-body" id="modal-body">
-        Blah blah blah
+        <form class="form form-horizontal" name="addRecipeForm">
+            <div class="form-group">
+                <label for="recipeName" class="control-label requiredField col-sm-4">
+                    Recipe Name:
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" name="recipeName" class="form-control" ng-model="mvm.recipe.name" required>
+                </div>
+                <span class="err-messages" ng-show="addRecipeForm.recipeName.$error.required">Please enter a recipe name.</span>
+            </div>
+            <div class="form-group">
+                <label for="prepTime" class="control-label requiredField col-sm-4">
+                    Preparation Time (total, in minutes):
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <input type="number" name="prepTime" class="form-control" ng-model="mvm.recipe.prep_time" required>
+                </div>
+                <span class="err-messages" ng-show="addRecipeForm.prepTime.$error.required">Please enter the prep time.</span>
+            </div>
+            <div class="form-group">
+                <label for="instructions" class="control-label requiredField col-sm-4">
+                    Instructions:
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <textarea name="instructions" class="form-control scrollable" ng-model="mvm.recipe.instructions" rows="4" required>
+                    </textarea>
+                </div>
+                <span class="err-messages" ng-show="addRecipeForm.instructions.$error.required">Please enter the instructions.</span>
+            </div>
+            <div>
+                <button class="btn btn-info" type="button" ng-click="mvm.addNewChoice()">Add Ingredient</button>
+            </div>
+            <br>
+            <fieldset data-ng-repeat="choice in mvm.choices">
+                <div class="col-sm-6" style="display:inline-block">
+                    <select class="form-control" name="ingredient" ng-options="item as item.item_name for item in mvm.items" ng-model="selected">
+                    </select>
+                </div>
+                <div class="col-sm-4" style="display:inline-block">
+                    <input type="number" class="form-control" ng-model="choice.quantity" name="quantity" placeholder="Quantity">
+                </div>
+                <button class="btn btn-warning btn-sm" type="button" ng-click="mvm.removeChoice($index)"><span class="glyphicon glyphicon-minus"></span></button>
+        </fieldset>
+        </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="mvm.added()">OK</button>
+        <button class="btn btn-primary" type="submit" ng-disabled="addRecipeForm.$invalid" ng-click="mvm.added()">OK</button>
         <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
     </div>
 </script>
