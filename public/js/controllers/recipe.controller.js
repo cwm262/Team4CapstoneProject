@@ -12,6 +12,7 @@
         var vm = this;
         vm.recipes = [];
         vm.selectedRecipe = null;
+        vm.searchRecipes = "";
 
         //Setting up our load bar.
         vm.progressbar = ngProgressFactory.createInstance();

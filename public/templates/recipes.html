@@ -18,6 +18,16 @@
                 <div class="panel-heading">
                     <h3 style="display:inline-block">Recipes</h3>
                     <button type="submit" class="btn btn-primary pull-right" style="margin-top:10px" ng-click="vm.newRecipe()">New</button>
+                    <form>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+
+                            <input type="text" class="form-control" placeholder="Search" ng-model="vm.searchRecipes">
+
+                        </div>      
+                        </div>
+                    </form>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover table-borderless">
@@ -28,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="recipe in vm.recipes" ng-click="vm.selectRecipe(recipe)">
+                        <tr ng-repeat="recipe in vm.recipes | filter:vm.searchRecipes" ng-click="vm.selectRecipe(recipe)">
                             <td>{{recipe.name}}</td>
                             <td star-rating ng-model="recipe.rating.rating" max="10" readonly="true"></td>
                         </tr>
