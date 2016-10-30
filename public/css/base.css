@@ -13,7 +13,7 @@ html{
 
 body{
     margin-bottom: 24px;
-    background-image: url(../images/001-Basik-Paper.png);
+    /*background-image: url(../images/001-Basik-Paper.png);*/
 }
 
 textarea {
@@ -227,4 +227,8 @@ body {
 
 #urgent{
     background-color: orangered !important;
+}
+
+.ingredBtn{
+    margin-top: 6px !important;
 }

@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('RecipeController', RecipeController);
 
-    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal'];
+    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope'];
     
-    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal){
+    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope){
 
         var vm = this;
         vm.recipes = [];
@@ -17,7 +17,7 @@
         //Setting up our load bar.
         vm.progressbar = ngProgressFactory.createInstance();
 
-        vm.getFullRecipeList = function(){
+        function getFullRecipeList() {
             vm.progressbar.start();
             recipe.getAll(USER_ID).then(function(response){
                 vm.recipes = response;
@@ -28,7 +28,11 @@
             })
         }
 
-        vm.getFullRecipeList();
+        getFullRecipeList();
+
+        $rootScope.$on("RefreshRecipeList", function(){
+           getFullRecipeList();
+        });
 
         vm.selectRecipe = function(recipe){
             vm.selectedRecipe = recipe;

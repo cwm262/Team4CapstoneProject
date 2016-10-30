@@ -12,6 +12,7 @@
 
         mvm.progressbar = ngProgressFactory.createInstance();
         mvm.items = [];
+        mvm.recipe = null;
 
         mvm.choices = [{id: 'choice1'}];
   
@@ -27,7 +28,6 @@
         function getItems(){
             item.getAll(USER_ID).then(function(response){
                 mvm.items = response;
-                console.log(mvm.items);
             }, function(error){
                 alert.add('danger', 'Failed to retrieve known items. Please note the time and contact support.');
             })
@@ -42,8 +42,20 @@
 
         mvm.added = function () {
             mvm.progressbar.start();
+            var ingredients = [];
+            mvm.choices.forEach(function(choice) {
+                var ingredient = {
+                    item_id: choice.selected.item_id,
+                    quantity: choice.quantity
+                }
+                ingredients.push(ingredient);
+            }, this);
             var data = {
-               
+               user_id: USER_ID,
+               name: mvm.recipe.name,
+               prep_time: mvm.recipe.prep_time,
+               instructions: mvm.recipe.instructions,
+               ingredients: ingredients
             }
             recipe.post(data).then(function(response){
                 $rootScope.$emit("RefreshRecipeList", {});

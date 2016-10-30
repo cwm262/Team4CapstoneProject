@@ -46,14 +46,17 @@
             </div>
             <br>
             <fieldset data-ng-repeat="choice in mvm.choices">
-                <div class="col-sm-6" style="display:inline-block">
-                    <select class="form-control" name="ingredient" ng-options="item as item.item_name for item in mvm.items" ng-model="selected">
+                <div class="col-sm-4" style="display:inline-block">
+                    <select class="form-control" name="ingredient" ng-options="item as item.item_name for item in mvm.items" ng-model="choice.selected">
                     </select>
                 </div>
-                <div class="col-sm-4" style="display:inline-block">
-                    <input type="number" class="form-control" ng-model="choice.quantity" name="quantity" placeholder="Quantity">
+                <div class="col-sm-3" style="display:inline-block">
+                    <input type="number" class="form-control" ng-model="choice.quantity" name="quantity" min="0" placeholder="amount">
                 </div>
-                <button class="btn btn-warning btn-sm" type="button" ng-click="mvm.removeChoice($index)"><span class="glyphicon glyphicon-minus"></span></button>
+                <div class="col-sm-3" style="display: inline-block; margin-top:10px;">
+                    {{choice.selected.measurement}}
+                </div>
+                <button class="btn btn-warning btn-sm ingredBtn" type="button" ng-click="mvm.removeChoice($index)"><span class="glyphicon glyphicon-minus"></span></button>
         </fieldset>
         </form>
     </div>
