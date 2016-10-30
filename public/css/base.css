@@ -49,6 +49,16 @@ body{
     margin-top: 60px;
 }
 
+.min-top-spacer{
+    margin-top: 20px;
+}
+
+.centerVH{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .inventory-panel-title{
     margin-top: 4px !important;
 }

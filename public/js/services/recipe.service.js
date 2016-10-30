@@ -28,6 +28,7 @@
         }
 
         function post(data){
+            var recipes = Restangular.all('/api/recipes');
             return recipes.post(data);
         }
 
