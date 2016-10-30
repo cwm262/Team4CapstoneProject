@@ -22,8 +22,9 @@ class RecipeController extends Controller
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
 
             foreach($recipes as $recipe) {
+                $rating = $recipe->rating;
                 $ingredients = $recipe->ingredients;
-
+                
                 foreach($ingredients as $ingredient) {
                     $ingredient->item;
                 }

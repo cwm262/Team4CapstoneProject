@@ -32,10 +32,6 @@ body{
     border: none !important;
 }
 
-.urgent{
-    background-color: yellow !important;
-}
-
 .alertBox{
     position:fixed; 
     top: 50px; 
@@ -61,6 +57,11 @@ body{
   height:550px;
   overflow-y:scroll;
   width:100%;
+}
+
+.scrollable{
+    overflow-y:scroll;
+    height:75px;
 }
 
 .tab-pane-no-scroll{
@@ -195,9 +196,17 @@ body {
 }
 
 .jumbotron{
-    background-color: #d7d7d7 !important;
+    background-color: transparent !important;
 }
 
 .btn-link{
     color: #000 !important;
+}
+
+.panel-default>.panel-heading {
+    background-color: #d7d7d7 !important;
+}
+
+#urgent{
+    background-color: orangered !important;
 }

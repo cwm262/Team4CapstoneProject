@@ -9,8 +9,6 @@
     
     function recipe(Restangular){
 
-        var recipes = Restangular.all('/api/recipes');
-
         var service = {
             getAll: getAll,
             getOne: getOne,
@@ -20,7 +18,8 @@
         };
         return service;
 
-        function getAll(){
+        function getAll(user_id){
+            var recipes = Restangular.all('/api/recipes/' + user_id);
             return recipes.getList();
         }
 
