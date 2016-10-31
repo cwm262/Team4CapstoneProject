@@ -132,7 +132,7 @@
                             <label class="control-label" for="recipeIngredients">
                                 Ingredients
                             </label>
-                            <ul class="scrollable">
+                            <ul id="ingredientArea" class="scrollable">
                                 <li ng-repeat="ingredient in vm.selectedRecipe.ingredients">
                                     <span>{{ingredient.item.item_name}}: {{ingredient.quantity}} {{ingredient.item.measurement}}</span>
                                 </li>
