@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('RecipeController', RecipeController);
 
-    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope'];
+    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope', '$confirm'];
     
-    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope){
+    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope, $confirm){
 
         var vm = this;
         vm.recipes = [];
@@ -42,8 +42,15 @@
             vm.selectedRecipe.rating = rating;
         };
 
-        vm.removeRecipe = function(){
-            //Code to remove recipe
+        vm.removeRecipe = function(id){
+            $confirm({ text: 'Are you sure you want to remove this recipe?', title: 'Remove Recipe', ok: 'Yes', cancel: 'No'}).then(function () {
+                recipe.remove(id).then(function(response){
+                    vm.selectedRecipe = null;
+                    getFullRecipeList();
+                }, function(error){
+                    alert.add("danger", "Unable to remove recipe. Please mark the time and contact support.");
+                })
+            }); 
         }
 
         vm.editRecipe = function(){
