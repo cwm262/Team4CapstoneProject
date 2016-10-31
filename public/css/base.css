@@ -205,10 +205,10 @@ body {
 }
 
 .highlight{
-    background-color: #fd0;
+    background-color: #f3FFBD;
 }
 
-.table-hover>tbody>tr:hover{
+.table-hover>tbody>tr:hover, .table-hover>tbody>tr:focus{
     background-color: #F3FFBD !important;
 }
 
