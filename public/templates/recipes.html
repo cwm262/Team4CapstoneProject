@@ -72,7 +72,7 @@
             <div class="panel panel-default tab-pane">
                 <div class="panel-heading">
                     <h3 style="display:inline-block">Recipes</h3>
-                    <button type="submit" class="btn btn-primary pull-right" style="margin-top:10px" ng-click="vm.newRecipe()">New</button>
+                    <button type="submit" class="btn btn-primary btn-sm pull-right" style="margin-top:10px" ng-click="vm.newRecipe()">New</button>
                     <form>
                         <div class="form-group">
                         <div class="input-group">
@@ -107,9 +107,9 @@
                 <div class="panel-heading">
                     <h3 style="display:inline-block">Selected Recipe</h3>
                     <div class="btn-group pull-right" style="margin-top: 10px;" role="group" ng-if="vm.selectedRecipe">
-                        <button type="submit" class="btn btn-danger" ng-click="vm.removeRecipe(vm.selectedRecipe.recipe_id)">Delete</button>
-                        <button type="submit" class="btn btn-success" ng-click="vm.madeRecipe()">Made</button>
-                        <button type="submit" class="btn btn-info" ng-click="vm.editRecipe()">Edit</button>
+                        <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.removeRecipe(vm.selectedRecipe.recipe_id)">Delete</button>
+                        <button type="submit" class="btn btn-success btn-sm" ng-click="vm.madeRecipe()">Made</button>
+                        <button type="submit" class="btn btn-info btn-sm" ng-click="vm.editRecipe()">Edit</button>
                     </div>
                 </div>
                 <div class="panel-body" ng-if="vm.selectedRecipe">

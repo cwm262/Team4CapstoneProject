@@ -216,6 +216,10 @@ body {
     background-color: #f3FFBD;
 }
 
+.navbar-right{
+    margin-right: 0px !important;
+}
+
 .table-hover>tbody>tr:hover, .table-hover>tbody>tr:focus{
     background-color: #F3FFBD !important;
 }
