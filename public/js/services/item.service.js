@@ -39,7 +39,6 @@
         }
 
         function remove(id){
-            var items = Restangular.all('/api/items/');
             return Restangular.one('/api/items', id).remove();
         }
 
