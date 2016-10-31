@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/all.css">
 
+    <!-- JS Libs -->
+    <script src="js/all.js"></script>
+
+    <!-- OUR ANGULAR -->
+    <!-- all angular resources will be loaded from the /public folder -->
+    <script src="js/app.module.js"></script> <!-- load our application -->
+
 </head> 
 <!-- declare our angular app and controller --> 
 <body ng-app="pantryApp"> 
@@ -24,13 +31,21 @@
         </a>
         <a class="navbar-brand" href="/" id="textLogo">PANTRY WIZARD</a>
     </div>
+    <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        </ul>
+    </nav>
 </div>
 
 <div class="container default-top-spacer">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h2 style="display:inline-block">Welcome to Pantry Wizard</h2><a href="/login" class="pull-right">Return to login</a></div>
+                <div class="panel-heading">
+                    <h3>About Pantry Wizard</h2>
+                    <a href="/login" >Return to login</a>
+                </div>
                 <div class="panel-body">
                     <h4>The Problem:</h4>
                     <ul>
