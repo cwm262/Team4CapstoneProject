@@ -40,10 +40,7 @@ class NotificationController extends Controller
                     }
             }
 
-
-            return response()->json($haveIngredients);
-
-            
+            return response()->json($haveIngredients);            
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
