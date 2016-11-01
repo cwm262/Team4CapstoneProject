@@ -69,7 +69,7 @@ class NotificationController extends Controller
                     $recipeItem = $ingredient->item_id;
 
                     foreach ($inventoryItems as $inventoryItem){
-                        if($inventoryItem->item_id = $recipeItem){
+                        if($inventoryItem->item_id == $recipeItem){
                             $count++;
                         }
                     }
