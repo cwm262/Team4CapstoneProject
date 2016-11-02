@@ -22,8 +22,9 @@ class RecipeController extends Controller
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
 
             foreach($recipes as $recipe) {
+                $rating = $recipe->rating;
                 $ingredients = $recipe->ingredients;
-
+                
                 foreach($ingredients as $ingredient) {
                     $ingredient->item;
                 }
@@ -38,12 +39,6 @@ class RecipeController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         try{
@@ -53,7 +48,16 @@ class RecipeController extends Controller
             $recipe->instructions = $request->input('instructions');
             $recipe->prep_time = $request->input('prep_time');
             $recipe->save();
+
+            // Add each item to the recipe_ingredients table
+            // - Each item in $request->ingredients should have an item_id and quantity
+            // - Item must already exist in items table
+            foreach($request->ingredients as $ingredient) {
+                $this->setIngredient($ingredient, $recipe->id);
+            }
+
             return response()->json($recipe);
+            //return response()->json($temp);
 
         }catch(\Exception $e){
             Log::critical($e->getMessage());
@@ -61,12 +65,26 @@ class RecipeController extends Controller
         }
     }
 
-    public function setIngredient(Request $request)
+    public function setIngredient($ingredient, $recipe_id)
     {
         // 1 request will have 1 row in the ingredients table
         // item_id/recipe_id
-        // Verify them
         // Quantity
+
+        try{
+            $recipe_ingredient = new recipe_ingredient;
+            $recipe_ingredient->item_id = $ingredient['item_id'];
+            $recipe_ingredient->recipe_id = $recipe_id;
+            $recipe_ingredient->quantity = $ingredient['quantity'];
+
+            $recipe_ingredient->save();
+
+            return $recipe_ingredient;
+
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
     }
 
     /**
@@ -75,7 +93,7 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id)
     {
         try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
@@ -90,24 +108,28 @@ class RecipeController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * Warning! This will change the recipe_id
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
-        /*try{
-            $recipe = recipe::find($id);
-            $input = $request->all();
-            foreach ($input as $key => $value) {
-                $recipe->$key = $value;
+        try{
+            $status = $this->destroy($request->recipe_id);
+
+            if($status == "Deleted") {
+                $status = $this->store($request);
             }
-            $recipe->save();
+
+            return $status;
+
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
-        }*/
+        }
     }
 
     /**
@@ -119,8 +141,11 @@ class RecipeController extends Controller
     public function destroy($recipe_id)
     {
         try{
-            $deletedRows = recipe::where('recipe_id', $recipe_id)->delete();
-            return "Deleted";
+            if(recipe::where('recipe_id', $recipe_id)->exists()) {
+                recipe::where('recipe_id', $recipe_id)->delete();
+                return "Deleted";
+            }
+            return "Not Found";
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);

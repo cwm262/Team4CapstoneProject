@@ -13,6 +13,12 @@ html{
 
 body{
     margin-bottom: 24px;
+    background-color: #B2DBBF;
+    /*background-image: url(../images/001-Basik-Paper.png);*/
+}
+
+textarea {
+    resize: none;
 }
 
 .footer {
@@ -31,8 +37,8 @@ body{
     border: none !important;
 }
 
-.urgent{
-    background-color: yellow !important;
+.asteriskField{
+    color: #CC0030;
 }
 
 .alertBox{
@@ -52,6 +58,16 @@ body{
     margin-top: 60px;
 }
 
+.min-top-spacer{
+    margin-top: 20px;
+}
+
+.centerVH{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .inventory-panel-title{
     margin-top: 4px !important;
 }
@@ -60,6 +76,11 @@ body{
   height:550px;
   overflow-y:scroll;
   width:100%;
+}
+
+.scrollable{
+    overflow-y:scroll;
+    height:75px;
 }
 
 .tab-pane-no-scroll{
@@ -76,8 +97,7 @@ body{
 }
 
 .err-messages{
-    color: #900000;
-    font-weight: bold;
+    color: #CC0030;
 }
 
 .gen-tab-border{
@@ -101,6 +121,14 @@ body{
 .navbar-brand>img{
     padding-top: 4px;
     padding-left: 10px;
+}
+
+.navbar-default .navbar-brand{
+    color: #F3FFBD !important;
+}
+
+.navbar-default .navbar-nav>li>a{
+    color: #F3FFBD !important;
 }
 
 #navbar-page-title{
@@ -180,15 +208,118 @@ body {
     background-color: #fd0;
 }
 
+.table-hover>tbody>tr:hover{
+    background-color: #F3FFBD !important;
+}
+
 #textLogo{
     font-size: x-large;
     padding-top: 13px !important;
 }
 
+.input-group-addon{
+    background-color: #F3FFBD !important;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
+    background-color: #3E95BA !important;
+}
+
 .navbar{
-    border-bottom: 2px solid dodgerblue !important;
+    border-bottom: 1px solid #F3FFBD !important;
+}
+
+.navbar-default{
+    /*background-image: url(../images/dark-wood.png) !important;*/
+    background-color: #247BA0 !important;
+}
+
+.modal-content{
+    background-color: #B2DBBF !important;
+}
+
+.jumbotron{
+    background-color: #70C1B3 !important;
 }
 
 .btn-link{
     color: #000 !important;
+}
+
+.panel-default>.panel-heading {
+    background-color: #70C1B3 !important;
+}
+
+.panel{
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.form-control{
+    background-color: #F3FFBD !important;
+}
+
+.btn-primary{
+    background-color: #247BA0 !important;
+    color: #F3FFBD !important;
+}
+
+.btn-primary:hover{
+    background-color: #00486D !important;
+}
+
+.btn-danger{
+    background-color: #FF1654 !important;
+}
+
+.btn-danger:hover{
+    background-color: #CC0030 !important;
+}
+
+.btn-success{
+    background-color: #335C40 !important;
+    border-color: #335C40 !important;
+}
+
+.btn-success:hover{
+    background-color: #194226 !important;
+}
+
+.btn-info{
+    background-color: #9477cb !important;
+    border-color: #9477cb !important;
+}
+
+.btn-info:hover{
+    background-color: #614498 !important;
+}
+
+.btn-warning{
+    background-color: #ffa82e !important;
+    border-color: #ffa82e !important;
+    text-shadow: 2px 2px rgba(0,0,0,0.15);
+}
+
+.btn-warning:hover{
+    background-color: #ff9e14 !important;
+}
+.ingredBtn{
+    margin-top: 6px !important;
+}
+
+.dropdown-menu{
+    background-color: #247BA0 !important;
+}
+
+.dropdown-menu>li>a{
+    color: #F3FFBD !important;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{
+    background-color: #3E95BA !important;
+    color: #F3FFBD !important;
+}
+
+#ingredientArea{
+    background-color: #F3FFBD;
 }

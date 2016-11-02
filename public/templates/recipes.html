@@ -1,10 +1,88 @@
-<div class="container default-top-spacer">
+<script type="text/ng-template" id="addRecipe.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Create a New Recipe</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form class="form form-horizontal" name="addRecipeForm">
+            <div class="form-group">
+                <label for="recipeName" class="control-label requiredField col-sm-4">
+                    Recipe Name:
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" name="recipeName" class="form-control" ng-model="mvm.recipe.name" required>
+                </div>
+                <span class="err-messages" ng-show="addRecipeForm.recipeName.$error.required">Please enter a recipe name.</span>
+            </div>
+            <div class="form-group">
+                <label for="prepTime" class="control-label requiredField col-sm-4">
+                    Preparation Time (total, in minutes):
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <input type="number" name="prepTime" class="form-control" ng-model="mvm.recipe.prep_time" required>
+                </div>
+                <span class="err-messages" ng-show="addRecipeForm.prepTime.$error.required">Please enter the prep time.</span>
+            </div>
+            <div class="form-group">
+                <label for="instructions" class="control-label requiredField col-sm-4">
+                    Instructions:
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <textarea name="instructions" class="form-control scrollable" ng-model="mvm.recipe.instructions" rows="4" required>
+                    </textarea>
+                </div>
+                <span class="err-messages" ng-show="addRecipeForm.instructions.$error.required">Please enter the instructions.</span>
+            </div>
+            <div>
+                <button class="btn btn-info" type="button" ng-click="mvm.addNewChoice()">Add Ingredient</button>
+            </div>
+            <br>
+            <fieldset data-ng-repeat="choice in mvm.choices">
+                <div class="col-sm-4" style="display:inline-block">
+                    <select class="form-control" name="ingredient" ng-options="item as item.item_name for item in mvm.items" ng-model="choice.selected">
+                    </select>
+                </div>
+                <div class="col-sm-3" style="display:inline-block">
+                    <input type="number" class="form-control" ng-model="choice.quantity" name="quantity" min="0" placeholder="amount">
+                </div>
+                <div class="col-sm-3" style="display: inline-block; margin-top:10px;">
+                    {{choice.selected.measurement}}
+                </div>
+                <button class="btn btn-warning btn-sm ingredBtn" type="button" ng-click="mvm.removeChoice($index)"><span class="glyphicon glyphicon-minus"></span></button>
+        </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-disabled="addRecipeForm.$invalid" ng-click="mvm.added()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>
 
+<div class="container default-top-spacer">
     <div class="row">
         <div class="col-sm-6">
             <div class="panel panel-default tab-pane">
                 <div class="panel-heading">
-                    <h3 class="">Recipes</h3>
+                    <h3 style="display:inline-block">Recipes</h3>
+                    <button type="submit" class="btn btn-primary pull-right" style="margin-top:10px" ng-click="vm.newRecipe()">New</button>
+                    <form>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+
+                            <input type="text" class="form-control" placeholder="Search" ng-model="vm.searchRecipes">
+
+                        </div>      
+                        </div>
+                    </form>
                 </div>
                 <div class="panel-body">
                     <table class="table table-hover table-borderless">
@@ -15,9 +93,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="recipe in vm.recipes" ng-click="vm.selectRecipe(recipe)">
+                        <tr ng-repeat="recipe in vm.recipes | filter:vm.searchRecipes" ng-click="vm.selectRecipe(recipe)">
                             <td>{{recipe.name}}</td>
-                            <td star-rating ng-model="vm.selectedRecipe.rating" max="5" readonly="true"></td>
+                            <td star-rating ng-model="recipe.rating.rating" max="10" readonly="true"></td>
                         </tr>
                     </tbody>
                     </table>
@@ -27,9 +105,14 @@
         <div class="col-sm-6">
             <div class="panel panel-default tab-pane-no-scroll">
                 <div class="panel-heading">
-                    <h3 class="">Selected Recipe</h3>
+                    <h3 style="display:inline-block">Selected Recipe</h3>
+                    <div class="btn-group pull-right" style="margin-top: 10px;" role="group" ng-if="vm.selectedRecipe">
+                        <button type="submit" class="btn btn-danger" ng-click="vm.removeRecipe(vm.selectedRecipe.recipe_id)">Delete</button>
+                        <button type="submit" class="btn btn-success" ng-click="vm.madeRecipe()">Made</button>
+                        <button type="submit" class="btn btn-info" ng-click="vm.editRecipe()">Edit</button>
+                    </div>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" ng-if="vm.selectedRecipe">
                     <form name="editrecipeForm">
                         <div class="form-group ">
                             <label class="control-label" for="recipeName">
@@ -40,37 +123,35 @@
                         </div>
                         <div class="form-group ">
                             <label class="control-label" for="recipePrepTime">
-                                Prep Time
+                                Prep Time (in minutes)
                             </label>
                             <input class="form-control" id="recipePrepTime" name="recipePrepTime" type="text" ng-model="vm.selectedRecipe.prep_time" ng-disabled="true"
                             />
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label class="control-label" for="recipeIngredients">
                                 Ingredients
                             </label>
-                            <ul>
+                            <ul id="ingredientArea" class="scrollable">
                                 <li ng-repeat="ingredient in vm.selectedRecipe.ingredients">
-                                    <span>{{ingredient.name}}: {{ingredient.quantity}} {{ingredient.measurement}}</span>
+                                    <span>{{ingredient.item.item_name}}: {{ingredient.quantity}} {{ingredient.item.measurement}}</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="form-group ">
                             <label class="control-label" for="recipeInstructions">
-                                Ingredients
+                                Instructions
                             </label>
                             <textarea class="form-control" rows="5" id="recipeInstructions" name="recipeInstructions" ng-model="vm.selectedRecipe.instructions" ng-disabled="true"></textarea>
                         </div>
-                        <div class="form-group">
-                            <div star-rating ng-model="vm.selectedRecipe.rating" max="5" on-rating-select="vm.rateFunction(rating)"></div>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-danger" ng-click="vm.removeRecipe()">Delete</button>
-                            <button type="submit" class="btn btn-success" ng-click="vm.madeRecipe()">Made</button>
-                            <button type="submit" class="btn btn-primary" ng-click="vm.newRecipe()">New</button>
-                            <button type="submit" class="btn btn-info" ng-click="vm.editRecipe()">Edit</button>
-                        </div>
+                        <!--<div class="form-group">
+                            <div star-rating ng-model="vm.selectedRecipe.rating.rating" max="10" on-rating-select="vm.rateFunction(rating)"></div>
+                        </div>-->
+                        
                     </form>
+                </div>
+                <div class="panel-body centerVH" ng-if="!vm.selectedRecipe">
+                    <h4>Please select a recipe from the left.</h4>
                 </div>
             </div>
         </div>

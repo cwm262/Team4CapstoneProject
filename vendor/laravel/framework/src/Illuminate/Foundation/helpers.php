@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Str;
 use Illuminate\Support\HtmlString;
 use Illuminate\Container\Container;
@@ -13,7 +12,6 @@ use Illuminate\Contracts\Cookie\Factory as CookieFactory;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Broadcasting\Factory as BroadcastFactory;
-
 if (! function_exists('abort')) {
     /**
      * Throw an HttpException with the given data.
@@ -31,7 +29,6 @@ if (! function_exists('abort')) {
         return app()->abort($code, $message, $headers);
     }
 }
-
 if (! function_exists('abort_if')) {
     /**
      * Throw an HttpException with the given data if the given condition is true.
@@ -52,7 +49,6 @@ if (! function_exists('abort_if')) {
         }
     }
 }
-
 if (! function_exists('abort_unless')) {
     /**
      * Throw an HttpException with the given data unless the given condition is true.
@@ -73,7 +69,6 @@ if (! function_exists('abort_unless')) {
         }
     }
 }
-
 if (! function_exists('action')) {
     /**
      * Generate a URL to a controller action.
@@ -88,7 +83,6 @@ if (! function_exists('action')) {
         return app('url')->action($name, $parameters, $absolute);
     }
 }
-
 if (! function_exists('app')) {
     /**
      * Get the available container instance.
@@ -102,11 +96,9 @@ if (! function_exists('app')) {
         if (is_null($make)) {
             return Container::getInstance();
         }
-
         return Container::getInstance()->make($make, $parameters);
     }
 }
-
 if (! function_exists('app_path')) {
     /**
      * Get the path to the application folder.
@@ -119,7 +111,6 @@ if (! function_exists('app_path')) {
         return app('path').($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('asset')) {
     /**
      * Generate an asset path for the application.
@@ -133,7 +124,6 @@ if (! function_exists('asset')) {
         return app('url')->asset($path, $secure);
     }
 }
-
 if (! function_exists('auth')) {
     /**
      * Get the available auth instance.
@@ -150,7 +140,6 @@ if (! function_exists('auth')) {
         }
     }
 }
-
 if (! function_exists('back')) {
     /**
      * Create a new redirect response to the previous location.
@@ -164,7 +153,6 @@ if (! function_exists('back')) {
         return app('redirect')->back($status, $headers);
     }
 }
-
 if (! function_exists('base_path')) {
     /**
      * Get the path to the base of the install.
@@ -177,7 +165,6 @@ if (! function_exists('base_path')) {
         return app()->basePath().($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('bcrypt')) {
     /**
      * Hash the given value.
@@ -191,7 +178,6 @@ if (! function_exists('bcrypt')) {
         return app('hash')->make($value, $options);
     }
 }
-
 if (! function_exists('broadcast')) {
     /**
      * Begin broadcasting an event.
@@ -204,7 +190,6 @@ if (! function_exists('broadcast')) {
         return app(BroadcastFactory::class)->event($event);
     }
 }
-
 if (! function_exists('cache')) {
     /**
      * Get / set the specified cache value.
@@ -219,27 +204,22 @@ if (! function_exists('cache')) {
     function cache()
     {
         $arguments = func_get_args();
-
         if (empty($arguments)) {
             return app('cache');
         }
-
         if (is_string($arguments[0])) {
             return app('cache')->get($arguments[0], isset($arguments[1]) ? $arguments[1] : null);
         }
-
         if (is_array($arguments[0])) {
             if (! isset($arguments[1])) {
                 throw new Exception(
                     'You must set an expiration time when putting to the cache.'
                 );
             }
-
             return app('cache')->put(key($arguments[0]), reset($arguments[0]), $arguments[1]);
         }
     }
 }
-
 if (! function_exists('config')) {
     /**
      * Get / set the specified configuration value.
@@ -255,15 +235,12 @@ if (! function_exists('config')) {
         if (is_null($key)) {
             return app('config');
         }
-
         if (is_array($key)) {
             return app('config')->set($key);
         }
-
         return app('config')->get($key, $default);
     }
 }
-
 if (! function_exists('config_path')) {
     /**
      * Get the configuration path.
@@ -276,7 +253,6 @@ if (! function_exists('config_path')) {
         return app()->make('path.config').($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('cookie')) {
     /**
      * Create a new cookie instance.
@@ -293,15 +269,12 @@ if (! function_exists('cookie')) {
     function cookie($name = null, $value = null, $minutes = 0, $path = null, $domain = null, $secure = false, $httpOnly = true)
     {
         $cookie = app(CookieFactory::class);
-
         if (is_null($name)) {
             return $cookie;
         }
-
         return $cookie->make($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
     }
 }
-
 if (! function_exists('csrf_field')) {
     /**
      * Generate a CSRF token form field.
@@ -313,7 +286,6 @@ if (! function_exists('csrf_field')) {
         return new HtmlString('<input type="hidden" name="_token" value="'.csrf_token().'">');
     }
 }
-
 if (! function_exists('csrf_token')) {
     /**
      * Get the CSRF token value.
@@ -325,15 +297,12 @@ if (! function_exists('csrf_token')) {
     function csrf_token()
     {
         $session = app('session');
-
         if (isset($session)) {
             return $session->getToken();
         }
-
         throw new RuntimeException('Application session store not set.');
     }
 }
-
 if (! function_exists('database_path')) {
     /**
      * Get the database path.
@@ -346,7 +315,6 @@ if (! function_exists('database_path')) {
         return app()->databasePath().($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('decrypt')) {
     /**
      * Decrypt the given value.
@@ -359,7 +327,6 @@ if (! function_exists('decrypt')) {
         return app('encrypter')->decrypt($value);
     }
 }
-
 if (! function_exists('dispatch')) {
     /**
      * Dispatch a job to its appropriate handler.
@@ -372,7 +339,6 @@ if (! function_exists('dispatch')) {
         return app(Dispatcher::class)->dispatch($job);
     }
 }
-
 if (! function_exists('elixir')) {
     /**
      * Get the path to a versioned Elixir file.
@@ -387,30 +353,23 @@ if (! function_exists('elixir')) {
     {
         static $manifest = [];
         static $manifestPath;
-
         if (empty($manifest) || $manifestPath !== $buildDirectory) {
             $path = public_path($buildDirectory.'/rev-manifest.json');
-
             if (file_exists($path)) {
                 $manifest = json_decode(file_get_contents($path), true);
                 $manifestPath = $buildDirectory;
             }
         }
-
         if (isset($manifest[$file])) {
             return '/'.trim($buildDirectory.'/'.$manifest[$file], '/');
         }
-
         $unversioned = public_path($file);
-
         if (file_exists($unversioned)) {
             return '/'.trim($file, '/');
         }
-
         throw new InvalidArgumentException("File {$file} not defined in asset manifest.");
     }
 }
-
 if (! function_exists('encrypt')) {
     /**
      * Encrypt the given value.
@@ -423,7 +382,6 @@ if (! function_exists('encrypt')) {
         return app('encrypter')->encrypt($value);
     }
 }
-
 if (! function_exists('env')) {
     /**
      * Gets the value of an environment variable. Supports boolean, empty and null.
@@ -435,11 +393,9 @@ if (! function_exists('env')) {
     function env($key, $default = null)
     {
         $value = getenv($key);
-
         if ($value === false) {
             return value($default);
         }
-
         switch (strtolower($value)) {
             case 'true':
             case '(true)':
@@ -454,15 +410,12 @@ if (! function_exists('env')) {
             case '(null)':
                 return;
         }
-
         if (strlen($value) > 1 && Str::startsWith($value, '"') && Str::endsWith($value, '"')) {
             return substr($value, 1, -1);
         }
-
         return $value;
     }
 }
-
 if (! function_exists('event')) {
     /**
      * Fire an event and call the listeners.
@@ -477,7 +430,6 @@ if (! function_exists('event')) {
         return app('events')->fire(...$args);
     }
 }
-
 if (! function_exists('factory')) {
     /**
      * Create a model factory builder for a given class, name, and amount.
@@ -488,9 +440,7 @@ if (! function_exists('factory')) {
     function factory()
     {
         $factory = app(EloquentFactory::class);
-
         $arguments = func_get_args();
-
         if (isset($arguments[1]) && is_string($arguments[1])) {
             return $factory->of($arguments[0], $arguments[1])->times(isset($arguments[2]) ? $arguments[2] : 1);
         } elseif (isset($arguments[1])) {
@@ -500,7 +450,6 @@ if (! function_exists('factory')) {
         }
     }
 }
-
 if (! function_exists('info')) {
     /**
      * Write some information to the log.
@@ -514,7 +463,6 @@ if (! function_exists('info')) {
         return app('log')->info($message, $context);
     }
 }
-
 if (! function_exists('logger')) {
     /**
      * Log a debug message to the logs.
@@ -528,11 +476,9 @@ if (! function_exists('logger')) {
         if (is_null($message)) {
             return app('log');
         }
-
         return app('log')->debug($message, $context);
     }
 }
-
 if (! function_exists('method_field')) {
     /**
      * Generate a form field to spoof the HTTP verb used by forms.
@@ -545,7 +491,6 @@ if (! function_exists('method_field')) {
         return new HtmlString('<input type="hidden" name="_method" value="'.$method.'">');
     }
 }
-
 if (! function_exists('old')) {
     /**
      * Retrieve an old input item.
@@ -559,7 +504,6 @@ if (! function_exists('old')) {
         return app('request')->old($key, $default);
     }
 }
-
 if (! function_exists('policy')) {
     /**
      * Get a policy instance for a given class.
@@ -574,7 +518,6 @@ if (! function_exists('policy')) {
         return app(Gate::class)->getPolicyFor($class);
     }
 }
-
 if (! function_exists('public_path')) {
     /**
      * Get the path to the public folder.
@@ -587,7 +530,6 @@ if (! function_exists('public_path')) {
         return app()->make('path.public').($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('redirect')) {
     /**
      * Get an instance of the redirector.
@@ -603,11 +545,9 @@ if (! function_exists('redirect')) {
         if (is_null($to)) {
             return app('redirect');
         }
-
         return app('redirect')->to($to, $status, $headers, $secure);
     }
 }
-
 if (! function_exists('request')) {
     /**
      * Get an instance of the current request or an input item from the request.
@@ -621,15 +561,12 @@ if (! function_exists('request')) {
         if (is_null($key)) {
             return app('request');
         }
-
         if (is_array($key)) {
             return app('request')->only($key);
         }
-
         return app('request')->input($key, $default);
     }
 }
-
 if (! function_exists('resolve')) {
     /**
      * Resolve a service from the container.
@@ -643,7 +580,6 @@ if (! function_exists('resolve')) {
         return app($name, $parameters);
     }
 }
-
 if (! function_exists('resource_path')) {
     /**
      * Get the path to the resources folder.
@@ -656,7 +592,6 @@ if (! function_exists('resource_path')) {
         return app()->basePath().DIRECTORY_SEPARATOR.'resources'.($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('response')) {
     /**
      * Return a new response from the application.
@@ -669,15 +604,12 @@ if (! function_exists('response')) {
     function response($content = '', $status = 200, array $headers = [])
     {
         $factory = app(ResponseFactory::class);
-
         if (func_num_args() === 0) {
             return $factory;
         }
-
         return $factory->make($content, $status, $headers);
     }
 }
-
 if (! function_exists('route')) {
     /**
      * Generate a URL to a named route.
@@ -692,7 +624,6 @@ if (! function_exists('route')) {
         return app('url')->route($name, $parameters, $absolute);
     }
 }
-
 if (! function_exists('secure_asset')) {
     /**
      * Generate an asset path for the application.
@@ -705,7 +636,6 @@ if (! function_exists('secure_asset')) {
         return asset($path, true);
     }
 }
-
 if (! function_exists('secure_url')) {
     /**
      * Generate a HTTPS url for the application.
@@ -719,7 +649,6 @@ if (! function_exists('secure_url')) {
         return url($path, $parameters, true);
     }
 }
-
 if (! function_exists('session')) {
     /**
      * Get / set the specified session value.
@@ -735,15 +664,12 @@ if (! function_exists('session')) {
         if (is_null($key)) {
             return app('session');
         }
-
         if (is_array($key)) {
             return app('session')->put($key);
         }
-
         return app('session')->get($key, $default);
     }
 }
-
 if (! function_exists('storage_path')) {
     /**
      * Get the path to the storage folder.
@@ -756,7 +682,6 @@ if (! function_exists('storage_path')) {
         return app('path.storage').($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
-
 if (! function_exists('trans')) {
     /**
      * Translate the given message.
@@ -772,11 +697,9 @@ if (! function_exists('trans')) {
         if (is_null($id)) {
             return app('translator');
         }
-
         return app('translator')->trans($id, $parameters, $domain, $locale);
     }
 }
-
 if (! function_exists('trans_choice')) {
     /**
      * Translates the given message based on a count.
@@ -793,7 +716,6 @@ if (! function_exists('trans_choice')) {
         return app('translator')->transChoice($id, $number, $parameters, $domain, $locale);
     }
 }
-
 if (! function_exists('url')) {
     /**
      * Generate a url for the application.
@@ -808,11 +730,9 @@ if (! function_exists('url')) {
         if (is_null($path)) {
             return app(UrlGenerator::class);
         }
-
         return app(UrlGenerator::class)->to($path, $parameters, $secure);
     }
 }
-
 if (! function_exists('validator')) {
     /**
      * Create a new Validator instance.
@@ -826,15 +746,12 @@ if (! function_exists('validator')) {
     function validator(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
     {
         $factory = app(ValidationFactory::class);
-
         if (func_num_args() === 0) {
             return $factory;
         }
-
         return $factory->make($data, $rules, $messages, $customAttributes);
     }
 }
-
 if (! function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
@@ -847,11 +764,9 @@ if (! function_exists('view')) {
     function view($view = null, $data = [], $mergeData = [])
     {
         $factory = app(ViewFactory::class);
-
         if (func_num_args() === 0) {
             return $factory;
         }
-
         return $factory->make($view, $data, $mergeData);
     }
 }

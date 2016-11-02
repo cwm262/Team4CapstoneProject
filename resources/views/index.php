@@ -26,6 +26,7 @@
     <script src="js/controllers/recipe.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/inventoryModal.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/addItemModal.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/recipeModal.controller.js"></script> <!-- load our controller -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
     <script src="js/services/inventory.service.js"></script> <!-- load our item service -->
@@ -54,7 +55,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#/">
-            <img src="images/hat.png" alt="Food Logo" height="45px"/>
+            <img src="images/wizard.png" alt="Food Logo" height="45px"/>
         </a>
         <a class="navbar-brand" href="#/" id="textLogo">PANTRY WIZARD</a>
     </div>

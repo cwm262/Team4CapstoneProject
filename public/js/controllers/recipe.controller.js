@@ -5,53 +5,52 @@
         .module('pantryApp')
         .controller('RecipeController', RecipeController);
 
-    RecipeController.$inject = ['recipe'];
+    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope', '$confirm'];
     
-    function RecipeController(recipe){
+    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope, $confirm){
 
         var vm = this;
         vm.recipes = [];
         vm.selectedRecipe = null;
+        vm.searchRecipes = "";
+
+        //Setting up our load bar.
+        vm.progressbar = ngProgressFactory.createInstance();
+
+        function getFullRecipeList() {
+            vm.progressbar.start();
+            recipe.getAll(USER_ID).then(function(response){
+                vm.recipes = response;
+                vm.progressbar.complete();
+            }, function(error){
+                vm.progressbar.complete();
+                alert.add("danger", "Unable to retrieve recipes. Please mark the time and contact support.");
+            })
+        }
+
+        getFullRecipeList();
+
+        $rootScope.$on("RefreshRecipeList", function(){
+           getFullRecipeList();
+        });
 
         vm.selectRecipe = function(recipe){
             vm.selectedRecipe = recipe;
         }
 
-        //Dummy recipe for demo purposes
-        vm.dummyRecipe = {
-            recipe_id: 4,
-            name: 'Spaghetti',
-            instructions: "Boil 4 quarts of water. Add salt to taste. Add pasta to water, wait for it to boil again. Stir frequently, cook about 10 minutes. Remove from heat and drain. Add back to pan, add 1 jar tomato sauce. Mix and enjoy!",
-            prep_time: 10,
-            ingredients: [
-                {
-                    name: "Pasta",
-                    quantity: 1,
-                    measurement: "lbs"
-                },
-                {
-                    name: "Tomato Sauce",
-                    quantity: 1,
-                    measurement: "jar"
-                }
-            ],
-            rating: 3
-
-        }
-
-        vm.recipes.push(vm.dummyRecipe);
-
-        /*End dummy data*/
-
-
-        vm.selectedRecipe = _.first(vm.recipes);
-
         vm.rateFunction = function(rating) {
             vm.selectedRecipe.rating = rating;
         };
 
-        vm.removeRecipe = function(){
-            //Code to remove recipe
+        vm.removeRecipe = function(id){
+            $confirm({ text: 'Are you sure you want to remove this recipe?', title: 'Remove Recipe', ok: 'Yes', cancel: 'No'}).then(function () {
+                recipe.remove(id).then(function(response){
+                    vm.selectedRecipe = null;
+                    getFullRecipeList();
+                }, function(error){
+                    alert.add("danger", "Unable to remove recipe. Please mark the time and contact support.");
+                })
+            }); 
         }
 
         vm.editRecipe = function(){
@@ -59,7 +58,11 @@
         }
 
         vm.newRecipe = function(){
-            //Code to add new recipe
+            var modalInstance = $uibModal.open({
+                templateUrl: "addRecipe.html",
+                controller: 'RecipeModalController',
+                controllerAs: 'mvm'
+            });
         }
 
         vm.madeRecipe = function(){
