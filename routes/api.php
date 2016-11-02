@@ -35,10 +35,12 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::put('inventory/{id}', ['as' => 'inventory.update', 'uses' => 'InventoryController@update']);
     Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show', 'update']]);  
 	
-	Route::resource('urgent', NotificationController));
+    //Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
+
+	//Route::resource('urgent', NotificationController));
 	
 	
      
 });
 
- 
+ Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
