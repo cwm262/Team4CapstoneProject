@@ -26,7 +26,7 @@ class NotificationController extends Controller
 			foreach($userItems as $ui){
 				$item = array_get($ui, 'item_id');
 				$creation = array_get($ui, 'created_at');
-				$expiration_date = DB::table('items')->select->('expiration')where('item_id', $item_id )->get();
+				//$expiration_date = DB::table('items')->select->('expiration')where('item_id', $item_id )->get();
 				$today = Carbon::today();
 				if ($created->addDays(expiration_date)->diffInDays($today) > 2) {
 					array_forget($userItems, 'item_id', $item);
@@ -57,8 +57,8 @@ class NotificationController extends Controller
     public function recipes($user_id){
 
         try{
-           $recipes = recipes::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-           $invetoryItems = inventory::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+           $recipes = recipes::where('id', $user_id)->orderBy('name', 'asc')->get();
+           $invetoryItems = inventory::where('id', $user_id)->orderBy('name', 'asc')->get();
 
             foreach($recipes as $recipe) {
                 $key = $recipe->recipie_id;
