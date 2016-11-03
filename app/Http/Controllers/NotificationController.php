@@ -69,10 +69,12 @@ class NotificationController extends Controller
                     $dangerDate = $creationDay;
                     $dangerDate->addDay($days);
                     $dangerDate->subDay(3);
-
+                    //$dangerZone[] = $expireDate;
+                    
                     if($ex->ignored_at != NULL){
                         $ignoreDate = $ex->ignored_at;
                         $newDangerDate = $ignoreDate;
+                                //$dangerZone[] = $newDangerDate;
                         $newDangerDate->addDay(7);
                         $newExpireDate = $newDangerDate;
                         $newExpireDate->addDay(30);
@@ -81,7 +83,7 @@ class NotificationController extends Controller
                             $dangerZone[] = $ex->item->item_name;
                         }
                     }
-                    if($today->between($dangerDate, $expireDate && $ex->ignored_at == NULL)){
+                    if($today->between($dangerDate, $expireDate) && $ex->ignored_at == NULL){
                         //array_push($dangerZone, $ex->item_name);*****
                         
                         $dangerZone[] = $ex->item->item_name;
@@ -89,9 +91,9 @@ class NotificationController extends Controller
                     
                 }
         //$temptest = 100;
-        return $expireSoon;
-        //return response()->json($dangerZone);
-        //return response()->json($ignoreDate);
+        //return response()->json($expireSoon);
+        return response()->json($dangerZone);
+        //return response()->json($temptest);
         
         }catch(\Exception $e){
             Log::critical($e->getMessage());

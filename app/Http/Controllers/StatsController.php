@@ -105,7 +105,7 @@ class StatsController extends Controller
             
 
 
-            //return response()->json($foodWaste);
+            //return response()->json($past5);
             return response()->json($resultArray);
         }catch(\Exception $e){
             Log::critical($e->getMessage());
