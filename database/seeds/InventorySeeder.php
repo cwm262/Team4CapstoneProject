@@ -220,6 +220,28 @@ class InventorySeeder extends Seeder
             'updated_at' => '2016-08-02 14:30:40',
         ]);
 
+        //for notification testing
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '9',
+            'quantity' => '30',
+            'used' => '2',
+            'total' => '32',
+            'expired' => '0',
+            'updated_at' => '2016-10-04 14:30:40',
+        ]);
+
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '9',
+            'quantity' => '30',
+            'used' => '2',
+            'total' => '32',
+            'expired' => '0',
+            'updated_at' => '2016-10-01 14:30:40',
+            'ignored_at' => '2016-10-27 14:30:40',
+        ]);
+
 
 
 

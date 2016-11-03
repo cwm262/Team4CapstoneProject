@@ -13,6 +13,7 @@ use pantryApp\inventory;
 class NotificationController extends Controller
 {
     public function urgent($user_id){
+       /*
         //Do database lookups
         //Find all inventory items where expiration is < x number of days
         //return json
@@ -36,22 +37,70 @@ class NotificationController extends Controller
 			return response()->json($userItems);
 			
 		}
-		catch(\Exception $e){
+        */
+        try{
+            $expireSoon = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
+                
+                foreach($expireSoon as $ii){
+                    $ii->item;
+                }
+
+                $creationDay = 0;
+                $days = 0;
+                $expireDate = 0;
+                $dangerDate = 0;
+                $newDangerDate = 0;
+                $newExpireDate = 0;
+
+                $today = Carbon::today();
+                $threeDaysAgo = Carbon::today();
+                $threeDaysAgo->subDay(3);
+
+                $dangerZone = array();
+                $ignoreDangerZone = array();
+    
+                foreach($expireSoon as $ex){
+                    $today = Carbon::today();
+                    $creationDay = $ex->created_at;
+                    $days = $ex->expiration;
+
+                    $expireDate = $creationDay;
+                    $expireDate->addDay($days);
+                    $dangerDate = $creationDay;
+                    $dangerDate->addDay($days);
+                    $dangerDate->subDay(3);
+
+                    if($ex->ignored_at != NULL){
+                        $ignoreDate = $ex->ignored_at;
+                        $newDangerDate = $ignoreDate;
+                        $newDangerDate->addDay(7);
+                        $newExpireDate = $newDangerDate;
+                        $newExpireDate->addDay(30);
+                        if($today->between($newDangerDate, $newExpireDate)){
+                            //$ignoreDangerZone[] = $ex->item_name;****
+                            $dangerZone[] = $ex->item->item_name;
+                        }
+                    }
+                    if($today->between($dangerDate, $expireDate && $ex->ignored_at == NULL)){
+                        //array_push($dangerZone, $ex->item_name);*****
+                        
+                        $dangerZone[] = $ex->item->item_name;
+                    }
+                    
+                }
+        //$temptest = 100;
+        return $expireSoon;
+        //return response()->json($dangerZone);
+        //return response()->json($ignoreDate);
+        
+        }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
         }
+    
     }
-	
-	public function outOfStock ($user_id){
-		try{
-			$needMore = inventory::where('user_id', $user_id)->where('quantity', '=', 'used')->orderBy('item_id', 'asc')->get();
-			return response()->json($needMore);
-		}
-		catch(\Exception $e){
-            Log::critical($e->getMessage());
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }
-	}
+
+
 
 	
     public function recipes($user_id){
