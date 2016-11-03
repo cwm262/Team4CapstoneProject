@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/all.css">
 
+    <!-- JS Libs -->
+    <script src="js/all.js"></script>
+
+    <script src="js/app.module.js"></script> <!-- load our application -->
+
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -33,8 +38,8 @@
         </a>
         <a class="navbar-brand" href="/" id="textLogo">PANTRY WIZARD</a>
     </div>
-    <nav class="collapse navbar-collapse pull-right" uib-collapse="navCollapsed">
-        <ul class="nav navbar-nav">
+    <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
+        <ul class="nav navbar-nav navbar-right">
             <li>
                 <a href="/about">
                     <span class="glyphicon glyphicon-info-sign"></span> About
