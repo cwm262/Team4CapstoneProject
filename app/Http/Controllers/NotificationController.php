@@ -84,9 +84,9 @@ class NotificationController extends Controller
                         }
                     }
                     if($today->between($dangerDate, $expireDate) && $ex->ignored_at == NULL){
-                        //array_push($dangerZone, $ex->item_name);*****
+                        //array_push($dangerZone, $ex);
                         
-                        $dangerZone[] = $ex->item->item_name;
+                        //$dangerZone[] = $ex->item->item_name;
                     }
                     
                 }
