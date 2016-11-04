@@ -2,8 +2,10 @@
 
 namespace pantryApp\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 
 use pantryApp\Http\Requests;
 use pantryApp\Http\Controllers\Controller;
@@ -60,39 +62,47 @@ class NotificationController extends Controller
                 $ignoreDangerZone = array();
     
                 foreach($expireSoon as $ex){
-                    $today = Carbon::today();
-                    $creationDay = $ex->created_at;
-                    $days = $ex->expiration;
+ 
+                    $dateRange = array();
 
-                    $expireDate = $creationDay;
-                    $expireDate->addDay($days);
-                    $dangerDate = $creationDay;
-                    $dangerDate->addDay($days);
-                    $dangerDate->subDay(3);
-                    //$dangerZone[] = $expireDate;
+                    $creationDay = $ex->created_at;
+                    $days = (int)$ex->item->expiration;
+                    $dangerDate = clone $creationDay;
+                    //return $dangerDate;
+                    $dangerDate->addDays($days);
+                    //return $dangerDate;
+                    $dangerDate->subdays(3);
                     
-                    if($ex->ignored_at != NULL){
-                        $ignoreDate = $ex->ignored_at;
-                        $newDangerDate = $ignoreDate;
-                                //$dangerZone[] = $newDangerDate;
-                        $newDangerDate->addDay(7);
-                        $newExpireDate = $newDangerDate;
-                        $newExpireDate->addDay(30);
+                    $expireDate = clone $creationDay;
+                    $expireDate->addDays($days);
+                    array_push($dateRange, $dangerDate);
+                    array_push($dateRange, $expireDate);
+
+
+
+// this is commented out because when they ignore a notification it will now never show again.
+/*                    if($ex->ignored_at != NULL){
+                        $newDangerDate = $ex->ignored_at;
+                        //return $newDangerDate;
+                        Carbon::parse($newDangerDate);
+                        return $newDangerDate;
+                        $newDangerDate->addDays(7);
+                        return $newDangerDate;
+                        $newExpireDate = $ex->ignored_at;
+                        $newExpireDate->addDays(14);
                         if($today->between($newDangerDate, $newExpireDate)){
-                            //$ignoreDangerZone[] = $ex->item_name;****
-                            $dangerZone[] = $ex->item->item_name;
+
+                            array_push($dangerZone, $ex);
                         }
-                    }
+                    }*/
                     if($today->between($dangerDate, $expireDate) && $ex->ignored_at == NULL){
-                        //array_push($dangerZone, $ex);
-                        
-                        //$dangerZone[] = $ex->item->item_name;
+                        array_push($dangerZone, $ex);
                     }
                     
                 }
         //$temptest = 100;
-        //return response()->json($expireSoon);
         return response()->json($dangerZone);
+        //return response()->json($dangerZone);
         //return response()->json($temptest);
         
         }catch(\Exception $e){
@@ -101,8 +111,21 @@ class NotificationController extends Controller
         }
     
     }
-
-
+    //needs the id of the inventory row not user_id
+    public function ignore($id){
+        try{
+            $inventoryItem = inventory::find($id);
+            $today = Carbon::today();
+            $inventoryItem->ignored_at = $today;
+            $inventoryItem->save();
+            $test = inventory::find($id);
+            return response()->json($test);
+        }
+        catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
+    }
 
 	
     public function recipes($user_id){
