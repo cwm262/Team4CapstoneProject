@@ -59,8 +59,28 @@
         </a>
         <a class="navbar-brand" href="#/" id="textLogo">PANTRY WIZARD</a>
     </div>
-    <nav class="collapse navbar-collapse pull-right" uib-collapse="navCollapsed">
-        <ul class="nav navbar-nav">
+    <nav class="collapse navbar-collapse" uib-collapse="navCollapsed">
+        <ul class="nav navbar-nav navbar-right" id="userHeader">
+            <li uib-dropdown class="dropdown">
+                <a href uib-dropdown-toggle>
+                    <span class="glyphicon glyphicon-user"></span> <?php echo Auth::user()->name; ?>
+                </a>
+                <ul class="dropdown-menu pull-right" uib-dropdown-menu>
+                    <li>
+                        <a href="<?php echo url('/logout') ?>"
+                            onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            <span class="glyphicon glyphicon-log-out"></span> Logout
+                        </a>
+
+                        <form id="logout-form" action="<?php echo url('/logout') ?>" method="POST" style="display: none;">
+                            <?php echo csrf_field(); ?>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
             <li>
                 <a href="#/add-items">
                     <span class="glyphicon glyphicon-plus"></span> Add
@@ -87,26 +107,7 @@
                 </a>
             </li> 
         </ul>
-        <ul class="nav navbar-nav navbar-right" id="userHeader">
-            <li uib-dropdown class="dropdown">
-                <a href uib-dropdown-toggle>
-                    <span class="glyphicon glyphicon-user"></span> <?php echo Auth::user()->name; ?>
-                </a>
-                <ul class="dropdown-menu pull-right" uib-dropdown-menu>
-                    <li>
-                        <a href="<?php echo url('/logout') ?>"
-                            onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                            <span class="glyphicon glyphicon-log-out"></span> Logout
-                        </a>
-
-                        <form id="logout-form" action="<?php echo url('/logout') ?>" method="POST" style="display: none;">
-                            <?php echo csrf_field(); ?>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        
     </nav>
 </div>
 

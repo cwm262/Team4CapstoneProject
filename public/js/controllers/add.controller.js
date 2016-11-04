@@ -100,7 +100,7 @@
                 
                 angular.forEach(vm.recentlyAdded, function(value, key){
                     var needle = _.find(submittedArray, function(o){
-                        return o.item_id === value.item_id;
+                        return o.id === value.id;
                     })
                     if(needle){
                         needle.quantity += value.quantity;
@@ -112,7 +112,7 @@
                 angular.forEach(submittedArray, function(value, key) {
                     //Build POST data
                     var data = {
-                        item_id: value.item_id,
+                        item_id: value.id,
                         user_id: USER_ID,
                         quantity: value.quantity,
                         total: value.quantity  

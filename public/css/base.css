@@ -21,6 +21,14 @@ textarea {
     resize: none;
 }
 
+.navbar-default .navbar-toggle{
+    color: #F3FFBD !important;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+    background-color: #247BA0 !important;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -51,11 +59,11 @@ textarea {
 }
 
 .default-top-spacer{
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .small-top-spacer{
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 .min-top-spacer{
@@ -205,10 +213,14 @@ body {
 }
 
 .highlight{
-    background-color: #fd0;
+    background-color: #f3FFBD;
 }
 
-.table-hover>tbody>tr:hover{
+.navbar-right{
+    margin-right: 0px !important;
+}
+
+.table-hover>tbody>tr:hover, .table-hover>tbody>tr:focus{
     background-color: #F3FFBD !important;
 }
 
