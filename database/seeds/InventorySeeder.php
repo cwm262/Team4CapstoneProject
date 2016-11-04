@@ -251,6 +251,14 @@ class InventorySeeder extends Seeder
             'total' => '6',
             'expired' => '0',
         ]);
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '22',
+            'quantity' => '4',
+            'used' => '2',
+            'total' => '6',
+            'expired' => '0',
+        ]);
 
 
 

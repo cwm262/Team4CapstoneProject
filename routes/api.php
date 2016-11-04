@@ -46,3 +46,4 @@ Route::group(['middleware' => 'auth:api'], function()
  Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
  Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
  Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
+ Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
