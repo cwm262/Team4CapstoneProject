@@ -132,7 +132,7 @@ class NotificationController extends Controller
     public function expired($user_id){
         try{
             $expireSoon = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
-                
+
                 foreach($expireSoon as $ii){
                     $ii->item;
                 }
@@ -183,18 +183,37 @@ class NotificationController extends Controller
         try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
             
-            $invetoryItems = inventory::where('id', $user_id)->where('quanity', '>', 0)->get();
+            foreach($recipes as $ii){
+                    $ii->ingredients;
+                    $ii->rating;
+                }
+            //return $recipes;
+
+            $inventoryItem = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
+                
+                foreach($inventoryItem as $ii){
+                    $ii->item;
+                }
+            //return $inventoryItem;
+
             $haveIngredients = null;
 
 
             foreach($recipes as $recipe) {
-                $key = $recipe->recipie_id;
-                $ingredients = recipe_ingredient::where('recipe_id', $key)->get();
-                $ingredientCount = count($ingredients);            
+                $key = $recipe->recipe_id;
+                
+                //$ingredients = recipe_ingredient::where('recipe_id', $key)->get();
+                $ingredients = $recipe->ingredients;
+                foreach($ingredients as $ii){
+                    $ii->item;
+                }
+                //return $ingredients;
+                $ingredientCount = count($ingredients); 
+                //return $ingredientCount;           
 
                 foreach($ingredients as $ingredient) {
                     $recipeItem = $ingredient->item_id;
-
+                    return $recipeItem;
                     foreach ($inventoryItems as $inventoryItem){
 
                         if($inventoryItem->item_id == $recipeItem){
