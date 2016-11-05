@@ -178,9 +178,10 @@ class NotificationController extends Controller
 	
     public function recipes($user_id){
 
-        try{
            $recipes = recipes::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-           $invetoryItems = inventory::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+
+           return response()->json($recipes); 
+    /*         $invetoryItems = inventory::where('user_id', $user_id)->orderBy('name', 'asc')->get();
 
             foreach($recipes as $recipe) {
                 $key = $recipe->recipie_id;
@@ -205,9 +206,9 @@ class NotificationController extends Controller
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }
-        //Create an algorithm/query to build a list of recipe suggestions
-        //Return json
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);*/
+    //    } 
+       
     }
+
 }
