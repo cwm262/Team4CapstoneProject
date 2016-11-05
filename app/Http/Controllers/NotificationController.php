@@ -12,6 +12,7 @@ use pantryApp\Http\Controllers\Controller;
 use pantryApp\Item;
 use pantryApp\inventory;
 use pantryApp\recipe;
+use pantryApp\recipie_ingredients;
 
 class NotificationController extends Controller
 {
@@ -179,23 +180,11 @@ class NotificationController extends Controller
     public function recipes($user_id){
 
 
- //       try{
+        try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-
-            foreach($recipies as $recipe){
-                $recipe->ingredients;
-            }
-         //  $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-         //  $recipes = DB::select("select * from recipes where id = ?", $user_id);
-           return response()->json(array($recipe));  
- //       }
-/*           $invetoryItems = inventory::where('id', $user_id)->get();
-           $haveIngredients = null;
-
-           $recipes = recipes::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-
-           return response()->json($recipes); 
-    /*         $invetoryItems = inventory::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+            
+            $invetoryItems = inventory::where('id', $user_id)->where('quanity', '>', 0)->get();
+            $haveIngredients = null;
 
 
             foreach($recipes as $recipe) {
@@ -217,7 +206,7 @@ class NotificationController extends Controller
                         $haveIngredients += $recipe;
                     }
             }
-            //return response()->json($haveIngredients);  
+            return response()->json($haveIngredients);  
   
           
         }
@@ -226,9 +215,6 @@ class NotificationController extends Controller
 
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
         } 
-
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);*/
-    //    } 
        
 
     }
