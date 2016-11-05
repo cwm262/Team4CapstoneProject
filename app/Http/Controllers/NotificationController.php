@@ -57,13 +57,22 @@ class NotificationController extends Controller
     public function recipes($user_id){
 
         try{
-           $recipes = recipes::where('id', $user_id)->orderBy('name', 'asc')->get();
-           $invetoryItems = inventory::where('id', $user_id)->orderBy('name', 'asc')->get();
+            $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+
+            foreach($recipies as $recipe){
+                $recipe->ingredients;
+            }
+         //  $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+         //  $recipes = DB::select("select * from recipes where id = ?", $user_id);
+           return response()->json(array($recipe));  
+        }
+/*           $invetoryItems = inventory::where('id', $user_id)->get();
+           $haveIngredients = null;
 
             foreach($recipes as $recipe) {
                 $key = $recipe->recipie_id;
-                $ingredients = recipe_ingredients::where('recipe_id', $key)->get();
-                $ingredientCount = count($ingredients);
+                $ingredients = recipe_ingredient::where('recipe_id', $key)->get();
+                $ingredientCount = count($ingredients);            
 
                 foreach($ingredients as $ingredient) {
                     $recipeItem = $ingredient->item_id;
@@ -75,18 +84,18 @@ class NotificationController extends Controller
                         }
                     }
                 }
-                if ($ingredientCount = $count){
+                if ($ingredientCount == $count){
                         $haveIngredients += $recipe;
                     }
             }
-
-            return response()->json($haveIngredients);            
+            //return response()->json($haveIngredients);  
+  
+          
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        }
-        //Create an algorithm/query to build a list of recipe suggestions
-        //Return json
+        } */
     }
 }
+?>
