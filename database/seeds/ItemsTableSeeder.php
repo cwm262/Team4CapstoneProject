@@ -252,5 +252,31 @@ class ItemsTableSeeder extends Seeder
             'expiration' => '90',
             'ready_to_eat' => '1',
         ]);
+        //will show as about to expire. Use example for demo that you put the bread in the freezer
+        //so its not actually about to expire.
+        DB::table('items')->insert([
+            'barcode' => '9999999999',
+            'user_id' => '1',
+            'item_name' => 'Sliced Bread',
+            'measurement' => 'quantity',
+            'serving_size' => '1',
+            'servings_per_container' => '6',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '2',
+            'ready_to_eat' => '1',
+        ]);
+        DB::table('items')->insert([
+            'barcode' => '9999999989',
+            'user_id' => '1',
+            'item_name' => 'Birthday Cake',
+            'measurement' => 'quantity',
+            'serving_size' => '1',
+            'servings_per_container' => '6',
+            'type' => '1',
+            'storage' => '2',
+            'expiration' => '-3',
+            'ready_to_eat' => '1',
+        ]);
     }
 }

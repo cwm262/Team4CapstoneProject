@@ -23,10 +23,13 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('items/barcode/{barcode}', ['as' => 'items.show', 'uses' => 'ItemController@show']);
     Route::resource('items', 'ItemController', ['except' => ['index', 'show']]);
 
+
     Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.ugrent', 'uses' => 'NotificationController@urgent']);
    
 
-    Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
+    //Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
+
+
     Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
     Route::resource('recipes', 'RecipeController', ['except' => ['index', 'destroy']]);
 
@@ -36,7 +39,7 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show', 'update']]);  
 	
     //Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
-
+    
 	//Route::resource('urgent', NotificationController));
 	
 	
@@ -44,4 +47,11 @@ Route::group(['middleware' => 'auth:api'], function()
 });
 
  Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
+
  Route::get('notifications/recipes/{user_id}', ['as' => 'notifications.recipes', 'uses' => 'NotificationController@recipes']);
+
+ Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
+ Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
+ Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
+ Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
+

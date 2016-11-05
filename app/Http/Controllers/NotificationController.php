@@ -2,17 +2,21 @@
 
 namespace pantryApp\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 
 use pantryApp\Http\Requests;
 use pantryApp\Http\Controllers\Controller;
 use pantryApp\Item;
 use pantryApp\inventory;
+use pantryApp\recipe;
 
 class NotificationController extends Controller
 {
     public function urgent($user_id){
+       /*
         //Do database lookups
         //Find all inventory items where expiration is < x number of days
         //return json
@@ -36,27 +40,146 @@ class NotificationController extends Controller
 			return response()->json($userItems);
 			
 		}
-		catch(\Exception $e){
+        */
+        try{
+            $expireSoon = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
+                
+                foreach($expireSoon as $ii){
+                    $ii->item;
+                }
+
+                $creationDay = 0;
+                $days = 0;
+                $expireDate = 0;
+                $dangerDate = 0;
+                $newDangerDate = 0;
+                $newExpireDate = 0;
+
+                $today = Carbon::today();
+                $threeDaysAgo = Carbon::today();
+                $threeDaysAgo->subDay(3);
+
+                $dangerZone = array();
+                $ignoreDangerZone = array();
+                
+                foreach($expireSoon as $ex){
+ 
+                    $dateRange = array();
+
+                    $creationDay = $ex->created_at;
+                    $days = (int)$ex->item->expiration;
+                    $dangerDate = clone $creationDay;
+                    //return $dangerDate;
+                    $dangerDate->addDays($days);
+                    //return $dangerDate;
+                    $dangerDate->subdays(3);
+                    
+                    $expireDate = clone $creationDay;
+                    $expireDate->addDays($days);
+                    array_push($dateRange, $dangerDate);
+                    array_push($dateRange, $expireDate);
+
+
+
+// this is commented out because when they ignore a notification it will now never show again.
+                    if($ex->ignored_at != NULL){
+                        $newDangerDate = $ex->created_at;
+                        //return $newDangerDate;
+                        Carbon::parse($newDangerDate);
+                        //return $newDangerDate;
+                        $newDangerDate->addDays(7);
+                        //return $newDangerDate;
+                        $newExpireDate = $ex->created_at;
+                        $newExpireDate->addDays(14);
+                        if($today->between($newDangerDate, $newExpireDate)){
+
+                            array_push($dangerZone, $ex);
+                        }
+                    }
+                    if($today->between($dangerDate, $expireDate) && $ex->ignored_at == NULL){
+                        array_push($dangerZone, $ex);
+                    }
+                    
+                }
+        //$temptest = 100;
+        return response()->json($dangerZone);
+        //return response()->json($dangerZone);
+        //return response()->json($temptest);
+        
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+        }
+    
+    }
+    //needs the id of the inventory row not user_id
+    public function ignore($id){
+        try{
+            $inventoryItem = inventory::find($id);
+            $today = Carbon::today();
+            $inventoryItem->ignored_at = $today;
+            $inventoryItem->save();
+            $test = inventory::find($id);
+            return response()->json($test);
+        }
+        catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
         }
     }
-	
-	public function outOfStock ($user_id){
-		try{
-			$needMore = inventory::where('user_id', $user_id)->where('quantity', '=', 'used')->orderBy('item_id', 'asc')->get();
-			return response()->json($needMore);
-		}
-		catch(\Exception $e){
+
+    public function expired($user_id){
+        try{
+            $expireSoon = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
+                
+                foreach($expireSoon as $ii){
+                    $ii->item;
+                }
+
+                $creationDay = 0;
+                $days = 0;
+                $expireDate = 0;
+                $dangerDate = 0;
+                $newDangerDate = 0;
+                $newExpireDate = 0;
+
+                $today = Carbon::today();
+                $futureMonth = Carbon::today();
+                $futureMonth->addDay(30);
+
+                $dangerZone = array();
+                
+                
+                foreach($expireSoon as $ex){
+
+                    $creationDay = $ex->created_at;
+                    $days = (int)$ex->item->expiration;
+                    
+                    $expireDate = clone $creationDay;
+                    $expireDate->addDays($days);
+                    $forgetDate = clone $expireDate;
+                    $forgetDate->addDays(30);
+
+                    if($today->between($expireDate, $forgetDate) && $ex->ignored_at == NULL){
+                        array_push($dangerZone, $ex);
+                    }
+                    
+                }
+            //$test = "100";
+            return response()->json($dangerZone);
+
+        }
+        catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
         }
-	}
+    }
 
 	
     public function recipes($user_id){
 
-        try{
+
+ //       try{
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
 
             foreach($recipies as $recipe){
@@ -65,9 +188,15 @@ class NotificationController extends Controller
          //  $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
          //  $recipes = DB::select("select * from recipes where id = ?", $user_id);
            return response()->json(array($recipe));  
-        }
+ //       }
 /*           $invetoryItems = inventory::where('id', $user_id)->get();
            $haveIngredients = null;
+
+           $recipes = recipes::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+
+           return response()->json($recipes); 
+    /*         $invetoryItems = inventory::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+
 
             foreach($recipes as $recipe) {
                 $key = $recipe->recipie_id;
@@ -94,8 +223,15 @@ class NotificationController extends Controller
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
+
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        } */
+        } 
+
+            return response()->json(array('message' => "Contact support with time that error occurred."), 500);*/
+    //    } 
+       
+
     }
+
 }
 ?>
