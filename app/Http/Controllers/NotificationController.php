@@ -181,62 +181,64 @@ class NotificationController extends Controller
 
 
         try{
+            //get all the recipes the user has made
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
+            $count = 0;
+            $haveIngredients = [];
             
+            //append all the ingredients and ratings to each recipe for access later
             foreach($recipes as $ii){
                     $ii->ingredients;
                     $ii->rating;
                 }
-            //return $recipes;
-
-            $inventoryItem = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
-                
-                foreach($inventoryItem as $ii){
+                //get all the items that the user has in their inventory
+            $inventoryItems = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
+                //append the item to the list for use later
+                foreach($inventoryItems as $ii){
                     $ii->item;
                 }
-            //return $inventoryItem;
-
-            $haveIngredients = null;
-
-
+            //loop through all the recipes to compare with what you have
             foreach($recipes as $recipe) {
-                $key = $recipe->recipe_id;
-                
-                //$ingredients = recipe_ingredient::where('recipe_id', $key)->get();
+                $count = 0;
+              
                 $ingredients = $recipe->ingredients;
+                //gets the ingredients for each recipe and appends the full item to it
                 foreach($ingredients as $ii){
                     $ii->item;
                 }
-                //return $ingredients;
-                $ingredientCount = count($ingredients); 
-                //return $ingredientCount;           
-
+                //count the number of ingredients to make the recipe for reference later
+                $ingredientCount = count($ingredients);          
+                
+                //go through each of the ingredients that is required to make the recipe
                 foreach($ingredients as $ingredient) {
                     $recipeItem = $ingredient->item_id;
-                    return $recipeItem;
-                    foreach ($inventoryItems as $inventoryItem){
-
-                        if($inventoryItem->item_id == $recipeItem){
-                            $count++;
-                        }
-                    }
+                    $recipeQuantity = $ingredient->quantity;
+                    //go through each item the user has and compare it to the item 
+                    //required to make the recipe 
+                    foreach ($inventoryItems as $ii){
+                
+                    $inventoryQuantity = $ii->quantity;
+                        //bump the counter if you have the ingredient item that is required to make the recipe
+                        //also makes sure you have enough of the item in order to make the recipe
+                        if($ii->item_id == $recipeItem && $inventoryQuantity >= $recipeQuantity){
+                            $count++;        
+                        }                      
+                    }                  
                 }
+                //if you have the same number of ingredients to make the recipe that the recipe calls for 
+                //then you have all the ingredients for that recipe and add it to be returned
                 if ($ingredientCount == $count){
-                        $haveIngredients += $recipe;
+                        $haveIngredients [] = $recipe->recipe_id;
                     }
             }
-            return response()->json($haveIngredients);  
-  
-          
+            //return all of the recipe ID's to the front end
+            return response()->json($haveIngredients);      
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
 
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
         } 
-       
-
     }
-
 }
 ?>
