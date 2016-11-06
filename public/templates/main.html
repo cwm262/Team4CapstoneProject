@@ -3,14 +3,15 @@
         <div class="col-sm-4">
             <div class="panel panel-default tab-pane">
                 <div class="panel-heading" id="urgent">
-                    <h3 class="">Urgent!</h3>
+                    <h3 class="">Expiring Soon</h3>
                 </div>
                 <div class="panel-body">
-                    <dl>
-                        <dt ng-repeat="item in vm.items">
-                            {{item.item_name}}
-                        </dt>
+                    <dl ng-repeat="notification in vm.urgentNotifications">
+                        <dt>{{notification.item.item_name}}: <span>{{notification.quantity}}</span><span ng-if="notification.item.measurement !== 'quantity'"> {{notification.item.measurement}}</span> <span style="color:#247BA1"> -- </span> <span class="urgent"> {{notification.daysUntilExpiration}} days until expired. </span><button type="button" class="btn btn-link" ng-click="vm.dismissed(notification)"><span class="glyphicon glyphicon-remove-sign"></span></button></dt>
                     </dl>
+                    <div ng-if="vm.urgentNotifications.length == 0">
+                        Nothing to report! Good job!
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,17 +21,15 @@
                     <h3 class="">Recipe Suggestions</h3>
                 </div>
                 <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra
-                    varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt
-                    condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
-                    nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor
-                    accumsan. Aliquam in felis sit amet augue.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra
-                    varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt
-                    condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
-                    nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor
-                    accumsan. Aliquam in felis sit amet augue.
+                    <small style="color:#247BA1">You have everything that you need to make the following recipes:</small>
+                    <br>
+                    <dl ng-repeat="notification in vm.recipeNotifications">
+                        <dt>{{notification.name}} <button type="button" class="btn btn-link" ng-click="vm.goToRecipe(notification.recipe_id)"><span class="glyphicon glyphicon-eye-open"></span></button></dt>
+                    </dl>
+                    <div ng-if="vm.recipeNotifications.length == 0">
+                        Your current inventory doesn't quite have everything to make any currently saved recipes =(
                     </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">

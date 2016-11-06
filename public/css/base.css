@@ -347,3 +347,11 @@ body {
     color: white;
     text-align: center;
 }
+
+dl{
+    margin-bottom: 0 !important;
+}
+
+.urgent{
+    color: #CC0030;
+}

@@ -5,13 +5,22 @@
         .module('pantryApp')
         .controller('RecipeController', RecipeController);
 
-    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope', '$confirm', '$scope'];
+    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope', '$confirm', '$scope', '$routeParams'];
     
-    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope, $confirm, $scope){
+    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope, $confirm, $scope, $routeParams){
 
         var vm = this;
         vm.recipes = [];
-        vm.selectedRecipe = null;
+        if($routeParams.recipeID){
+            recipe.getOne($routeParams.recipeID).then(function(response){
+                vm.selectedRecipe = response;
+            }, function(error){
+                alert.add("warning", "404. Recipe not found.");
+            })
+        }else{
+            vm.selectedRecipe = null;
+        }
+        
         vm.searchRecipes = "";
 
         //Setting up our load bar.
