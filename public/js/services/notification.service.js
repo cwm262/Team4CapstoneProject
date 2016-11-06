@@ -30,7 +30,8 @@
         }
 
         function getExpired(user_id) {
-
+            var notifications = Restangular.all('/api/notifications/expired/' + user_id);
+            return notifications.getList();
         }
     }
 })();
