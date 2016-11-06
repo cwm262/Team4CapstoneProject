@@ -6,11 +6,27 @@
                     <h3 class="">Urgent!</h3>
                 </div>
                 <div class="panel-body">
-                    <dl>
-                        <dt ng-repeat="item in vm.items">
-                            {{item.item_name}}
-                        </dt>
-                    </dl>
+                    <table class="table table-borderless" ng-if="vm.urgentNotifications.length > 0">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Quantity</th>
+                                <th>Days Until Expired</th>
+                                <th>Dismiss</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="notification in vm.urgentNotifications">
+                                <td>{{notification.item.item_name}}</td>
+                                <td><span>{{notification.quantity}}</span><span ng-if="notification.item.measurement !== 'quantity'"> {{notification.item.measurement}}</span></td>
+                                <td>{{notification.daysUntilExpiration}}</td>
+                                <td><button type="button" class="btn btn-link" ng-click="vm.dismissed(notification)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="vm.urgentNotifications.length == 0">
+                        Nothing to report! Good job!
+                    </div>
                 </div>
             </div>
         </div>
