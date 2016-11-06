@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('RecipeController', RecipeController);
 
-    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope', '$confirm'];
+    RecipeController.$inject = ['recipe', 'ngProgressFactory', 'USER_ID', 'alert', '$uibModal', '$rootScope', '$confirm', '$scope'];
     
-    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope, $confirm){
+    function RecipeController(recipe, ngProgressFactory, USER_ID, alert, $uibModal, $rootScope, $confirm, $scope){
 
         var vm = this;
         vm.recipes = [];
@@ -30,6 +30,7 @@
         }
 
         getFullRecipeList();
+        
 
         //Listens for a call to refresh the recipe list. Modal will transmit call.
         $rootScope.$on("RefreshRecipeList", function(event, data){
@@ -44,9 +45,16 @@
             vm.selectedRecipe = recipe;
         }
 
-        //WIP
+        //Called when a star rating is changed for the selected recipe. Updates rating in storage
         vm.rateFunction = function(rating) {
-            vm.selectedRecipe.rating = rating;
+            var data = {
+                'rating': rating
+            }
+            recipe.updateRating(data, vm.selectedRecipe.rating.id).then(function(response){
+                getFullRecipeList();
+            }, function(error){
+                alert.add("danger", "Unable to update recipe rating. Please mark the time and contact support.");
+            })
         };
 
         //Remove recipe with confirmation box.

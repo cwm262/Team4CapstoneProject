@@ -15,7 +15,8 @@
             post: post,
             put: put,
             remove: remove,
-            updateMade: updateMade
+            updateMade: updateMade,
+            updateRating: updateRating
         };
         return service;
 
@@ -41,8 +42,13 @@
             return Restangular.one('/api/recipes', id).remove();
         }
 
-        function updateMade(data, recipe_id){
-            return Restangular.one('/api/recipes/made', recipe_id).customPUT(data);
+        function updateMade(data, id){
+            return Restangular.one('/api/recipes/made', id).customPUT(data);
+
+        }
+
+        function updateRating(data, id){
+            return Restangular.one('/api/recipes/rating', id).customPUT(data);
 
         }
 

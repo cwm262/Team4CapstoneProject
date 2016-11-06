@@ -9,6 +9,7 @@ use pantryApp\Http\Requests;
 use pantryApp\recipe;
 use pantryApp\recipe_ingredient;
 use pantryApp\recipes_used;
+use pantryApp\recipe_rating;
 
 class RecipeController extends Controller
 {
@@ -57,6 +58,12 @@ class RecipeController extends Controller
             $recipeMade->recipe_id = $recipe->id;
             $recipeMade->quantity = 0;
             $recipeMade->save();
+
+            $recipeRating = new recipe_rating;
+            $recipeRating->user_id = $request->input('user_id');
+            $recipeRating->recipe_id = $recipe->id;
+            $recipeRating->rating = 5;
+            $recipeRating->save();
 
             // Add each item to the recipe_ingredients table
             // - Each item in $request->ingredients should have an item_id and quantity
@@ -179,6 +186,25 @@ class RecipeController extends Controller
             $recipeMade->quantity = $recipeMade->quantity + 1;
             $recipeMade->save();
             return response()->json($recipeMade);
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
+    }
+
+    /**
+     * Update the specified id's rating in storage
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRating(Request $request, $id){
+        try{
+            $recipeRating = recipe_rating::find($id);
+            $recipeRating->rating = $request->input('rating');
+            $recipeRating->save();
+            return response()->json($recipeRating);
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);

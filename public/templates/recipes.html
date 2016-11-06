@@ -173,15 +173,18 @@
         <div class="col-sm-6">
             <div class="panel panel-default tab-pane-no-scroll">
                 <div class="panel-heading">
-                    <h3 style="display:inline-block">Selected Recipe</h3>
-                    <div class="btn-group pull-right" style="margin-top: 10px;" role="group" ng-if="vm.selectedRecipe">
-                        <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.removeRecipe(vm.selectedRecipe.recipe_id)">Delete</button>
-                        <button type="submit" class="btn btn-success btn-sm" ng-click="vm.madeRecipe(vm.selectedRecipe.used.id)">Made <span class="circleSurround">{{vm.selectedRecipe.used.quantity}}</span></button>
-                        <button type="submit" class="btn btn-info btn-sm" ng-click="vm.editRecipe(vm.selectedRecipe)">Edit</button>
+                    <h3>Selected Recipe</h3>
+                    <div ng-if="vm.selectedRecipe">
+                        <div class="btn-group pull-right" role="group">
+                            <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.removeRecipe(vm.selectedRecipe.recipe_id)">Delete</button>
+                            <button type="submit" class="btn btn-success btn-sm" ng-click="vm.madeRecipe(vm.selectedRecipe.used.id)">Made <span class="circleSurround">{{vm.selectedRecipe.used.quantity}}</span></button>
+                            <button type="submit" class="btn btn-info btn-sm" ng-click="vm.editRecipe(vm.selectedRecipe)">Edit</button>
+                        </div>
+                        <span star-rating ng-model="vm.selectedRecipe.rating.rating" max="10" on-rating-select="vm.rateFunction(rating)"></span>
                     </div>
                 </div>
                 <div class="panel-body" ng-if="vm.selectedRecipe">
-                    <form name="editrecipeForm">
+                    <form name="recipeForm">
                         <div class="form-group ">
                             <label class="control-label" for="recipeName">
                                 Recipe Name

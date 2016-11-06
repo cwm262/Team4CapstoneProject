@@ -81,7 +81,7 @@ textarea {
 }
 
 .tab-pane{
-  height:550px;
+  height:600px;
   overflow-y:scroll;
   width:100%;
 }
@@ -92,7 +92,7 @@ textarea {
 }
 
 .tab-pane-no-scroll{
-    height: 550px;
+    height: 600px;
     width: 100%;
 }
 

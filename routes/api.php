@@ -28,9 +28,15 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::put('inventory/{id}', ['as' => 'inventory.update', 'uses' => 'InventoryController@update']);
     Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show', 'update']]);  
 	
-    //Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
-    
-	//Route::resource('urgent', NotificationController));
+    /* RECIPE ROUTES */
+    Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
+    Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
+    Route::put('recipes/{recipe_id}', ['as' => 'recipes.update', 'uses' => 'RecipeController@update']);
+    Route::put('recipes/made/{id}', ['as' => 'recipes.updateMade', 'uses' => 'RecipeController@updateMade']);
+    Route::get('recipes/find/{recipe_id}', ['as' => 'recipes.show', 'uses' => 'RecipeController@show']);
+    Route::put('recipes/rating/{id}', ['as' => 'recipes.updateRating', 'uses' => 'RecipeController@updateRating']);
+    Route::resource('recipes', 'RecipeController', ['except' => ['index', 'destroy', 'update', 'show']]);
+	/* END RECIPE ROUTES */
 	
 	
      
@@ -43,10 +49,4 @@ Route::group(['middleware' => 'auth:api'], function()
  Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
  Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
  Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
- Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
- Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
- Route::put('recipes/{recipe_id}', ['as' => 'recipes.update', 'uses' => 'RecipeController@update']);
- Route::put('recipes/made/{id}', ['as' => 'recipes.updateMade', 'uses' => 'RecipeController@updateMade']);
- Route::get('recipes/find/{recipe_id}', ['as' => 'recipes.show', 'uses' => 'RecipeController@show']);
- Route::resource('recipes', 'RecipeController', ['except' => ['index', 'destroy', 'update', 'show']]);
 
