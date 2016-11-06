@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Carbon\Carbon;
 
 class Inventorytable extends Migration
 {
@@ -21,7 +22,7 @@ class Inventorytable extends Migration
             $table->float('quantity', 8, 2)->default(0);
             $table->float('used', 8, 2)->default(0);
             $table->float('expired', 8, 2)->default(0);
-            $table->timestamp('ignored_at')->default(NULL);
+            $table->timestamp('ignored_at')->nullable()->default(NULL);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -14,7 +14,9 @@
             getOne: getOne,
             post: post,
             put: put,
-            remove: remove
+            remove: remove,
+            updateMade: updateMade,
+            updateRating: updateRating
         };
         return service;
 
@@ -24,7 +26,7 @@
         }
 
         function getOne(id){
-            return recipes.get(id);
+            return Restangular.one('/api/recipes/find', id).get();
         }
 
         function post(data){
@@ -38,6 +40,16 @@
 
         function remove(id){
             return Restangular.one('/api/recipes', id).remove();
+        }
+
+        function updateMade(data, id){
+            return Restangular.one('/api/recipes/made', id).customPUT(data);
+
+        }
+
+        function updateRating(data, id){
+            return Restangular.one('/api/recipes/rating', id).customPUT(data);
+
         }
 
     }
