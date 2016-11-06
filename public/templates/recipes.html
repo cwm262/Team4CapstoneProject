@@ -66,6 +66,74 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="editRecipe.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Edit Recipe</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form class="form form-horizontal" name="editRecipeForm">
+            <div class="form-group">
+                <label for="recipeName" class="control-label requiredField col-sm-4">
+                    Recipe Name:
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <input type="text" name="recipeName" class="form-control" ng-model="mvm.myRecipe.name" required>
+                </div>
+                <span class="err-messages" ng-show="editRecipeForm.recipeName.$error.required">Please enter a recipe name.</span>
+            </div>
+            <div class="form-group">
+                <label for="prepTime" class="control-label requiredField col-sm-4">
+                    Preparation Time (total, in minutes):
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <input type="number" name="prepTime" class="form-control" ng-model="mvm.myRecipe.prep_time" required>
+                </div>
+                <span class="err-messages" ng-show="editRecipeForm.prepTime.$error.required">Please enter the prep time.</span>
+            </div>
+            <div class="form-group">
+                <label for="instructions" class="control-label requiredField col-sm-4">
+                    Instructions:
+                    <span class="asteriskField">
+                        *
+                    </span> 
+                </label>
+                <div class="col-sm-6">
+                    <textarea name="instructions" class="form-control scrollable" ng-model="mvm.myRecipe.instructions" rows="4" required>
+                    </textarea>
+                </div>
+                <span class="err-messages" ng-show="editRecipeForm.instructions.$error.required">Please enter the instructions.</span>
+            </div>
+            <div>
+                <button class="btn btn-info" type="button" ng-click="mvm.addNewChoice()">Add Ingredient</button>
+            </div>
+            <br>
+            <fieldset data-ng-repeat="choice in mvm.choices">
+                <div class="col-sm-4" style="display:inline-block">
+                    <select class="form-control" name="ingredient" ng-model="choice.selected" ng-options="item as item.item_name for item in mvm.items track by item.item_id">
+                    </select>
+                </div>
+                <div class="col-sm-3" style="display:inline-block">
+                    <input type="number" class="form-control" ng-model="choice.quantity" name="quantity" min="0" placeholder="amount">
+                </div>
+                <div class="col-sm-3" style="display: inline-block; margin-top:10px;">
+                    {{choice.selected.measurement}}
+                </div>
+                <button class="btn btn-warning btn-sm ingredBtn" type="button" ng-click="mvm.removeChoice($index)"><span class="glyphicon glyphicon-minus"></span></button>
+        </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-disabled="editRecipeForm.$invalid" ng-click="mvm.edited()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>
+
 <div class="container default-top-spacer">
     <div class="row">
         <div class="col-sm-6">
@@ -108,8 +176,8 @@
                     <h3 style="display:inline-block">Selected Recipe</h3>
                     <div class="btn-group pull-right" style="margin-top: 10px;" role="group" ng-if="vm.selectedRecipe">
                         <button type="submit" class="btn btn-danger btn-sm" ng-click="vm.removeRecipe(vm.selectedRecipe.recipe_id)">Delete</button>
-                        <button type="submit" class="btn btn-success btn-sm" ng-click="vm.madeRecipe()">Made</button>
-                        <button type="submit" class="btn btn-info btn-sm" ng-click="vm.editRecipe()">Edit</button>
+                        <button type="submit" class="btn btn-success btn-sm" ng-click="vm.madeRecipe(vm.selectedRecipe.used.id)">Made <span class="circleSurround">{{vm.selectedRecipe.used.quantity}}</span></button>
+                        <button type="submit" class="btn btn-info btn-sm" ng-click="vm.editRecipe(vm.selectedRecipe)">Edit</button>
                     </div>
                 </div>
                 <div class="panel-body" ng-if="vm.selectedRecipe">

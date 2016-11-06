@@ -23,16 +23,6 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('items/barcode/{barcode}', ['as' => 'items.show', 'uses' => 'ItemController@show']);
     Route::resource('items', 'ItemController', ['except' => ['index', 'show']]);
 
-
-    Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.ugrent', 'uses' => 'NotificationController@urgent']);
-   
-
-    //Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
-
-
-    Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
-    Route::resource('recipes', 'RecipeController', ['except' => ['index', 'destroy']]);
-
     Route::get('inventory/{user_id}/{item_id}', ['as' => 'inventory.show', 'uses' => 'InventoryController@show']);
     Route::get('inventory/{user_id}', ['as' => 'inventory.index', 'uses' => 'InventoryController@index']);
     Route::put('inventory/{id}', ['as' => 'inventory.update', 'uses' => 'InventoryController@update']);
@@ -54,4 +44,9 @@ Route::group(['middleware' => 'auth:api'], function()
  Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
  Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
  Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
+ Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
+ Route::put('recipes/{recipe_id}', ['as' => 'recipes.update', 'uses' => 'RecipeController@update']);
+ Route::put('recipes/made/{id}', ['as' => 'recipes.updateMade', 'uses' => 'RecipeController@updateMade']);
+ Route::get('recipes/find/{recipe_id}', ['as' => 'recipes.show', 'uses' => 'RecipeController@show']);
+ Route::resource('recipes', 'RecipeController', ['except' => ['index', 'destroy', 'update', 'show']]);
 

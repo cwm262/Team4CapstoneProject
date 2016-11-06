@@ -15,11 +15,13 @@ class RecipeRatingsTable extends Migration
     {
         Schema::dropIfExists('recipe_ratings');
         Schema::create('recipe_ratings', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('recipe_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('rating');
             $table->foreign('recipe_id')->references('recipe_id')->on('recipes')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
