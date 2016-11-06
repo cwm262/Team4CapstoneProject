@@ -8,27 +8,28 @@
     notification.$inject = ['Restangular'];
     function notification(Restangular) {
         var service = {
-            urgent: urgent,
-            recipes: recipes,
-            dismiss: dismiss,
-            expired: expired
+            getUrgent: getUrgent,
+            getRecipes: getRecipes,
+            getDismiss: getDismiss,
+            getExpired: getExpired
         };
         return service;
 
-        function urgent(user_id) {
+        function getUrgent(user_id) {
             var notifications = Restangular.all('/api/notifications/urgent/' + user_id);
             return notifications.getList();
         }
 
-        function recipes(user_id) {
-
+        function getRecipes(user_id) {
+            var notifications = Restangular.all('/api/notifications/recipes/' + user_id);
+            return notifications.getList();
         }
 
-        function dismiss(id) {
+        function getDismiss(id) {
             return Restangular.one('/api/notifications/ignore', id).get();
         }
 
-        function expired(user_id) {
+        function getExpired(user_id) {
 
         }
     }
