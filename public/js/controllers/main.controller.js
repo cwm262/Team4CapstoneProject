@@ -13,12 +13,11 @@
         
         vm.progressbar = ngProgressFactory.createInstance(); //Instantiate progress bar for later use.
 
-        vm.recipeNotifications = [];
-
         //Gets all front-end notifications.
         function getAllNotifications(){
             vm.progressbar.start(); //Start Progress Bar to show load progress
 
+            //Get urgent notifications ie food about to expire. Set num days until expiration to be displayed.
             notification.getUrgent(USER_ID).then(function(response){
                 var currentDate = moment();
                 vm.urgentNotifications = response;
@@ -30,8 +29,22 @@
                 alert.add('danger', 'Failed to retrieve urgent notifications! Please note the time and contact support.');
             })
 
+            //Get expired notifications ie food already expired. Set num days past expiration to be displayed.
+            notification.getExpired(USER_ID).then(function(response){
+                var currentDate = moment();
+                vm.expiredNotifications = response;
+                vm.expiredNotifications.forEach(function(notification){
+                    var expirationDate = moment(notification.created_at).add(notification.item.expiration, 'days');
+                    notification.daysPastExpiration = currentDate.diff(expirationDate, 'days');
+                })
+            }, function(error){
+                alert.add('danger', 'Failed to retrieve expired notifications! Please note the time and contact support.');
+            })
+
+            //Get recipe notifications ie recipes that can be prepared with inventory on hand.
             notification.getRecipes(USER_ID).then(function(response){
                 var recipes = response;
+                vm.recipeNotifications = [];
                 if(recipes.length > 0){
                     recipes.forEach(function(index){
                         recipe.getOne(index).then(function(response){
