@@ -185,6 +185,7 @@ class NotificationController extends Controller
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
             $count = 0;
             $haveIngredients = [];
+
             
             //append all the ingredients and ratings to each recipe for access later
             foreach($recipes as $ii){
@@ -196,11 +197,13 @@ class NotificationController extends Controller
                 //append the item to the list for use later
                 foreach($inventoryItems as $ii){
                     $ii->item;
+                 
                 }
             //loop through all the recipes to compare with what you have
             foreach($recipes as $recipe) {
                 $count = 0;
-              
+                $recipe->ingredients;
+                $recipe->rating;
                 $ingredients = $recipe->ingredients;
                 //gets the ingredients for each recipe and appends the full item to it
                 foreach($ingredients as $ii){
@@ -228,10 +231,13 @@ class NotificationController extends Controller
                 //if you have the same number of ingredients to make the recipe that the recipe calls for 
                 //then you have all the ingredients for that recipe and add it to be returned
                 if ($ingredientCount == $count){
-                        $haveIngredients [] = $recipe->recipe_id;
+                        $recipe_id = $recipe->recipe_id;
+                        $rating = $recipe->rating->rating;
+                        $haveIngredients += [$recipe_id => $rating];
                     }
             }
             //return all of the recipe ID's to the front end
+            krsort($haveIngredients);        
             return response()->json($haveIngredients);      
         }
         catch(\Exception $e){
