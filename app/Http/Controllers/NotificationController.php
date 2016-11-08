@@ -177,42 +177,21 @@ class NotificationController extends Controller
     }
 
 	
-    public function recipes($user_id){
+  public function recipes($user_id){
 
 
         try{
             //get all the recipes the user has made
             $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-            $count = 0;
-            $haveIngredients = [];
-
-            //append all the ingredients and ratings to each recipe for access later
-            foreach($recipes as $ii){
-                    $ii->ingredients;
-                    $ii->rating;
-                    $ii->used;
-                }
-                //get all the items that the user has in their inventory
             $inventoryItems = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
-                //append the item to the list for use later
-                foreach($inventoryItems as $ii){
-                    $ii->item;
-                 
-                }
+            $haveIngredients = [];
+            $insertionCount = 0;
             //loop through all the recipes to compare with what you have
             foreach($recipes as $recipe) {
                 $count = 0;
-                $recipe->ingredients;
-                $recipe->rating;
                 $ingredients = $recipe->ingredients;
-                
-                //gets the ingredients for each recipe and appends the full item to it
-                foreach($ingredients as $ii){
-                    $ii->item;
-                }
                 //count the number of ingredients to make the recipe for reference later
                 $ingredientCount = count($ingredients);          
-                
                 //go through each of the ingredients that is required to make the recipe
                 foreach($ingredients as $ingredient) {
                     $recipeItem = $ingredient->item_id;
@@ -220,11 +199,9 @@ class NotificationController extends Controller
                     //go through each item the user has and compare it to the item 
                     //required to make the recipe 
                     foreach ($inventoryItems as $ii){
-                
-                    $inventoryQuantity = $ii->quantity;
                         //bump the counter if you have the ingredient item that is required to make the recipe
                         //also makes sure you have enough of the item in order to make the recipe
-                        if($ii->item_id == $recipeItem && $inventoryQuantity >= $recipeQuantity){
+                        if($ii->item_id == $recipeItem && $ii->quantity >= $recipeQuantity){
                             $count++;        
                         }                      
                     }                  
@@ -232,10 +209,7 @@ class NotificationController extends Controller
                 //if you have the same number of ingredients to make the recipe that the recipe calls for 
                 //then you have all the ingredients for that recipe and add it to be returned
                 if ($ingredientCount == $count){
-                        $recipe_id = $recipe->recipe_id;
-                        $rating = $recipe->rating->rating;
-                        $timesMade = $recipe->used->quantity;
-                        $recipeSort [] = ['recipe_id' => $recipe_id, 'rating' => $rating, 'timesMade' => $timesMade];
+                        $recipeSort [] = ['recipe_id' => $recipe->recipe_id, 'rating' => $recipe->rating->rating, 'timesMade' => $recipe->used->quantity];
                     }
             }
             //return all of the recipe ID's to the front end
@@ -245,15 +219,12 @@ class NotificationController extends Controller
             }
             //Sort array based on rating and then if equal base rating off times made
             array_multisort($ratingSort, SORT_DESC, $timesMadeSort, SORT_DESC, $recipeSort);
-         
-            $insertionCount = 0;
-
+            
             foreach ($recipeSort as $ii){
                 $haveIngredients[$insertionCount] = $ii['recipe_id'];
                 $insertionCount++;
             }
 
-                    
             return response()->json($haveIngredients);      
         }
         catch(\Exception $e){
