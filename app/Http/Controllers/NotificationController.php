@@ -186,11 +186,11 @@ class NotificationController extends Controller
             $count = 0;
             $haveIngredients = [];
 
-            
             //append all the ingredients and ratings to each recipe for access later
             foreach($recipes as $ii){
                     $ii->ingredients;
                     $ii->rating;
+                    $ii->used;
                 }
                 //get all the items that the user has in their inventory
             $inventoryItems = inventory::where('user_id', $user_id)->where('quantity', '>', 0)->orderBy('item_id', 'asc')->get();
@@ -205,6 +205,7 @@ class NotificationController extends Controller
                 $recipe->ingredients;
                 $recipe->rating;
                 $ingredients = $recipe->ingredients;
+                
                 //gets the ingredients for each recipe and appends the full item to it
                 foreach($ingredients as $ii){
                     $ii->item;
@@ -233,18 +234,34 @@ class NotificationController extends Controller
                 if ($ingredientCount == $count){
                         $recipe_id = $recipe->recipe_id;
                         $rating = $recipe->rating->rating;
-                        $haveIngredients += [$recipe_id => $rating];
+                        $timesMade = $recipe->used->quantity;
+                        $recipeSort [] = ['recipe_id' => $recipe_id, 'rating' => $rating, 'timesMade' => $timesMade];
                     }
             }
             //return all of the recipe ID's to the front end
-            krsort($haveIngredients);        
+            foreach ($recipeSort as $key => $row) {
+               $ratingSort[$key] = $recipeSort[$key]['rating'];
+               $timesMadeSort[$key] = $recipeSort[$key]['timesMade'];
+            }
+            //Sort array based on rating and then if equal base rating off times made
+            array_multisort($ratingSort, SORT_DESC, $timesMadeSort, SORT_DESC, $recipeSort);
+         
+            $insertionCount = 0;
+
+            foreach ($recipeSort as $ii){
+                $haveIngredients[$insertionCount] = $ii['recipe_id'];
+                $insertionCount++;
+            }
+
+                    
             return response()->json($haveIngredients);      
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
 
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
-        } 
+        }
     }
+    
 }
 ?>

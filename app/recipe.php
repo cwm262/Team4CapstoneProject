@@ -15,4 +15,7 @@ class recipe extends Model
     public function rating() {
         return $this->hasOne('pantryApp\recipe_rating', 'recipe_id', 'recipe_id')->where('user_id', $this->user_id);
     }
+    public function used(){
+        return $this->hasOne('pantryApp\recipes_used', 'recipe_id', 'recipe_id')->where('user_id', $this->user_id);
+    }
 }
