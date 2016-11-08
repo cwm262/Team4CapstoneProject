@@ -253,8 +253,7 @@ class NotificationController extends Controller
                 $haveIngredients[$insertionCount] = $ii['recipe_id'];
                 $insertionCount++;
             }
-
-                    
+   
             return response()->json($haveIngredients);      
         }
         catch(\Exception $e){
