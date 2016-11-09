@@ -197,28 +197,55 @@ class InventorySeeder extends Seeder
             'user_id' => '1',
             'item_id' => '19',
             'quantity' => '0',
-            'used' => '2',
-            'total' => '402',
-            'expired' => '400',
+            'used' => '1385',
+            'total' => '1802',
+            'expired' => '417',
+            'updated_at' => '2016-11-02 14:30:40',
+        ]);
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '19',
+            'quantity' => '0',
+            'used' => '1246',
+            'total' => '1635',
+            'expired' => '389',
             'updated_at' => '2016-10-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '18',
             'quantity' => '0',
-            'used' => '2',
-            'total' => '452',
-            'expired' => '450',
+            'used' => '1167',
+            'total' => '1594',
+            'expired' => '427',
             'updated_at' => '2016-09-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '17',
             'quantity' => '0',
-            'used' => '2',
-            'total' => '352',
-            'expired' => '350',
+            'used' => '1034',
+            'total' => '1402',
+            'expired' => '368',
             'updated_at' => '2016-08-02 14:30:40',
+        ]);
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '16',
+            'quantity' => '0',
+            'used' => '1198',
+            'total' => '1634',
+            'expired' => '436',
+            'updated_at' => '2016-07-02 14:30:40',
+        ]);
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '15',
+            'quantity' => '0',
+            'used' => '1463',
+            'total' => '1920',
+            'expired' => '547',
+            'updated_at' => '2016-06-02 14:30:40',
         ]);
 
         //for notification testing

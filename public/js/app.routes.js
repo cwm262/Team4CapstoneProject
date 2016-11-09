@@ -42,7 +42,7 @@
             })
             .when("/statistics", {
                 templateUrl : "templates/statistics.html",
-                controller: "StatisticsController",
+                controller: "StatsController",
                 controllerAs: "vm"
             })
 

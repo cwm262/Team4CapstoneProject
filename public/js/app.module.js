@@ -14,7 +14,8 @@
             'rzModule',
             'angularMoment',
             'barcodeListener',
-            'angular-confirm'
+            'angular-confirm',
+            'chart.js'
         ]);
     
 })();

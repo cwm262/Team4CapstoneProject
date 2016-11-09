@@ -47,67 +47,127 @@ class StatsController extends Controller
             $past6 = Carbon::today();
             $past6->subMonth(6);
 
-            //adding up the total wasted for x months back
-            $waste1 = 0;
-            foreach($foodWaste as $w1){
-                if($w1->updated_at->between($past1, $today)){
-                    $temp = $w1->expired;
-                    $waste1 = $temp;
+            $wastePerMonth = array(
+                "0" => 0,
+                "1" => 0,
+                "2" => 0,
+                "3" => 0,
+                "4" => 0,
+                "5" => 0,
+            );
+            $consumptionPerMonth = array(
+                "0" => 0,
+                "1" => 0,
+                "2" => 0,
+                "3" => 0,
+                "4" => 0,
+                "5" => 0,
+            );
+            foreach($foodWaste as $fw){
+                if($fw->updated_at->between($past1, $today)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[0] += $temp;
+                }
+                else if($fw->updated_at->between($past2, $past1)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[1] += $temp;
+                }
+                else if($fw->updated_at->between($past3, $past2)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[2] += $temp;
+                }
+                else if($fw->updated_at->between($past4, $past3)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[3] += $temp;
+                }
+                else if($fw->updated_at->between($past5, $past4)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[4] += $temp;
+                }
+                else if($fw->updated_at->between($past6, $past5)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[5] += $temp;
                 }
             }
 
-            $waste2 = 0;
-            foreach($foodWaste as $w2){
-                if($w2->updated_at->between($past2, $past1)){
-                    $temp = $w2->expired;
-                    $waste2 = $temp;
+            //Getting consumption from db
+            $foodConsumption = inventory::where('user_id', $user_id)->where('used', '!=', 0)->orderBy('item_id', 'asc')->get();
+            foreach($foodWaste as $ii){
+                $ii->item;
+            }
+            
+            //finding what month each thing is for
+            foreach($foodConsumption as $fc){
+                if($fc->updated_at->between($past1, $today)){
+                    $temp = 0;
+                    $temp = $fc->used;
+                    $consumptionPerMonth[0] += $temp;
+                }
+                else if($fc->updated_at->between($past2, $past1)){
+                    $temp = 0;
+                    $temp = $fc->used;
+                    $consumptionPerMonth[1] += $temp;
+                }
+                else if($fc->updated_at->between($past3, $past2)){
+                    $temp = 0;
+                    $temp = $fc->used;
+                    $consumptionPerMonth[2] += $temp;
+                }
+                else if($fc->updated_at->between($past4, $past3)){
+                    $temp = 0;
+                    $temp = $fc->used;
+                    $consumptionPerMonth[3] += $temp;
+                }
+                else if($fc->updated_at->between($past5, $past4)){
+                    $temp = 0;
+                    $temp = $fc->used;
+                    $consumptionPerMonth[4] += $temp;
+                }
+                else if($fc->updated_at->between($past6, $past5)){
+                    $temp = 0;
+                    $temp = $fc->used;
+                    $consumptionPerMonth[5] += $temp;
                 }
             }
+            //getting totals
 
-            $waste3 = 0;
-            foreach($foodWaste as $w3){
-                if($w3->updated_at->between($past3, $past2)){
-                    $temp = $w3->expired;
-                    $waste3 = $temp;
-                }
-            }
+            $total0 = $consumptionPerMonth[0] + $wastePerMonth[0];
+            $total1 = $consumptionPerMonth[1] + $wastePerMonth[1];
+            $total2 = $consumptionPerMonth[2] + $wastePerMonth[2];
+            $total3 = $consumptionPerMonth[3] + $wastePerMonth[3];
+            $total4 = $consumptionPerMonth[4] + $wastePerMonth[4];
+            $total5 = $consumptionPerMonth[5] + $wastePerMonth[5];
+            
+            //making arrays for return
 
-            $waste4 = 0;
-            foreach($foodWaste as $w4){
-                if($w4->updated_at->between($past4, $past3)){
-                    $temp = $w4->expired;
-                    $waste4 = $temp;
-                }
-            }
+            $month0 = array($total0,$wastePerMonth[0], $consumptionPerMonth[0]);
+            $month1 = array($total1,$wastePerMonth[1], $consumptionPerMonth[1]);
+            $month2 = array($total2,$wastePerMonth[2], $consumptionPerMonth[2]);
+            $month3 = array($total3,$wastePerMonth[3], $consumptionPerMonth[3]);
+            $month4 = array($total4,$wastePerMonth[4], $consumptionPerMonth[4]);
+            $month5 = array($total5,$wastePerMonth[5], $consumptionPerMonth[5]);
 
-            $waste5 = 0;
-            foreach($foodWaste as $w5){
-                if($w5->updated_at->between($past5, $past4)){
-                    $temp = $w5->expired;
-                    $waste5 = $temp;
-                }
-            }
-
-            $waste6 = 0;
-            foreach($foodWaste as $w6){
-                if($w6->updated_at->between($past6, $past5)){
-                    $temp = $w6->expired;
-                    $waste6 = $temp;
-                }
-            }
-
-            //making array for return
             $resultArray = array
                 (
-                array("total wasted",$totalWaste),
-                array("waste by month",$waste1, $waste2, $waste3, $waste4, $waste5, $waste6)
+                    "Total Waste" => $totalWaste,
+                    "month 0" => $month0,
+                    "month 1" => $month1,
+                    "month 2" => $month2,
+                    "month 3" => $month3,
+                    "month 4" => $month4,
+                    "month 5" => $month5
                 );
             
 
 
             //return response()->json($past5);
-            //return response()->json($resultArray);
-            return response()->json($foodWaste);
+            return response()->json($resultArray);
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);
