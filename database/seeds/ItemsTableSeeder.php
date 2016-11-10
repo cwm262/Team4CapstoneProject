@@ -266,6 +266,7 @@ class ItemsTableSeeder extends Seeder
             'expiration' => '2',
             'ready_to_eat' => '1',
         ]);
+        //this one has a negative expiration so that it will show expired
         DB::table('items')->insert([
             'barcode' => '9999999989',
             'user_id' => '1',
@@ -278,5 +279,7 @@ class ItemsTableSeeder extends Seeder
             'expiration' => '-3',
             'ready_to_eat' => '1',
         ]);
+        
+
     }
 }
