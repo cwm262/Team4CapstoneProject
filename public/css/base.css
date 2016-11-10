@@ -81,7 +81,7 @@ textarea {
 }
 
 .tab-pane{
-  height:550px;
+  height:600px;
   overflow-y:scroll;
   width:100%;
 }
@@ -92,7 +92,7 @@ textarea {
 }
 
 .tab-pane-no-scroll{
-    height: 550px;
+    height: 600px;
     width: 100%;
 }
 
@@ -334,4 +334,24 @@ body {
 
 #ingredientArea{
     background-color: #F3FFBD;
+}
+
+.circleSurround{
+    display: inline-block;
+    width: 20px;
+
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+dl{
+    margin-bottom: 0 !important;
+}
+
+.urgent{
+    color: #CC0030;
 }

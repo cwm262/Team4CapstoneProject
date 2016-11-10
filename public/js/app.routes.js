@@ -35,9 +35,14 @@
                 controller: "RecipeController",
                 controllerAs: "vm"
             })
+            .when("/recipes/:recipeID", {
+                templateUrl : "templates/recipes.html",
+                controller: "RecipeController",
+                controllerAs: "vm"
+            })
             .when("/statistics", {
                 templateUrl : "templates/statistics.html",
-                controller: "StatisticsController",
+                controller: "StatsController",
                 controllerAs: "vm"
             })
 

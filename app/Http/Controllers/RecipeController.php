@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Log;
 use pantryApp\Http\Requests;
 use pantryApp\recipe;
 use pantryApp\recipe_ingredient;
+use pantryApp\recipes_used;
+use pantryApp\recipe_rating;
 
 class RecipeController extends Controller
 {
@@ -23,11 +25,13 @@ class RecipeController extends Controller
 
             foreach($recipes as $recipe) {
                 $rating = $recipe->rating;
+                $used = $recipe->used;
                 $ingredients = $recipe->ingredients;
                 
                 foreach($ingredients as $ingredient) {
                     $ingredient->item;
                 }
+                
             }
 
             return response()->json($recipes);
@@ -49,6 +53,18 @@ class RecipeController extends Controller
             $recipe->prep_time = $request->input('prep_time');
             $recipe->save();
 
+            $recipeMade = new recipes_used;
+            $recipeMade->user_id = $request->input('user_id');
+            $recipeMade->recipe_id = $recipe->id;
+            $recipeMade->quantity = 0;
+            $recipeMade->save();
+
+            $recipeRating = new recipe_rating;
+            $recipeRating->user_id = $request->input('user_id');
+            $recipeRating->recipe_id = $recipe->id;
+            $recipeRating->rating = 5;
+            $recipeRating->save();
+
             // Add each item to the recipe_ingredients table
             // - Each item in $request->ingredients should have an item_id and quantity
             // - Item must already exist in items table
@@ -57,7 +73,6 @@ class RecipeController extends Controller
             }
 
             return response()->json($recipe);
-            //return response()->json($temp);
 
         }catch(\Exception $e){
             Log::critical($e->getMessage());
@@ -93,15 +108,21 @@ class RecipeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($user_id)
+    public function show($recipe_id)
     {
         try{
-            $recipes = recipe::where('user_id', $user_id)->orderBy('name', 'asc')->get();
-            return response()->json($recipes);
+            $recipe = recipe::where('recipe_id', $recipe_id)->first();
+            $ingredients = $recipe->ingredients;
+            foreach($ingredients as $ingredient){
+                $ingredient->item;
+            }
+            $recipe->rating;
+            $recipe->used;
+            return response()->json($recipe);
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+            return response()->json(array('message' => "Not Found"), 404);
         }
     }
 
@@ -112,10 +133,10 @@ class RecipeController extends Controller
      * Warning! This will change the recipe_id
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $recipe_id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user_id)
+    public function update(Request $request, $recipe_id)
     {
         try{
             $status = $this->destroy($request->recipe_id);
@@ -146,6 +167,44 @@ class RecipeController extends Controller
                 return "Deleted";
             }
             return "Not Found";
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
+    }
+
+    /**
+     * Update the specified id's quantity made in storage
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMade(Request $request, $id){
+        try{
+            $recipeMade = recipes_used::find($id);
+            $recipeMade->quantity = $recipeMade->quantity + 1;
+            $recipeMade->save();
+            return response()->json($recipeMade);
+        }catch(\Exception $e){
+            Log::critical($e->getMessage());
+            return response()->json(array('message' => "Please contact support with time that error occurred."), 500);
+        }
+    }
+
+    /**
+     * Update the specified id's rating in storage
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateRating(Request $request, $id){
+        try{
+            $recipeRating = recipe_rating::find($id);
+            $recipeRating->rating = $request->input('rating');
+            $recipeRating->save();
+            return response()->json($recipeRating);
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Please contact support with time that error occurred."), 500);

@@ -27,7 +27,10 @@
     <script src="js/controllers/inventoryModal.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/addItemModal.controller.js"></script> <!-- load our controller -->
     <script src="js/controllers/recipeModal.controller.js"></script> <!-- load our controller -->
+    <script src="js/controllers/stats.controller.js"></script>
+    <script src="js/services/notification.service.js"></script> <!-- load our alert service -->
     <script src="js/services/alert.service.js"></script> <!-- load our alert service -->
+    <script src="js/services/stats.service.js"></script>
     <script src="js/services/item.service.js"></script> <!-- load our item service -->
     <script src="js/services/inventory.service.js"></script> <!-- load our item service -->
     <script src="js/services/recipe.service.js"></script> <!-- load our item service -->

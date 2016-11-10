@@ -121,6 +121,7 @@ class NotificationController extends Controller
             $inventoryItem->ignored_at = $today;
             $inventoryItem->save();
             $test = inventory::find($id);
+            
             return response()->json($test);
         }
         catch(\Exception $e){
@@ -224,6 +225,7 @@ class NotificationController extends Controller
                 $haveIngredients[$insertionCount] = $ii['recipe_id'];
                 $insertionCount++;
             }
+
 
             return response()->json($haveIngredients);      
         }

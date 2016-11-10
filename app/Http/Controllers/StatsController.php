@@ -47,67 +47,58 @@ class StatsController extends Controller
             $past6 = Carbon::today();
             $past6->subMonth(6);
 
-            //adding up the total wasted for x months back
-            $waste1 = 0;
-            foreach($foodWaste as $w1){
-                if($w1->updated_at->between($past1, $today)){
-                    $temp = $w1->expired;
-                    $waste1 = $temp;
+            $wastePerMonth = array(
+                "0" => 0,
+                "1" => 0,
+                "2" => 0,
+                "3" => 0,
+                "4" => 0,
+                "5" => 0,
+            );
+            foreach($foodWaste as $fw){
+                if($fw->updated_at->between($past1, $today)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[0] = $temp;
                 }
-            }
-
-            $waste2 = 0;
-            foreach($foodWaste as $w2){
-                if($w2->updated_at->between($past2, $past1)){
-                    $temp = $w2->expired;
-                    $waste2 = $temp;
+                else if($fw->updated_at->between($past2, $past1)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[1] = $temp;
                 }
-            }
-
-            $waste3 = 0;
-            foreach($foodWaste as $w3){
-                if($w3->updated_at->between($past3, $past2)){
-                    $temp = $w3->expired;
-                    $waste3 = $temp;
+                else if($fw->updated_at->between($past3, $past2)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[2] = $temp;
                 }
-            }
-
-            $waste4 = 0;
-            foreach($foodWaste as $w4){
-                if($w4->updated_at->between($past4, $past3)){
-                    $temp = $w4->expired;
-                    $waste4 = $temp;
+                else if($fw->updated_at->between($past4, $past3)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[3] = $temp;
                 }
-            }
-
-            $waste5 = 0;
-            foreach($foodWaste as $w5){
-                if($w5->updated_at->between($past5, $past4)){
-                    $temp = $w5->expired;
-                    $waste5 = $temp;
+                else if($fw->updated_at->between($past5, $past4)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[4] = $temp;
                 }
-            }
-
-            $waste6 = 0;
-            foreach($foodWaste as $w6){
-                if($w6->updated_at->between($past6, $past5)){
-                    $temp = $w6->expired;
-                    $waste6 = $temp;
+                else if($fw->updated_at->between($past6, $past5)){
+                    $temp = 0;
+                    $temp = $fw->expired;
+                    $wastePerMonth[5] = $temp;
                 }
             }
 
             //making array for return
             $resultArray = array
                 (
-                array("total wasted",$totalWaste),
-                array("waste by month",$waste1, $waste2, $waste3, $waste4, $waste5, $waste6)
+                    "Total Waste" => $totalWaste,
+                    "Waste Per Month" => $wastePerMonth
                 );
             
 
 
             //return response()->json($past5);
-            //return response()->json($resultArray);
-            return response()->json($foodWaste);
+            return response()->json($resultArray);
         }catch(\Exception $e){
             Log::critical($e->getMessage());
             return response()->json(array('message' => "Contact support with time that error occurred."), 500);

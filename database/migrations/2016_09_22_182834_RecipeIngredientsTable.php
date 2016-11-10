@@ -19,6 +19,7 @@ class RecipeIngredientsTable extends Migration
             $table->float('quantity', 8, 2);
             $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
             $table->foreign('recipe_id')->references('recipe_id')->on('recipes')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -18,6 +18,7 @@ elixir(mix => {
             './node_modules/lodash/lodash.js',
             './node_modules/underscore/underscore.js',
             './node_modules/moment/moment.js',
+            './node_modules/chart.js/dist/Chart.js',
             './node_modules/angular/angular.js',
             './node_modules/angular-aria/angular-aria.js',
             './node_modules/angular-animate/angular-animate.js',
@@ -30,7 +31,8 @@ elixir(mix => {
             './node_modules/angularjs-slider/dist/rzslider.js',
             './node_modules/angular-moment/angular-moment.js',
             './node_modules/angular-barcode-listener/angular-barcode-listener.js',
-            './node_modules/angular-confirm/angular-confirm.js'
+            './node_modules/angular-confirm/angular-confirm.js',
+            './node_modules/angular-chart.js/dist/angular-chart.js'
         ])
         .styles([
             './node_modules/ngprogress/ngProgress.css',
