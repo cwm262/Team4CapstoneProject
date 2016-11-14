@@ -20,8 +20,14 @@ class SmartShoppingListController extends Controller
     {
         try{
             $items = $this->getSuggestedItems($user_id, $date_range, $num_days);
+            $itemArray = array();
+            foreach ($items as $key => $value){
+                $myItem = Item::where('item_id', $key)->select('item_name', 'measurement')->first();
+                $myItem['quantity'] = $value;
+                array_push($itemArray, $myItem);
+            }
 
-            return response()->json($items);
+            return response()->json($itemArray);
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
