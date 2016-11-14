@@ -195,56 +195,65 @@ class InventorySeeder extends Seeder
 
         DB::table('inventory')->insert([
             'user_id' => '1',
-            'item_id' => '19',
+            'item_id' => '2',
             'quantity' => '0',
-            'used' => '1385',
-            'total' => '1802',
-            'expired' => '417',
+            'used' => '18',
+            'total' => '24',
+            'expired' => '6',
             'updated_at' => '2016-11-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
-            'item_id' => '19',
+            'item_id' => '3',
             'quantity' => '0',
-            'used' => '1246',
-            'total' => '1635',
-            'expired' => '389',
+            'used' => '13',
+            'total' => '16',
+            'expired' => '3',
             'updated_at' => '2016-10-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
-            'user_id' => '1',
+            'user_id' => '5',
             'item_id' => '18',
             'quantity' => '0',
-            'used' => '1167',
-            'total' => '1594',
-            'expired' => '427',
+            'used' => '10',
+            'total' => '12',
+            'expired' => '2',
             'updated_at' => '2016-09-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
-            'item_id' => '17',
+            'item_id' => '13',
             'quantity' => '0',
-            'used' => '1034',
-            'total' => '1402',
-            'expired' => '368',
+            'used' => '12',
+            'total' => '16',
+            'expired' => '4',
+            'updated_at' => '2016-08-02 14:30:40',
+        ]);
+        DB::table('inventory')->insert([
+            'user_id' => '1',
+            'item_id' => '14',
+            'quantity' => '0',
+            'used' => '8',
+            'total' => '10',
+            'expired' => '2',
             'updated_at' => '2016-08-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '16',
             'quantity' => '0',
-            'used' => '1198',
-            'total' => '1634',
-            'expired' => '436',
+            'used' => '24',
+            'total' => '32',
+            'expired' => '8',
             'updated_at' => '2016-07-02 14:30:40',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
-            'item_id' => '15',
+            'item_id' => '6',
             'quantity' => '0',
-            'used' => '1463',
-            'total' => '1920',
-            'expired' => '547',
+            'used' => '10',
+            'total' => '14',
+            'expired' => '4',
             'updated_at' => '2016-06-02 14:30:40',
         ]);
 
