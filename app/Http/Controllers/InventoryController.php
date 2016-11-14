@@ -40,6 +40,7 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         try{
+            return $request;
             $inventoryItem = new inventory;
             $inventoryItem->item_id = $request->input('item_id');
             $inventoryItem->user_id = $request->input('user_id');

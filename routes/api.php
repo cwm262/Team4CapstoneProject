@@ -49,4 +49,4 @@ Route::group(['middleware' => 'auth:api'], function()
  Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
  Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
  Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
-
+ Route::post('email/send/{user_id}', ['as' => 'email.send', 'uses' => 'emailController@send']);
