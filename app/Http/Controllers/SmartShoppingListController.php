@@ -89,7 +89,7 @@ class SmartShoppingListController extends Controller
             }
 
             // determine the number of items to get
-            $n = $desired_quantity / $item_serving_size;
+            $n = floor($desired_quantity / $item_serving_size);
 
             // If the number of items is greater than one unit then add to list, else do nothing
             if($n > 0) { 
