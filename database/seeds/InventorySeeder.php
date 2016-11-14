@@ -100,9 +100,9 @@ class InventorySeeder extends Seeder
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '11',
-            'quantity' => '16',
-            'used' => '0',
-            'total' => '16',
+            'quantity' => '10',
+            'used' => '5',
+            'total' => '15',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -150,9 +150,9 @@ class InventorySeeder extends Seeder
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '17',
-            'quantity' => '14',
+            'quantity' => '8',
             'used' => '4',
-            'total' => '18',
+            'total' => '12',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -164,9 +164,9 @@ class InventorySeeder extends Seeder
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '19',
-            'quantity' => '6',
+            'quantity' => '5',
             'used' => '0',
-            'total' => '6',
+            'total' => '5',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -177,10 +177,10 @@ class InventorySeeder extends Seeder
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
-            'item_id' => '19',
+            'item_id' => '10',
             'quantity' => '0',
-            'used' => '6',
-            'total' => '6',
+            'used' => '16',
+            'total' => '16',
         ]);
         DB::table('inventory')->insert([
             'user_id' => '1',
@@ -261,9 +261,9 @@ class InventorySeeder extends Seeder
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '9',
-            'quantity' => '30',
+            'quantity' => '2',
             'used' => '2',
-            'total' => '32',
+            'total' => '4',
             'expired' => '0',
             'updated_at' => '2016-10-04 14:30:40',
         ]);
@@ -271,9 +271,9 @@ class InventorySeeder extends Seeder
         DB::table('inventory')->insert([
             'user_id' => '1',
             'item_id' => '9',
-            'quantity' => '30',
+            'quantity' => '2',
             'used' => '2',
-            'total' => '32',
+            'total' => '4',
             'expired' => '0',
             'updated_at' => '2016-10-01 00:00:00',
             //'ignored_at' => '2016-10-27 00:00:00',
