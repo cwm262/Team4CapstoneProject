@@ -9,7 +9,9 @@ use pantryApp\User;
 use pantryApp\shopping_list;
 use pantryApp\Item;
 
-class emailController extends Controller
+use Mail;
+
+class EmailController extends Controller
 {   
     public function send(Request $request){
         date_default_timezone_set('America/Chicago');
@@ -30,16 +32,16 @@ class emailController extends Controller
             }
            $count++;
        }
-       $todaysDate = date('l \t\h\e jS');
+        $todaysDate = date('l \t\h\e jS');
         $greeting = "Your shopping list";
         $title = "Your Shopping List For " . $todaysDate;
         $description = $yourShoppingList;
         
-        return $greeting . "\n\n" . $title . "\n" . $description;
+        //return $greeting . "\n\n" . $title . "\n" . $description;
         Mail::send('emails.send', ['title' => $title, 'description' => $description,], 
-            function ($m) use ($student, $greeting)
+            function ($m) use ($greeting)
             {
-                $m->from('CDSSCPoints@gmail.com', 'Student Center Point Notifier');
+                $m->from('TheWizard@PantryWizard.app', 'Pantry Wizard Shopping List');
                 $m->to('azathoth.hp@gmail.com')->subject($greeting);
             });
         return response()->json(['message' => 'Request completed']);   
