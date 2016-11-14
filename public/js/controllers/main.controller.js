@@ -44,14 +44,14 @@
             //Get recipe notifications ie recipes that can be prepared with inventory on hand.
             notification.getRecipes(USER_ID).then(function(response){
                 var recipes = response;
-                vm.recipeNotifications = [];
-                if(recipes.length > 0){
-                    recipes.forEach(function(index){
-                        recipe.getOne(index).then(function(response){
-                            vm.recipeNotifications.push(response);
-                        })
-                    })
-                }
+            }, function(error){
+                alert.add('danger', 'Failed to retrieve shopping list suggestions! Please note the time and contact support.');
+            })
+
+            // Display suggested shopping list for the user
+            
+            notification.getShoppingList(USER_ID).then(function(response){
+                vm.shoppingList = response;
             }, function(error){
                 alert.add('danger', 'Failed to retrieve recipe notifications! Please note the time and contact support.');
             })
