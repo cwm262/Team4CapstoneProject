@@ -82,7 +82,7 @@ class SmartShoppingListController extends Controller
 
             // get number of servings for the specified item
             $item_serving_size = Item::where('item_id', $item_id)->orderBy('item_id', 'asc')->pluck('serving_size')->first();
-
+            
             // Just incase there is a 0 serving size (shouldn't be possible but who am I to judge?)
             if($item_serving_size == 0) {
                 $item_serving_size = 0.01;
@@ -90,7 +90,7 @@ class SmartShoppingListController extends Controller
 
             // determine the number of items to get
             $n = floor($desired_quantity / $item_serving_size);
-
+            
             // If the number of items is greater than one unit then add to list, else do nothing
             if($n > 0) { 
                 $num_items[$item_id] = $n;
