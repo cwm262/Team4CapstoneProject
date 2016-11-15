@@ -66,9 +66,8 @@
                         vm.groceries.push({
                             name: value,
                             itemList: itemList,
-                            total: totalQuantity.toFixed(2),//chris touched this
-                            //chris commented this out
-                            //unit: unit
+                            total: totalQuantity.toFixed(2),
+                            unit: unit
                         })
                     })
                     //Stop progressbar. Page has loaded.
