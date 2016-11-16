@@ -50,6 +50,7 @@ class SmartShoppingListController extends Controller
 
         // will be an array of item_id => number_of_items
         $num_items = array();
+        //return print_r($item_lists);
 
         foreach($item_lists as $item_id => $item_list) {
             //$count[$item_id] = sizeof($item_list);
@@ -72,7 +73,7 @@ class SmartShoppingListController extends Controller
             //$first = strtotime($dates[$item_id]);
             $first = strtotime($earliest_date);
             $diff = $now - $first;
-            $time_span = max(7, floor($diff / (60 * 60 * 24))); // rounds everything up to one week (after this item has existed more than a week this will be the new time_span)
+            $time_span = max($num_days, floor($diff / (60 * 60 * 24))); // rounds everything up to num_days (after this item has existed more than that this will be the new time_span)
 
             // consumption rate (quantity per day)
             $consumptionRate = $quantity / $time_span;
@@ -90,7 +91,7 @@ class SmartShoppingListController extends Controller
 
             // determine the number of items to get
             $n = floor($desired_quantity / $item_serving_size);
-            
+
             // If the number of items is greater than one unit then add to list, else do nothing
             if($n > 0) { 
                 $num_items[$item_id] = $n;
