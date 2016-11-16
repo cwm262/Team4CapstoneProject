@@ -222,24 +222,21 @@ class NotificationController extends Controller
                 //if you have the same number of ingredients to make the recipe that the recipe calls for 
                 //then you have all the ingredients for that recipe and add it to be returned
                 if ($ingredientCount == $count){
-                   // return $recipe;
-                        $recipeSort [] = ['recipe_id' => $recipe->recipe_id, 'rating' => $recipe->rating->rating, 'timesMade' => $recipe->used->quantity];
+                    
+                        $recipeSort [] = ['recipe_id' => $recipe->recipe_id, 'rating' => $recipe->rating->rating];
                     }
             }
             //return all of the recipe ID's to the front end
             foreach ($recipeSort as $key => $row) {
                $ratingSort[$key] = $recipeSort[$key]['rating'];
-               $timesMadeSort[$key] = $recipeSort[$key]['timesMade'];
             }
             //Sort array based on rating and then if equal base rating off times made
-            array_multisort($ratingSort, SORT_DESC, $timesMadeSort, SORT_DESC, $recipeSort);
+            array_multisort($ratingSort, SORT_DESC, $recipeSort);
             
             foreach ($recipeSort as $ii){
                 $haveIngredients[$insertionCount] = $ii['recipe_id'];
                 $insertionCount++;
             }
-
-
             return response()->json($haveIngredients);      
         }
         catch(\Exception $e){
