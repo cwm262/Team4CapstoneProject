@@ -73,11 +73,6 @@ class RecipeIngredients extends Seeder
             'quantity'=> '1',
         ]);
         DB::table('recipe_ingredients')->insert([
-            'item_id' => '15',
-            'recipe_id' => '4',
-            'quantity'=> '1',
-        ]);
-        DB::table('recipe_ingredients')->insert([
             'item_id' => '8',
             'recipe_id' => '4',
             'quantity'=> '1',
@@ -85,7 +80,7 @@ class RecipeIngredients extends Seeder
         DB::table('recipe_ingredients')->insert([
             'item_id' => '15',
             'recipe_id' => '4',
-            'quantity'=> '1',
+            'quantity'=> '.2',
         ]);
         DB::table('recipe_ingredients')->insert([
             'item_id' => '16',
