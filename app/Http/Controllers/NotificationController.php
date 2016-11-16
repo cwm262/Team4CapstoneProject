@@ -199,17 +199,30 @@ class NotificationController extends Controller
                     $recipeQuantity = $ingredient->quantity;
                     //go through each item the user has and compare it to the item 
                     //required to make the recipe 
-                    foreach ($inventoryItems as $ii){
+                    $id = null;
+                    $realCount = 0;
+                  //  return $inventoryItems[4];
+                    for ($i = 0; $i < count($inventoryItems)-1; $i++){
+                        if ($id == $inventoryItems[$i]->item_id){
+                            $realCount += $inventoryItems[$i]->quantity;
+                        }
+                        else{
+                            $realCount = $inventoryItems[$i]->quantity;
+                        }
+                        $id = $inventoryItems[$i]->item_id;
+                        
                         //bump the counter if you have the ingredient item that is required to make the recipe
                         //also makes sure you have enough of the item in order to make the recipe
-                        if($ii->item_id == $recipeItem && $ii->quantity >= $recipeQuantity){
+                        if($inventoryItems[$i]->item_id == $recipeItem && $realCount >= $recipeQuantity && $inventoryItems[$i+1]->item_id != $inventoryItems[$i]->item_id){
                             $count++;        
                         }                      
                     }                  
                 }
+
                 //if you have the same number of ingredients to make the recipe that the recipe calls for 
                 //then you have all the ingredients for that recipe and add it to be returned
                 if ($ingredientCount == $count){
+                   // return $recipe;
                         $recipeSort [] = ['recipe_id' => $recipe->recipe_id, 'rating' => $recipe->rating->rating, 'timesMade' => $recipe->used->quantity];
                     }
             }
