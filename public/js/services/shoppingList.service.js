@@ -10,7 +10,9 @@
         var service = {
             getList: getList,
             updateList: updateList,
-            deleteList: deleteList
+            deleteList: deleteList,
+            sendListWithOut: sendListWithOut,
+            sendListWith: sendListWith
         };
         return service;
 
@@ -26,6 +28,14 @@
 
         function deleteList(user_id){
             return Restangular.one('/api/DumbShoppingList', user_id).remove();
+        }
+
+        function sendListWithOut(data){
+            return Restangular.all('/api/email/send/').post(data);
+        }
+
+        function sendListWith(data){
+            return Restangular.all('/api/email/smartSend/').post(data);
         }
     }
 })();

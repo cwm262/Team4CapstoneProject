@@ -30,7 +30,6 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::resource('inventory', 'InventoryController', ['except' => ['index', 'show', 'update']]);
     /*END INVENTORY ROUTES*/
       
-	
    /* RECIPE ROUTES */
     Route::get('recipes/{user_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@index']);
     Route::delete('recipes/{recipe_id}', ['as' => 'recipes.index', 'uses' => 'RecipeController@destroy']);
@@ -47,24 +46,29 @@ Route::group(['middleware' => 'auth:api'], function()
     Route::get('SmartShoppingList/{user_id}/{date_range}/{num_days}', ['as' => 'SmartShoppingList.index', 'uses' => 'SmartShoppingListController@index']);
     /* END SMART SHOPPING LIST ROUTES */ 
 
-   
-
-    /*ETC*/
-    Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
-
-    Route::get('notifications/recipes/{user_id}', ['as' => 'notifications.recipes', 'uses' => 'NotificationController@recipes']);
-
-    Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
-    Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
-    Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
-    Route::post('email/send', ['as' => 'email.send', 'uses' => 'EmailController@send']);
-
-});
-
-
     /*DUMB SHOPPING LIST ROUTES */
     Route::get('DumbShoppingList/{user_id}', ['as' => 'ShoppingList.getList', 'uses' => 'ShoppingListController@getList']);
     Route::post('DumbShoppingList', ['as' => 'ShoppingList.updateList', 'uses' => 'ShoppingListController@updateList']);
     Route::delete('DumbShoppingList/{user_id}', ['as' => 'ShoppingList.deleteList', 'uses' => 'ShoppingListController@deleteList']);
+   /*END SHOPPING LIST ROUTES*/
+
+    /*NOTIFICATION ROUTES*/
+    Route::get('notifications/recipes/{user_id}', ['as' => 'notifications.recipes', 'uses' => 'NotificationController@recipes']);
+    Route::get('notifications/urgent/{user_id}', ['as' => 'notifications.urgent', 'uses' => 'NotificationController@urgent']);
+    Route::get('notifications/ignore/{id}', ['as' => 'notifications.ignore', 'uses'=> 'NotificationController@ignore']);
+    Route::get('notifications/expired/{user_id}', ['as' => 'notifications.expired', 'uses'=> 'NotificationController@expired']);
+    /*END ROUTES*/
+
+    /*EMAILS*/
+    Route::post('email/send', ['as' => 'email.send', 'uses' => 'EmailController@send']);
+    Route::post('email/send', ['as' => 'email.send', 'uses' => 'EmailController@send']);
+    /*END EMAIL ROUTES*/
+
+    Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
+
+});
+
+
+    
 
  

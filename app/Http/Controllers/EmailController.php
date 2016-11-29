@@ -46,5 +46,9 @@ class EmailController extends Controller
             });
         return response()->json(['message' => 'Request completed']);   
     }
+
+    public function smartSend(Request $request){
+        
+    }
 }
 ?>

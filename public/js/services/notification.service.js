@@ -36,7 +36,6 @@
         }
 
         function getShoppingList(user_id, dateRange = null, numDays = null){
-            //var notifications = Restangular.all('/api/SmartShoppingList/' + user_id);
             if(dateRange){
                 if(numDays){
                     return Restangular.one('/api/SmartShoppingList/' + user_id + '/' + dateRange + '/' + numDays).get();
@@ -45,7 +44,6 @@
                 }
             }
             return Restangular.one('/api/SmartShoppingList/' + user_id).get();
-            //return notifications.getList();
         }
     }
 })();

@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['USER_ID', 'notification', 'ngProgressFactory', 'alert', 'moment', '$confirm', 'recipe', '$location', '$uibModal'];
+    MainController.$inject = ['USER_ID', 'notification', 'ngProgressFactory', 'alert', 'moment', '$confirm', 'recipe', '$location', '$uibModal', 'shoppingList'];
     
-    function MainController(USER_ID, notification, ngProgressFactory, alert, moment, $confirm, recipe, $location, $uibModal){
+    function MainController(USER_ID, notification, ngProgressFactory, alert, moment, $confirm, recipe, $location, $uibModal, shoppingList){
 
         var vm = this;
         
@@ -88,13 +88,27 @@
         vm.editShoppingList = function(){
             var modalInstance = $uibModal.open({
                 templateUrl: "editShoppingList.html",
-                controller: 'ShoppingListModalController',
-                controllerAs: 'mvm'
+                controller: "ShoppingListModalController",
+                controllerAs: "mvm"
             });
         }
 
-        vm.sendShoppingList = function(){
+        vm.sendWithOut = function(){
+            var data = {
+                user_id: USER_ID
+            }
+            shoppingList.sendListWithOut(data).then(function(response){
+                alert.add('success', 'Your shopping list is on the way! Check your registered e-mail!');
+            })
+        }
 
+        vm.sendWith = function(){
+            var data = {
+                user_id: USER_ID
+            }
+            shoppingList.sendWith(data).then(function(response){
+                alert.add('success', 'Your shopping list is on the way! Check your registered e-mail!');
+            })
         }
         
 
