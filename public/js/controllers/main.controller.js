@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['USER_ID', 'notification', 'ngProgressFactory', 'alert', 'moment', '$confirm', 'recipe', '$location'];
+    MainController.$inject = ['USER_ID', 'notification', 'ngProgressFactory', 'alert', 'moment', '$confirm', 'recipe', '$location', '$uibModal', 'shoppingList'];
     
-    function MainController(USER_ID, notification, ngProgressFactory, alert, moment, $confirm, recipe, $location){
+    function MainController(USER_ID, notification, ngProgressFactory, alert, moment, $confirm, recipe, $location, $uibModal, shoppingList){
 
         var vm = this;
         
@@ -51,7 +51,15 @@
                             vm.recipeNotifications.push(response);
                         })
                     })
-                }
+                }      
+            }, function(error){
+                alert.add('danger', 'Failed to retrieve shopping list suggestions! Please note the time and contact support.');
+            })
+
+            // Display suggested shopping list for the user
+            
+            notification.getShoppingList(USER_ID).then(function(response){
+                vm.shoppingList = response;
             }, function(error){
                 alert.add('danger', 'Failed to retrieve recipe notifications! Please note the time and contact support.');
             })
@@ -75,6 +83,32 @@
 
         vm.goToRecipe = function(id){
             $location.path('recipes/'+id);
+        }
+
+        vm.editShoppingList = function(){
+            var modalInstance = $uibModal.open({
+                templateUrl: "editShoppingList.html",
+                controller: "ShoppingListModalController",
+                controllerAs: "mvm"
+            });
+        }
+
+        vm.sendWithOut = function(){
+            var data = {
+                user_id: USER_ID
+            }
+            shoppingList.sendListWithOut(data).then(function(response){
+                alert.add('success', 'Your shopping list is on the way! Check your registered e-mail!');
+            })
+        }
+
+        vm.sendWith = function(){
+            var data = {
+                user_id: USER_ID
+            }
+            shoppingList.sendWith(data).then(function(response){
+                alert.add('success', 'Your shopping list is on the way! Check your registered e-mail!');
+            })
         }
         
 

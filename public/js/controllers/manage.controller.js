@@ -57,7 +57,7 @@
                         angular.forEach(vm.items, function (v, k) {
                             if (value === v.item.item_name) {
                                 itemList.push(v);
-                                totalQuantity += v.quantity;
+                                totalQuantity += (v.quantity/v.item.servings_per_container);//chris touched this
                                 if (unit !== v.item.measurement) {
                                     unit = v.item.measurement;
                                 }
@@ -66,7 +66,7 @@
                         vm.groceries.push({
                             name: value,
                             itemList: itemList,
-                            total: totalQuantity,
+                            total: totalQuantity.toFixed(2),
                             unit: unit
                         })
                     })

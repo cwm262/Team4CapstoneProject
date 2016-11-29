@@ -19,6 +19,7 @@ class ShoppingListTable extends Migration
             $table->float('quantity', 8, 2);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
