@@ -1,3 +1,31 @@
+<script type="text/ng-template" id="editShoppingList.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Edit Shopping List</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form class="form form-horizontal" name="editShoppingListForm">
+            <div>
+                <button class="btn btn-info" type="button" ng-click="mvm.addNewChoice()">Add Item</button>
+            </div>
+            <br>
+            <fieldset data-ng-repeat="choice in mvm.choices">
+                <div class="col-sm-4" style="display:inline-block">
+                    <select class="form-control" name="item" ng-model="choice.selected" ng-options="item as item.item_name for item in mvm.items track by item.item_id">
+                    </select>
+                </div>
+                <div class="col-sm-3" style="display:inline-block">
+                    <input type="number" class="form-control" ng-model="choice.quantity" name="quantity" min="0" placeholder="amount">
+                </div>
+                <button class="btn btn-warning btn-sm ingredBtn" type="button" ng-click="mvm.removeChoice($index)"><span class="glyphicon glyphicon-minus"></span></button>
+        </fieldset>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" ng-disabled="editShoppingListForm.$invalid" ng-click="mvm.edited()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="mvm.cancel()">Cancel</button>
+    </div>
+</script>
+
 <div class="container default-top-spacer">
     <div class="row">
         <div class="col-sm-4">
@@ -39,12 +67,14 @@
         <div class="col-sm-4">
             <div class="panel panel-default tab-pane">
                 <div class="panel-heading">
-                    <h3 class="">Smart Shopping List</h3>
+                    <h3 class="">Shopping List</h3>
                 </div>
                 <div class="panel-body">
-                    <dl ng-repeat="item in vm.shoppingList">
+                    <!--<dl ng-repeat="item in vm.shoppingList">
                         <dt>{{item.item_name}}: <span>{{item.quantity}}</span><span ng-if="item.measurement !== 'quantity'"> {{item.measurement}}</span></dt>
-                    </dl>
+                    </dl>-->
+                    <button type="button" class="btn btn-primary" ng-click="vm.editShoppingList()">Edit Items</button>
+                    <button type="button" class="btn btn-secondary" ng-click="vm.sendShoppingList()">Send Shopping List</button>
                 </div>
             </div>
         </div>

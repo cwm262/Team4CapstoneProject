@@ -5,9 +5,9 @@
         .module('pantryApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['USER_ID', 'notification', 'ngProgressFactory', 'alert', 'moment', '$confirm', 'recipe', '$location'];
+    MainController.$inject = ['USER_ID', 'notification', 'ngProgressFactory', 'alert', 'moment', '$confirm', 'recipe', '$location', '$uibModal'];
     
-    function MainController(USER_ID, notification, ngProgressFactory, alert, moment, $confirm, recipe, $location){
+    function MainController(USER_ID, notification, ngProgressFactory, alert, moment, $confirm, recipe, $location, $uibModal){
 
         var vm = this;
         
@@ -83,6 +83,18 @@
 
         vm.goToRecipe = function(id){
             $location.path('recipes/'+id);
+        }
+
+        vm.editShoppingList = function(){
+            var modalInstance = $uibModal.open({
+                templateUrl: "editShoppingList.html",
+                controller: 'ShoppingListModalController',
+                controllerAs: 'mvm'
+            });
+        }
+
+        vm.sendShoppingList = function(){
+
         }
         
 
