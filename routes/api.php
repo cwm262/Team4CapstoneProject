@@ -61,12 +61,14 @@ Route::group(['middleware' => 'auth:api'], function()
 
     /*EMAILS*/
     Route::post('email/send', ['as' => 'email.send', 'uses' => 'EmailController@send']);
-    Route::post('email/send', ['as' => 'email.send', 'uses' => 'EmailController@send']);
+    Route::post('email/smartSend', ['as' => 'email.smartSend', 'uses' => 'EmailController@smartSend']);
     /*END EMAIL ROUTES*/
 
     Route::get('stats/{user_id}', ['as' => 'stats.index', 'uses' => 'StatsController@index']);
 
 });
+
+Route::get('SmartShoppingList/{user_id}', ['as' => 'SmartShoppingList.index', 'uses' => 'SmartShoppingListController@index']);
 
 
     

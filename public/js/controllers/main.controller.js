@@ -98,7 +98,7 @@
             var data = {
                 user_id: USER_ID
             }
-            shoppingList.sendWith(data).then(function(response){
+            shoppingList.sendListWith(data).then(function(response){
                 alert.add('success', 'Your shopping list is on the way! Check your registered e-mail!');
             })
         }
