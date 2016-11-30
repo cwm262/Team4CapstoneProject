@@ -25,8 +25,6 @@
                     var expirationDate = moment(notification.created_at).add(notification.item.expiration, 'days');
                     notification.daysUntilExpiration = expirationDate.diff(currentDate, 'days');
                 })
-            }, function(error){
-                alert.add('danger', 'Failed to retrieve urgent notifications! Please note the time and contact support.');
             })
 
             //Get expired notifications ie food already expired. Set num days past expiration to be displayed.
@@ -37,8 +35,6 @@
                     var expirationDate = moment(notification.created_at).add(notification.item.expiration, 'days');
                     notification.daysPastExpiration = currentDate.diff(expirationDate, 'days');
                 })
-            }, function(error){
-                alert.add('danger', 'Failed to retrieve expired notifications! Please note the time and contact support.');
             })
 
             //Get recipe notifications ie recipes that can be prepared with inventory on hand.
@@ -52,16 +48,12 @@
                         })
                     })
                 }      
-            }, function(error){
-                alert.add('danger', 'Failed to retrieve shopping list suggestions! Please note the time and contact support.');
             })
 
             // Display suggested shopping list for the user
             
             notification.getShoppingList(USER_ID).then(function(response){
                 vm.shoppingList = response;
-            }, function(error){
-                alert.add('danger', 'Failed to retrieve recipe notifications! Please note the time and contact support.');
             })
 
 
