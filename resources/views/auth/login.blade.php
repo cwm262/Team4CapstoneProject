@@ -100,7 +100,7 @@
                                     Login &nbsp; <span class="glyphicon glyphicon-log-in"></span>
                                 </button>
 
-                                <!-- <a class="btn btn-link" href="{{ url('/register') }}">Register</a> -->
+                                <a class="btn btn-link" href="{{ url('/register') }}">Register</a>
 
                             </div>
                         </div>

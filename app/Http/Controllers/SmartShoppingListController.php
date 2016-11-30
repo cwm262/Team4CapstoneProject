@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use pantryApp\Http\Requests;
 use pantryApp\inventory;
 use pantryApp\Item;
+use pantryApp\shopping_list;
 
 class SmartShoppingListController extends Controller
 {
@@ -21,17 +22,17 @@ class SmartShoppingListController extends Controller
         try{
             $items = $this->getSuggestedItems($user_id, $date_range, $num_days);
             $itemArray = array();
+            
             foreach ($items as $key => $value){
                 $myItem = Item::where('item_id', $key)->select('item_name', 'measurement')->first();
                 $myItem['quantity'] = $value;
                 array_push($itemArray, $myItem);
             }
-
-            return response()->json($itemArray);
+            return $itemArray;
         }
         catch(\Exception $e){
             Log::critical($e->getMessage());
-            return response()->json(array('message' => "Contact support with time that error occurred."), 500);
+            return $e->getMessage();
         }
     }
 
@@ -40,9 +41,9 @@ class SmartShoppingListController extends Controller
         // Get all items the user has added in the last $date_range days
         $date_bound = date('Y-m-d', strtotime("-$date_range days"));
         $used_items = inventory::where('user_id', $user_id)->where('created_at', '>=', $date_bound)->orderBy('item_id', 'asc')->get();
-
+        $item_lists = array();
         foreach($used_items as $used_item) {
-            $item_lists[$used_item["item_id"]] = array(); 
+            $item_lists[$used_item["item_id"]] = array();
         }
         foreach($used_items as $used_item) {
             array_push($item_lists[$used_item["item_id"]], $used_item);
@@ -50,7 +51,6 @@ class SmartShoppingListController extends Controller
 
         // will be an array of item_id => number_of_items
         $num_items = array();
-        //return print_r($item_lists);
 
         foreach($item_lists as $item_id => $item_list) {
             //$count[$item_id] = sizeof($item_list);
@@ -82,7 +82,8 @@ class SmartShoppingListController extends Controller
             $desired_quantity = $consumptionRate * $num_days;
 
             // get number of servings for the specified item
-            $item_serving_size = Item::where('item_id', $item_id)->orderBy('item_id', 'asc')->pluck('serving_size')->first();
+            $item_serving_size = Item::where('user_id', $user_id)->where('item_id', $item_id)->orderBy('item_id', 'asc')->pluck('serving_size')->first();
+            $item_servings_per_container = Item::where('user_id', $user_id)->where('item_id', $item_id)->orderBy('item_id', 'asc')->pluck('servings_per_container')->first();
             
             // Just incase there is a 0 serving size (shouldn't be possible but who am I to judge?)
             if($item_serving_size == 0) {
@@ -90,11 +91,24 @@ class SmartShoppingListController extends Controller
             }
 
             // determine the number of items to get
-            $n = floor($desired_quantity / $item_serving_size);
+            $n = round(floor($desired_quantity / $item_serving_size) / $item_servings_per_container);
+           
 
             // If the number of items is greater than one unit then add to list, else do nothing
             if($n > 0) { 
                 $num_items[$item_id] = $n;
+            }
+
+            // Get number of item in shopping list already and subtract it 
+            $shopping_items = shopping_list::where('user_id', $user_id)->where('item_id', $item_id)->get();
+            $total = 0;
+            
+            foreach($shopping_items as $si) {
+                $total += $si['quantity'];
+            }
+            
+            if($n > 0) {
+                $num_items[$item_id] = max(0, $num_items[$item_id] - $total);
             }
         }
 
